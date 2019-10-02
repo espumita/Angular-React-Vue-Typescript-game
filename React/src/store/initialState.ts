@@ -1,8 +1,4 @@
 export interface Store {
-    board: Board
-}
-
-export interface Board {
     mines: Mine[]
 }
 
@@ -15,8 +11,11 @@ export interface Position {
     y: number
 }
 
-export const initialState: Store = {
-    board: {
-        mines: []
-    }
+const initialState: Store = {
+    mines: [
+        { position: { x: 1, y: 1} },
+        { position: { x: 2, y: 2} },
+    ]
 }
+
+export default initialState

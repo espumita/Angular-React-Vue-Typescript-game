@@ -1,7 +1,14 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import configStore from './store/configStore'
+import Board from './components/Board'
+
+const store = configStore()
 
 ReactDOM.render(
-    <h1>TEST REACT</h1>,
+    <Provider store={store}>
+        <Board/>
+    </Provider>,
     document.getElementById("root")
 )
