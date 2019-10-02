@@ -1,1 +1,5 @@
-Minesweeper2
+TODO:
+
+-React:
+    -Hot webpack module remplacement
+    -React hot-loader
