@@ -12,10 +12,7 @@ export interface Position {
 }
 
 const initialState: Store = {
-    mines: [
-        { position: { x: 1, y: 1} },
-        { position: { x: 2, y: 2} },
-    ]
+    mines: [ ]
 }
 
 export default initialState
