@@ -5,9 +5,6 @@ import path from 'path';
 export default {
     resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx', '.css'] },
     entry: [
-       // './src/webpack-public-path',
-       // 'react-hot-loader/patch',
-       // 'webpack-hot-middleware/client?reload=true', 
         path.resolve(__dirname, 'src/root.tsx')
      ],
     output: { filename: 'bundle.js', publicPath: '/', path: path.resolve(__dirname, 'dist') },
@@ -26,8 +23,7 @@ export default {
         new HtmlWebpackPlugin({
             template: "./src/root.html",
             filename: "./index.html"
-        }),
-      //  new webpack.HotModuleReplacementPlugin()
+        })
     ]
 
 }
