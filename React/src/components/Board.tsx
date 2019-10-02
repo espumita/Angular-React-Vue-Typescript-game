@@ -2,16 +2,14 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Store, Mine } from '../store/initialState'
 
-function Board(props: { mines: Mine[] }) {
+export function Board(props: { theMagicProp: string }) {
     return (
       <div>
-        {props.mines.map((mine, key) =>
-          <div>{key}</div>
-        )}
+        {props.theMagicProp}
       </div>
     )
   }
   
-  export default connect(
-    (state: Store) : { mines: Mine[] } => { return { mines: state.mines } }
-  )(Board)
+export default connect(
+  (state: Store) : { theMagicProp: string} => { return { theMagicProp: state.mines.length.toString()} }
+)(Board)
