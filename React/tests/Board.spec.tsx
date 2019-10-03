@@ -11,7 +11,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('Board should', () =>{
 
-    test('Have 8 x 8 cells in beginner dificulty', () =>{
+    test('Have 8 x 8 cells in beginner difficulty', () =>{
         const initialStore : Store = {
             difficulty: new BeginerDifficulty()
         }
