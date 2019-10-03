@@ -3,7 +3,7 @@ import minesReducer from './minesReducer'
 import { Store } from '../store/initialState'
 
 const combinedReducers = combineReducers<Store>({
-    mines: minesReducer 
+    difficulty: minesReducer 
 });
 
 export default combinedReducers;
