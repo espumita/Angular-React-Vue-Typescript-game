@@ -3,7 +3,7 @@ import { Position } from '../store/initialState'
 
 const Cell = function Cell(props: Position) {
     return (
-      <div>
+      <div style={{ width: '40px', height: '40px', backgroundColor: 'grey', borderBlockColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
         ({props.x},{props.y})
       </div>
     )

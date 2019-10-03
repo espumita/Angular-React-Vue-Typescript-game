@@ -8,7 +8,9 @@ const store = configStore()
 
 ReactDOM.render(
     <Provider store={store}>
-        <Board/>
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Board/>
+        </div>
     </Provider>,
     document.getElementById("root")
 )
