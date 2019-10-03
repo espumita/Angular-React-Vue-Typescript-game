@@ -5,21 +5,32 @@ import Cell from './Cell'
 
 export function Board(props: Difficulty) {
   return (
-    <div>
+    <div style={{ display: 'flex' }}>
       {cells(props.boardWidth, props.boardHeight)}
     </div>
   )
 }
   
 function cells(width: number, height : Number) {
-  const cells = []
+  const cellsRows = []
   for (let i = 0; i < width; i++) {
-    for (let j = 0; j < height; j++) {
-      cells.push(<Cell x={i} y={j} key={`cell-${i}-${j}`}/>)
-    }
+    cellsRows.push(cellRow(height, i))
   }
-  return cells
+  return cellsRows
 }
+
+function cellRow(height : Number, rowNumber: number) {
+  const cellsRow = []
+  for (let j = 0; j < height; j++) {
+    cellsRow.push(<Cell x={j} y={rowNumber} key={`cell-${j}-${rowNumber}`}/>)
+  }
+  return (
+    <div key={`cell-row-${rowNumber}`}>
+      {cellsRow}
+    </div>
+  ) 
+}
+
 
 export default connect(
   (state: Store) : Difficulty => { return { ...state.difficulty } }
