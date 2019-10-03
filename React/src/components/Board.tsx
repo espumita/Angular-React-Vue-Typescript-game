@@ -1,15 +1,25 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Store, Mine } from '../store/initialState'
+import { Store, Difficulty } from '../store/initialState'
+import Cell from './Cell'
 
-export function Board(props: { theMagicProp: string }) {
+export function Board(props: Difficulty) {
+    const a = []
+    for (let i = 0; i < props.boardWidth; i++) {
+      for (let j = 0; j < props.boardHeight; j++) {
+        a.push(<Cell key={`cell-${i}-${j}`} x={i} y={j}/>)
+      }
+    }
+
     return (
       <div>
-        {props.theMagicProp}
+        {
+          a
+        }
       </div>
     )
   }
   
 export default connect(
-  (state: Store) : { theMagicProp: string} => { return { theMagicProp: state.mines.length.toString()} }
+  (state: Store) : Difficulty => { return { ...state.difficulty } }
 )(Board)

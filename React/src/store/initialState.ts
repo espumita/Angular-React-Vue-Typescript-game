@@ -1,9 +1,23 @@
 export interface Store {
-    mines: Mine[]
+    difficulty: Difficulty 
 }
 
-export interface Mine {
-    position: Position
+export interface Difficulty {
+    minesNumber: number
+    boardWidth: number
+    boardHeight: number
+}
+
+export class BeginerDifficulty implements Difficulty {
+    minesNumber: number
+    boardWidth: number
+    boardHeight: number
+
+    constructor(){
+        this.minesNumber = 10
+        this.boardWidth = 8
+        this.boardHeight = 8
+    }
 }
 
 export interface Position {
@@ -12,7 +26,7 @@ export interface Position {
 }
 
 const initialState: Store = {
-    mines: [ ]
+    difficulty: new BeginerDifficulty()
 }
 
 export default initialState
