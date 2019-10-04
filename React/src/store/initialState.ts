@@ -1,8 +1,18 @@
 export interface Store {
     difficulty: Difficulty
     gameState: GameState
-    mines: Mine[]
+    mines: Mines
     showableCells: Position[]
+}
+
+export interface Mines {
+    positions: Position[]
+    perimeterCells: PerimeterCell[]
+}
+
+export interface PerimeterCell {
+    position: Position,
+    numberOfClosestsMines: number
 }
 
 export interface Difficulty {
@@ -42,11 +52,6 @@ export enum CellType {
     EightMinesClose = 10
 }
 
-
-export interface Mine {
-    position: Position
-}
-
 export interface Positionable {
     x: number
     y: number
@@ -69,10 +74,11 @@ export class Position implements Positionable {
 const initialState: Store = {
     difficulty: new BeginerDifficulty(),
     gameState: GameState.NotStarted,
-    mines: [],
-    showableCells: [
-        new Position(2, 4)
-    ]
+    mines: {
+        positions: [],
+        perimeterCells: []
+    },
+    showableCells: []
 }
 
 export default initialState

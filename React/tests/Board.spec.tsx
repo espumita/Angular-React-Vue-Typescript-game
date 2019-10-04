@@ -16,7 +16,7 @@ describe('Board should', () =>{
         const initialStore : Store = {
             difficulty: new BeginerDifficulty(),
             gameState: GameState.NotStarted,
-            mines: [],
+            mines: { positions: [], perimeterCells: []},
             showableCells: []
         }
         const mockStore = configureMockStore<Store>([])
@@ -35,7 +35,7 @@ describe('Board should', () =>{
         const initialStore : Store = {
             difficulty: new BeginerDifficulty(),
             gameState: GameState.NotStarted,
-            mines: [],
+            mines: { positions: [], perimeterCells: []},
             showableCells: []
         }
         const mockStore = configureMockStore<Store>([])
@@ -58,7 +58,7 @@ describe('Board should', () =>{
         const initialStore : Store = {
             difficulty: new BeginerDifficulty(),
             gameState: GameState.Started,
-            mines: [],
+            mines: { positions: [], perimeterCells: []},
             showableCells: []
         }
         const mockStore = configureMockStore<Store>([])
