@@ -30,7 +30,7 @@ export enum GameState {
 
 export enum CellType {
     None = 0,
-    NoneCliked = 1,
+    EmptyCell = 1,
     Mine = 2
 }
 
@@ -53,7 +53,7 @@ export class Position implements Positionable {
         this.y = y
     }
 
-    sameAs(position : Position){
+    sameAs(position : Position) : boolean {
         return this.x === position.x && this.y === position.y
     }
 }
@@ -62,7 +62,9 @@ const initialState: Store = {
     difficulty: new BeginerDifficulty(),
     gameState: GameState.NotStarted,
     mines: [],
-    showableCells: []
+    showableCells: [
+        new Position(2, 4)
+    ]
 }
 
 export default initialState

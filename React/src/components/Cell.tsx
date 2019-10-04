@@ -11,7 +11,7 @@ const Cell = function Cell(props: Positionable & { clickAction : Function, type:
     const color = getColor(props.type)
     return (
       <div onClick={() => props.clickAction()} style={{ width: '40px', height: '40px', backgroundColor: color, borderBlockColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
-        
+        ({props.x},{props.y})
       </div>
     )
   }
