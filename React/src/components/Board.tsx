@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Store, Difficulty, Position, GameState } from '../store/initialState'
 import Cell from './Cell'
-import { createStartGameAction } from '../actions/exampleAction' 
+import { createStartGameAction } from '../actions/gameActions' 
 
 export function Board(props: Difficulty & { gameState: GameState } & BoardActions) {
   const clickAction : Function = cellAction(props.gameState ,props.startGame)
