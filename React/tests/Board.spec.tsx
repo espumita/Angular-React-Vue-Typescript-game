@@ -47,7 +47,29 @@ describe('Board should', () =>{
         aCell.simulate('click')
 
         const actions = store.getActions()
-        expect(actions[0].type).toBe(START_GAME_ACTION + "A")
+        expect(actions[0].type).toBe(START_GAME_ACTION)
+    })
+
+    test('game only start once', () =>{
+        const initialStore : Store = {
+            difficulty: new BeginerDifficulty(),
+            gameState: GameState.Started
+        }
+        const mockStore = configureMockStore<Store>([])
+        const store = mockStore(initialStore)
+        const wrapper = mount(
+            <Provider store={store}>
+                <BoardComponent/>
+            </Provider>
+        )
+        const cells = wrapper.find(Cell)
+        const aCell = cells.first()
+
+        aCell.simulate('click')
+
+        const actions = store.getActions()
+        const startActions = actions.filter(x => x.type == START_GAME_ACTION)
+        expect(startActions.length).toBe(0)
     })
     
 

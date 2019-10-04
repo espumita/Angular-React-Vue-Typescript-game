@@ -23,6 +23,7 @@ export class BeginerDifficulty implements Difficulty {
 
 export enum GameState {
     NotStarted = 0,
+    Started = 1
 }
 
 export interface Position {
