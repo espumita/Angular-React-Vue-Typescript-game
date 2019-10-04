@@ -23,8 +23,8 @@ const Cell = function Cell(props: Positionable & { clickAction : Function, type:
     const color = getColor(props.type)
     const number = getNumber(props.type)
     return (
-      <div onClick={() => props.clickAction()} style={{ width: '40px', height: '40px', backgroundColor: color, borderBlockColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
-        {number}
+      <div onClick={() => props.clickAction()} style={{ display:'flex', alignItems: 'center', justifyContent: 'content', width: '40px', height: '40px', backgroundColor: color, borderBlockColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
+        <div>{number}</div>
       </div>
     )
   }

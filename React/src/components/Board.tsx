@@ -42,6 +42,17 @@ function cellRow(height : Number, rowNumber: number, clickAction : Function, sho
 function getCellType(position : Position, showableCells : Position[], mines : Mines) : CellType {
   if (showableCells.some(x => position.sameAs(x))){
     if (mines.positions.some(x => x.sameAs(position))) return CellType.Mine
+    if (mines.perimeterCells.some(x => x.position.sameAs(position))) {
+      const perimeterCell = mines.perimeterCells.find(x => x.position.sameAs(position))
+      if(perimeterCell.numberOfClosestsMines === 1) return CellType.OneMineClose
+      if(perimeterCell.numberOfClosestsMines === 2) return CellType.TwoMinesClose
+      if(perimeterCell.numberOfClosestsMines === 3) return CellType.TreeMinesClose
+      if(perimeterCell.numberOfClosestsMines === 4) return CellType.FourMinesClose
+      if(perimeterCell.numberOfClosestsMines === 5) return CellType.FiveMinesClose
+      if(perimeterCell.numberOfClosestsMines === 6) return CellType.SixMinesClose
+      if(perimeterCell.numberOfClosestsMines === 7) return CellType.SevenMinesClose
+      if(perimeterCell.numberOfClosestsMines === 8) return CellType.EightMinesClose
+    }
     return CellType.EmptyCell
   } 
   return CellType.None

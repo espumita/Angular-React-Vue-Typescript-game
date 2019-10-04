@@ -10,9 +10,19 @@ export interface Mines {
     perimeterCells: PerimeterCell[]
 }
 
-export interface PerimeterCell {
-    position: Position,
+export class PerimeterCell {
+    position: Position
     numberOfClosestsMines: number
+
+    constructor(position : Position){
+        this.position = position
+        this.numberOfClosestsMines = 1
+    }
+
+    updateNumberOfClosestsMines(){
+        this.numberOfClosestsMines = this.numberOfClosestsMines + 1
+    }
+
 }
 
 export interface Difficulty {
