@@ -5,15 +5,16 @@ import BoardComponent, { Board } from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
-import { Store, BeginerDifficulty } from '../src/store/initialState';
+import { Store, BeginerDifficulty, GameState } from '../src/store/initialState';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Board should', () =>{
 
-    test('Have 8 x 8 cells in beginner difficulty', () =>{
+    test('have 8 x 8 cells in beginner difficulty', () =>{
         const initialStore : Store = {
-            difficulty: new BeginerDifficulty()
+            difficulty: new BeginerDifficulty(),
+            gameState: GameState.NotStarted
         }
         const mockStore = configureMockStore<Store>([])
         const store = mockStore(initialStore)

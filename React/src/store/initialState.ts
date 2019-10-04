@@ -1,5 +1,6 @@
 export interface Store {
-    difficulty: Difficulty 
+    difficulty: Difficulty
+    gameState: GameState
 }
 
 export interface Difficulty {
@@ -20,13 +21,18 @@ export class BeginerDifficulty implements Difficulty {
     }
 }
 
+export enum GameState {
+    NotStarted = 0,
+}
+
 export interface Position {
     x: number
     y: number
 }
 
 const initialState: Store = {
-    difficulty: new BeginerDifficulty()
+    difficulty: new BeginerDifficulty(),
+    gameState: GameState.NotStarted
 }
 
 export default initialState
