@@ -15,7 +15,8 @@ describe('Board should', () =>{
     test('have 8 x 8 cells in beginner difficulty', () =>{
         const initialStore : Store = {
             difficulty: new BeginerDifficulty(),
-            gameState: GameState.NotStarted
+            gameState: GameState.NotStarted,
+            mines: []
         }
         const mockStore = configureMockStore<Store>([])
         const store = mockStore(initialStore)
@@ -32,7 +33,8 @@ describe('Board should', () =>{
     test('game start when click in the first cell', () =>{
         const initialStore : Store = {
             difficulty: new BeginerDifficulty(),
-            gameState: GameState.NotStarted
+            gameState: GameState.NotStarted,
+            mines: []
         }
         const mockStore = configureMockStore<Store>([])
         const store = mockStore(initialStore)
@@ -53,7 +55,8 @@ describe('Board should', () =>{
     test('game only start once', () =>{
         const initialStore : Store = {
             difficulty: new BeginerDifficulty(),
-            gameState: GameState.Started
+            gameState: GameState.Started,
+            mines: []
         }
         const mockStore = configureMockStore<Store>([])
         const store = mockStore(initialStore)

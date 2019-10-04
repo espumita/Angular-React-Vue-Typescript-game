@@ -1,6 +1,7 @@
 export interface Store {
     difficulty: Difficulty
     gameState: GameState
+    mines: Mine[]
 }
 
 export interface Difficulty {
@@ -26,6 +27,11 @@ export enum GameState {
     Started = 1
 }
 
+
+export interface Mine {
+    position: Position
+}
+
 export interface Position {
     x: number
     y: number
@@ -33,7 +39,8 @@ export interface Position {
 
 const initialState: Store = {
     difficulty: new BeginerDifficulty(),
-    gameState: GameState.NotStarted
+    gameState: GameState.NotStarted,
+    mines: []
 }
 
 export default initialState

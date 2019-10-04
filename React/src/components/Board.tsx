@@ -2,19 +2,19 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Store, Difficulty, Position, GameState } from '../store/initialState'
 import Cell from './Cell'
-import { createStartGameAction } from '../actions/gameActions' 
+import { distpatchCreateStartGameAction } from '../actions/gameActions' 
 
-export function Board(props: Difficulty & { gameState: GameState } & BoardActions) {
-  const clickAction : Function = cellAction(props.gameState ,props.startGame)
+export function Board(props: { difficulty: Difficulty } & { gameState: GameState } & BoardActions) {
+  const clickAction : Function = cellAction(props.gameState,  props.startGame, props.difficulty)
   return (
     <div style={{ display: 'flex' }}>
-      {cells(props.boardWidth, props.boardHeight, clickAction)}
+      {cells(props.difficulty.boardWidth, props.difficulty.boardHeight, clickAction)}
     </div>
   )
 }
 
-function cellAction(gameState : GameState, startGame: Function) : Function {
-  if (gameState === GameState.NotStarted) return startGame
+function cellAction(gameState : GameState, startGame: Function, difficulty: Difficulty) : Function {
+  if (gameState === GameState.NotStarted) return (position: Position) => startGame(position, difficulty)
   return (position: Position) => console.log("arreadySarted, nice try on: ", position.x , position.y)
 }
   
@@ -39,9 +39,9 @@ function cellRow(height : Number, rowNumber: number, clickAction : Function) {
 }
 
 export default connect(
-  (state: Store) : Difficulty & { gameState: GameState } => { return { ...state.difficulty, gameState: state.gameState } },
+  (state: Store) : { difficulty: Difficulty } & { gameState: GameState } => { return { difficulty: {...state.difficulty }, gameState: state.gameState } },
   (dispatch: Function) : BoardActions => { return {
-    startGame: (position: Position) => dispatch(createStartGameAction(position))
+    startGame: (position: Position, difficulty: Difficulty) => distpatchCreateStartGameAction(position, difficulty)(dispatch)
   }}
 )(Board)
 
