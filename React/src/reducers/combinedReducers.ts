@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
-import minesReducer from './minesReducer'
+import gameReducer from './gameReducer'
+import gameStateReducer from './gameStateReducer'
 import { Store } from '../store/initialState'
 
 const combinedReducers = combineReducers<Store>({
-    difficulty: minesReducer 
+    difficulty: gameReducer,
+    gameState: gameStateReducer
 });
 
 export default combinedReducers;

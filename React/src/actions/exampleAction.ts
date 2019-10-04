@@ -1,15 +1,15 @@
 import { Action } from 'redux'
-export const ACTION1 = 'ACTION1'
+import { Position } from '../store/initialState'
+export const START_GAME_ACTION = 'START_GAME_ACTION'
 
-
-export interface ActionAction1 extends Action {
-    type: typeof ACTION1,
-    payload: string
+export interface StartGaneAction extends Action {
+    type: typeof START_GAME_ACTION,
+    position: Position
 }
 
-export function CreateAction1(param: string) : ActionAction1{
+export function createStartGameAction(position: Position) : StartGaneAction {
     return {
-        type: ACTION1,
-        payload: param
+        type: START_GAME_ACTION,
+        position: position
     }
 }
