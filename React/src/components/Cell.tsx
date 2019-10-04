@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Position, CellType } from '../store/initialState'
+import { Position, CellType, Positionable } from '../store/initialState'
 
 function getColor(type : CellType) {
   if (type === CellType.None) return 'grey'
@@ -7,7 +7,7 @@ function getColor(type : CellType) {
   return 'yellow'
 }
 
-const Cell = function Cell(props: Position & { clickAction : Function, type: CellType }) {
+const Cell = function Cell(props: Positionable & { clickAction : Function, type: CellType }) {
     const color = getColor(props.type)
     return (
       <div onClick={() => props.clickAction()} style={{ width: '40px', height: '40px', backgroundColor: color, borderBlockColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
