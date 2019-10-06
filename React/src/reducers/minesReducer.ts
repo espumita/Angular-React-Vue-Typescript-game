@@ -40,9 +40,6 @@ export default (state: Mines = undefined, action: DeployMinesAction, difficulty 
                         perimeterCell.updateNumberOfClosestsMines()
                     }
                 })
-            
-         
-
             })
             return { positions : newMinesPositions, perimeterCells: newPerimeterCells}
         }   

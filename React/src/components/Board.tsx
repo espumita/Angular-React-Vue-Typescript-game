@@ -5,7 +5,7 @@ import Cell from './Cell'
 import { distpatchCreateStartGameAction, dispatchCreateMakeMovementAction } from '../actions/gameActions' 
 
 export function Board(props: { difficulty: Difficulty, gameState: GameState, showableCells : Position[], mines : Mines } & BoardActions) {
-  const clickAction = cellAction(props.gameState, props.startGame, props.difficulty, props.makeMovement, props.mines)
+  const clickAction = cellAction(props.gameState, props.startGame, props.makeMovement)
   return (
     <div style={{ display: 'flex' }}>
       {cells(props.difficulty.boardWidth, props.difficulty.boardHeight, clickAction, props.showableCells, props.mines)}
@@ -13,9 +13,9 @@ export function Board(props: { difficulty: Difficulty, gameState: GameState, sho
   )
 }
 
-function cellAction(gameState : GameState, startGame: Function, difficulty: Difficulty, makeMovement: Function, mines: Mines) : Function {
-  if (gameState === GameState.NotStarted) return (position: Position) => startGame(position, difficulty, mines)
-  return (position: Position) => makeMovement(position, mines)
+function cellAction(gameState : GameState, startGame: Function, makeMovement: Function) : Function {
+  if (gameState === GameState.NotStarted) return (position: Position) => startGame(position)
+  return (position: Position) => makeMovement(position)
 }
   
 function cells(width: number, height : Number, clickAction : Function, showableCells : Position[], mines: Mines) {
@@ -29,11 +29,11 @@ function cells(width: number, height : Number, clickAction : Function, showableC
 function cellRow(height : Number, rowNumber: number, clickAction : Function, showableCells : Position[], mines: Mines) {
   const cellsRow = []
   for (let j = 0; j < height; j++) {
-    const cellType = getCellType(new Position(j, rowNumber), showableCells, mines)
-    cellsRow.push(<Cell x={j} y={rowNumber} type={cellType} key={`cell-${j}-${rowNumber}`} clickAction={() => clickAction(new Position(j, rowNumber))}/>)
+    const cellType = getCellType(new Position(rowNumber, j), showableCells, mines)
+    cellsRow.push(<Cell x={rowNumber} y={j} type={cellType} key={`cell-${rowNumber}-${j}`} clickAction={() => clickAction(new Position(rowNumber, j))}/>)
   }
   return (
-    <div key={`cell-row-${rowNumber}`}>
+    <div key={`cell-row-${rowNumber}`} style={{backgroundColor: 'red'}}>
       {cellsRow}
     </div>
   ) 
@@ -61,8 +61,8 @@ function getCellType(position : Position, showableCells : Position[], mines : Mi
 export default connect(
   (state: Store) : { difficulty: Difficulty, mines: Mines, gameState: GameState, showableCells: Position[] } => { return { difficulty: {...state.difficulty }, gameState: state.gameState, showableCells: state.showableCells, mines: state.mines } },
   (dispatch: Function) : BoardActions => { return {
-    startGame: (position: Position, difficulty: Difficulty, mines: Mines) => distpatchCreateStartGameAction(position)(dispatch),
-    makeMovement: (position: Position, mines: Mines) => dispatchCreateMakeMovementAction(position)(dispatch)
+    startGame: (position: Position) => distpatchCreateStartGameAction(position)(dispatch),
+    makeMovement: (position: Position) => dispatchCreateMakeMovementAction(position)(dispatch)
   }}
 )(Board)
 

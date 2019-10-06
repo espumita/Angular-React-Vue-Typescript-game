@@ -37,11 +37,36 @@ export class BeginerDifficulty implements Difficulty {
     boardHeight: number
 
     constructor(){
-        this.minesNumber = 4
+        this.minesNumber = 10
         this.boardWidth = 8
         this.boardHeight = 8
     }
 }
+
+export class IntermediateDifficulty  implements Difficulty {
+    minesNumber: number
+    boardWidth: number
+    boardHeight: number
+
+    constructor(){
+        this.minesNumber = 40
+        this.boardWidth = 16
+        this.boardHeight = 16
+    }
+}
+
+export class ExpertDifficulty  implements Difficulty {
+    minesNumber: number
+    boardWidth: number
+    boardHeight: number
+
+    constructor(){
+        this.minesNumber = 99
+        this.boardWidth = 30
+        this.boardHeight = 16
+    }
+}
+
 
 export enum GameState {
     NotStarted = 0,
@@ -82,7 +107,7 @@ export class Position implements Positionable {
 }
 
 const initialState: Store = {
-    difficulty: new BeginerDifficulty(),
+    difficulty: new ExpertDifficulty(),
     gameState: GameState.NotStarted,
     mines: {
         positions: [],
