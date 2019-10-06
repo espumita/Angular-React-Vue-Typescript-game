@@ -26,8 +26,12 @@ function getForPerimeter(position: Position, mines: Mines, state: Position[], di
     const newPerimeterShoweable = positionPerimeter.filter(x => !state.some(y => y.sameAs(x)))
     const arraysToPropagate = newPerimeterShoweable.filter(x => !perimeterCelllsPosiiton.some(y => y.sameAs(x)))
     console.log("Candidate to propagate", arraysToPropagate)
-    const expandable = arraysToPropagate.map(y => getForPerimeter(y, mines, [...state, ...newPerimeterShoweable], difficulty))
-    return [ ...newPerimeterShoweable,...[].concat.apply([], expandable)  ]
+    const a : Position[] = []
+    arraysToPropagate.forEach(y=>{
+        a.push(...getForPerimeter(y, mines, [...state, ...newPerimeterShoweable], difficulty))
+    })
+    //const expandable = arraysToPropagate.map(y => getForPerimeter(y, mines, [...state, ...newPerimeterShoweable], difficulty))
+    return [ ...newPerimeterShoweable, ...a  ]
  }
   return [ ]
 }
@@ -40,7 +44,7 @@ export default (state: Position[] = undefined, action: MakeMovementAction, mines
             if(!state.some(x => action.position.sameAs(x))) {
                 //Check if mine loose?
                 if (mines.positions.some(x => x.sameAs(action.position))){
-                    console.log('YOU LOSUE, MINE AT', action.position)
+                    console.log('YOU LOSE, MINE AT', action.position)
                     return [ ...state, ...mines.positions]
                 } 
 
