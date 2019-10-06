@@ -20,7 +20,6 @@ export default (state: Mines = undefined, action: DeployMinesAction, difficulty 
     if (state == undefined) return initialState.mines
     switch(action.type){
         case DEPLOY_MINES_ACTION: {
-            console.log('DEPLOYING MINES', difficulty.minesNumber)
             const newMinesPositions : Position[] = []
             while (newMinesPositions.length != difficulty.minesNumber){
                 const a = Math.floor(Math.random() * (difficulty.boardWidth))

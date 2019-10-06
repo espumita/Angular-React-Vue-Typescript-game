@@ -6,7 +6,6 @@ export default (state: GameState = undefined, action: StartGaneAction) => {
     if (state == undefined) return initialState.gameState
     switch(action.type){
         case START_GAME_ACTION: {
-            console.log('GAME STARTED', action.position.x, action.position.y)
             return GameState.Started
         }
         default: return state
