@@ -1,5 +1,5 @@
 
-import initialState, { Position, Mines, PerimeterCell } from '../store/initialState'
+import initialState, { Position, Mines, PerimeterCell, Difficulty } from '../store/initialState'
 import { DeployMinesAction } from '../actions/gameActions'
 import { DEPLOY_MINES_ACTION } from '../actions/actions'
 
@@ -16,15 +16,15 @@ function getPerimeterFor(position : Position){
     return perimeter
 }
 
-export default (state: Mines = undefined, action: DeployMinesAction) => {
+export default (state: Mines = undefined, action: DeployMinesAction, difficulty : Difficulty) => {
     if (state == undefined) return initialState.mines
     switch(action.type){
         case DEPLOY_MINES_ACTION: {
-            console.log('DEPLOYING MINES', action.difficulty.minesNumber)
+            console.log('DEPLOYING MINES', difficulty.minesNumber)
             const newMinesPositions : Position[] = []
-            while (newMinesPositions.length != action.difficulty.minesNumber){
-                const a = Math.floor(Math.random() * (action.difficulty.boardWidth))
-                const b = Math.floor(Math.random() * (action.difficulty.boardHeight))
+            while (newMinesPositions.length != difficulty.minesNumber){
+                const a = Math.floor(Math.random() * (difficulty.boardWidth))
+                const b = Math.floor(Math.random() * (difficulty.boardHeight))
                 if (newMinesPositions.every(x => !x.sameAs(new Position(a, b)))){
                     newMinesPositions.push(new Position(a,b))
                 }

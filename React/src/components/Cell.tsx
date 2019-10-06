@@ -22,8 +22,9 @@ function getNumber(type : CellType) {
 const Cell = function Cell(props: Positionable & { clickAction : Function, type: CellType }) {
     const color = getColor(props.type)
     const number = getNumber(props.type)
+    const clickAction = props.type === CellType.None ? () => props.clickAction() : () => {}
     return (
-      <div onClick={() => props.clickAction()} style={{ display:'flex', alignItems: 'center', justifyContent: 'content', width: '40px', height: '40px', backgroundColor: color, borderBlockColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
+      <div onClick={clickAction} style={{ display:'flex', alignItems: 'center', justifyContent: 'content', width: '40px', height: '40px', backgroundColor: color, borderBlockColor: 'black', borderStyle: 'solid', borderWidth: '1px'}}>
         <div>{number}</div>
       </div>
     )

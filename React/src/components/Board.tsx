@@ -2,10 +2,10 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Store, Difficulty, Position, GameState, CellType, Mines } from '../store/initialState'
 import Cell from './Cell'
-import { distpatchCreateStartGameAction, createMakeMovementAction } from '../actions/gameActions' 
+import { distpatchCreateStartGameAction, dispatchCreateMakeMovementAction } from '../actions/gameActions' 
 
 export function Board(props: { difficulty: Difficulty, gameState: GameState, showableCells : Position[], mines : Mines } & BoardActions) {
-  const clickAction = cellAction(props.gameState, props.startGame, props.difficulty, props.makeMovement)
+  const clickAction = cellAction(props.gameState, props.startGame, props.difficulty, props.makeMovement, props.mines)
   return (
     <div style={{ display: 'flex' }}>
       {cells(props.difficulty.boardWidth, props.difficulty.boardHeight, clickAction, props.showableCells, props.mines)}
@@ -13,9 +13,9 @@ export function Board(props: { difficulty: Difficulty, gameState: GameState, sho
   )
 }
 
-function cellAction(gameState : GameState, startGame: Function, difficulty: Difficulty, makeMovement: Function) : Function {
-  if (gameState === GameState.NotStarted) return (position: Position) => startGame(position, difficulty)
-  return makeMovement
+function cellAction(gameState : GameState, startGame: Function, difficulty: Difficulty, makeMovement: Function, mines: Mines) : Function {
+  if (gameState === GameState.NotStarted) return (position: Position) => startGame(position, difficulty, mines)
+  return (position: Position) => makeMovement(position, mines)
 }
   
 function cells(width: number, height : Number, clickAction : Function, showableCells : Position[], mines: Mines) {
@@ -61,8 +61,8 @@ function getCellType(position : Position, showableCells : Position[], mines : Mi
 export default connect(
   (state: Store) : { difficulty: Difficulty, mines: Mines, gameState: GameState, showableCells: Position[] } => { return { difficulty: {...state.difficulty }, gameState: state.gameState, showableCells: state.showableCells, mines: state.mines } },
   (dispatch: Function) : BoardActions => { return {
-    startGame: (position: Position, difficulty: Difficulty) => distpatchCreateStartGameAction(position, difficulty)(dispatch),
-    makeMovement: (position: Position) => dispatch(createMakeMovementAction(position))
+    startGame: (position: Position, difficulty: Difficulty, mines: Mines) => distpatchCreateStartGameAction(position)(dispatch),
+    makeMovement: (position: Position, mines: Mines) => dispatchCreateMakeMovementAction(position)(dispatch)
   }}
 )(Board)
 

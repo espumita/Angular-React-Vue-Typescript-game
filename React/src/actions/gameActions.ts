@@ -1,5 +1,5 @@
 import { Action } from 'redux'
-import { Position, Difficulty } from '../store/initialState'
+import { Position, Difficulty, Mines } from '../store/initialState'
 import { START_GAME_ACTION, DEPLOY_MINES_ACTION, MAKE_MOVEMENT } from './actions'
 
 export interface StartGaneAction extends Action {
@@ -9,7 +9,6 @@ export interface StartGaneAction extends Action {
 
 export interface DeployMinesAction extends Action {
     type: typeof DEPLOY_MINES_ACTION
-    difficulty: Difficulty
 }
 
 export interface MakeMovementAction extends Action {
@@ -25,14 +24,14 @@ export function createStartGameAction(position: Position) : StartGaneAction {
     }
 }
 
-export function createDeployMinesAction(difficulty: Difficulty) : DeployMinesAction {
+export function createDeployMinesAction() : DeployMinesAction {
     return {
-        type: DEPLOY_MINES_ACTION,
-        difficulty: difficulty
+        type: DEPLOY_MINES_ACTION
     }
 }
 
 export function createMakeMovementAction(position: Position) : MakeMovementAction {
+    //if poisiton is in mines => return LOSE GAME ACTION?
     return {
         type: MAKE_MOVEMENT,
         position: position
@@ -40,10 +39,16 @@ export function createMakeMovementAction(position: Position) : MakeMovementActio
 }
 
 
-export function distpatchCreateStartGameAction(position: Position, difficulty: Difficulty){
+export function distpatchCreateStartGameAction(position: Position){
     return (dispatch: Function) => {
         dispatch(createStartGameAction(position))
-        dispatch(createDeployMinesAction(difficulty))
+        dispatch(createDeployMinesAction())
+        dispatch(createMakeMovementAction(position))
+    }
+}
+
+export function dispatchCreateMakeMovementAction(position: Position){
+    return (dispatch: Function) => {
         dispatch(createMakeMovementAction(position))
     }
 }
