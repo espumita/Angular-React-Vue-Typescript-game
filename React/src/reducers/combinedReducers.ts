@@ -6,7 +6,6 @@ import showableCellsReducer from './showableCellsReducer'
 import { Store } from '../store/initialState'
 import { Action } from 'redux'
 
-
 const rootReducer = (state: Store, action: Action) => {
     return {
         difficulty: difficultyReducer(state.difficulty, action),

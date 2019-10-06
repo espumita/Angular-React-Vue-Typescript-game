@@ -3,16 +3,16 @@ import initialState, { Position, Mines, PerimeterCell, Difficulty } from '../sto
 import { DeployMinesAction } from '../actions/gameActions'
 import { DEPLOY_MINES_ACTION } from '../actions/actions'
 
-function getPerimeterFor(position : Position){
+function getPerimeterFor(position : Position, difficulty : Difficulty){
     const perimeter = []
-    perimeter.push(new Position(position.x + 1, position.y + 1))
-    perimeter.push(new Position(position.x + 1, position.y ))
-    perimeter.push(new Position(position.x, position.y + 1))
-    perimeter.push(new Position(position.x - 1, position.y - 1))
-    perimeter.push(new Position(position.x - 1, position.y))
-    perimeter.push(new Position(position.x, position.y - 1))
-    perimeter.push(new Position(position.x + 1, position.y - 1))
-    perimeter.push(new Position(position.x - 1, position.y + 1))
+    if (position.x + 1 < difficulty.boardWidth && position.y + 1 < difficulty.boardHeight) perimeter.push(new Position(position.x + 1, position.y + 1))
+    if (position.x + 1 < difficulty.boardWidth ) perimeter.push(new Position(position.x + 1, position.y ))
+    if (position.y + 1 < difficulty.boardHeight) perimeter.push(new Position(position.x, position.y + 1))
+    if (position.x - 1 >= 0 && position.y -1 >= 0) perimeter.push(new Position(position.x - 1, position.y - 1))
+    if (position.x - 1 >= 0) perimeter.push(new Position(position.x - 1, position.y))
+    if (position.y -1 >= 0) perimeter.push(new Position(position.x, position.y - 1))
+    if (position.x + 1 < difficulty.boardWidth && position.y -1 >= 0) perimeter.push(new Position(position.x + 1, position.y - 1))
+    if (position.x - 1 >= 0 && position.y < difficulty.boardHeight) perimeter.push(new Position(position.x - 1, position.y + 1))
     return perimeter
 }
 
@@ -31,7 +31,7 @@ export default (state: Mines = undefined, action: DeployMinesAction, difficulty 
             }
             const newPerimeterCells : PerimeterCell[] = []
             newMinesPositions.forEach(minePosition => {
-                const perimter = getPerimeterFor(minePosition)
+                const perimter = getPerimeterFor(minePosition, difficulty)
                 perimter.forEach(perimeterPosition => {
                     const exists = newPerimeterCells.some(x => x.position.sameAs(perimeterPosition))
                     if (!exists){
