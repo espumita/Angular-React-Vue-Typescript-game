@@ -11,7 +11,7 @@ const rootReducer = (state: Store, action: Action) => {
         difficulty: difficultyReducer(state.difficulty, action),
         gameState: gameStateReducer(state.gameState, action as StartGaneAction),
         mines: minesReducer(state.mines, action as DeployMinesAction, state.difficulty),
-        showableCells: showableCellsReducer(state.showableCells, action as MakeMovementAction, state.mines)
+        showableCells: showableCellsReducer(state.showableCells, action as MakeMovementAction, state.mines, state.difficulty)
     }
 }
 export default rootReducer;

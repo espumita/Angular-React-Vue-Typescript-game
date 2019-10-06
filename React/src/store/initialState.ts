@@ -37,7 +37,7 @@ export class BeginerDifficulty implements Difficulty {
     boardHeight: number
 
     constructor(){
-        this.minesNumber = 10
+        this.minesNumber = 4
         this.boardWidth = 8
         this.boardHeight = 8
     }
