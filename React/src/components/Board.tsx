@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import { Store, Position, GameState, CellType, Mines } from '../store/initialState'
 import Cell from './Cell'
 import { distpatchCreateStartGameAction, dispatchCreateMakeMovementAction } from '../actions/gameActions' 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-export function Board(props: & BoardActions) {
+export function Board () {
   const { difficulty, gameState, mines, showableCells } = useSelector((state: Store) => state)
-  const clickAction = cellAction(gameState, props.startGame, props.makeMovement)
+  const dispatch = useDispatch()
+  const clickAction = cellAction(gameState, dispatch)
   return (
     <div style={{ display: 'flex' }}>
       {cells(difficulty.boardWidth, difficulty.boardHeight, clickAction, showableCells, mines)}
@@ -15,9 +16,9 @@ export function Board(props: & BoardActions) {
   )
 }
 
-function cellAction(gameState : GameState, startGame: Function, makeMovement: Function) : Function {
-  if (gameState === GameState.NotStarted) return (position: Position) => startGame(position)
-  return (position: Position) => makeMovement(position)
+function cellAction(gameState : GameState, dispatch: Function) : Function {
+  if (gameState === GameState.NotStarted) return (position: Position) => distpatchCreateStartGameAction(position)(dispatch)
+  return (position: Position) => dispatchCreateMakeMovementAction(position)(dispatch)
 }
   
 function cells(width: number, height : Number, clickAction : Function, showableCells : Position[], mines: Mines) {
@@ -62,13 +63,5 @@ function getCellType(position : Position, showableCells : Position[], mines : Mi
 
 export default connect(
   (state: Store) : { } => { return {  } },
-  (dispatch: Function) : BoardActions => { return {
-    startGame: (position: Position) => distpatchCreateStartGameAction(position)(dispatch),
-    makeMovement: (position: Position) => dispatchCreateMakeMovementAction(position)(dispatch)
-  }}
+  (dispatch: Function) : {} => { return {  }}
 )(Board)
-
-interface BoardActions {
-  startGame: Function,
-  makeMovement: Function
-}
