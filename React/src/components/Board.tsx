@@ -1,11 +1,10 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
 import { Store, Position, GameState, CellType, Mines } from '../store/initialState'
 import Cell from './Cell'
 import { distpatchCreateStartGameAction, dispatchCreateMakeMovementAction } from '../actions/gameActions' 
 import { useSelector, useDispatch } from 'react-redux'
 
-export function Board () {
+const Board  = () => {
   const { difficulty, gameState, mines, showableCells } = useSelector((state: Store) => state)
   const dispatch = useDispatch()
   const clickAction = cellAction(gameState, dispatch)
@@ -61,7 +60,4 @@ function getCellType(position : Position, showableCells : Position[], mines : Mi
   return CellType.None
 }
 
-export default connect(
-  (state: Store) : { } => { return {  } },
-  (dispatch: Function) : {} => { return {  }}
-)(Board)
+export default Board
