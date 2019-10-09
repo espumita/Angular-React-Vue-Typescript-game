@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Enzyme, { mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16';
-import BoardComponent, { Board } from '../src/components/Board'
+import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
