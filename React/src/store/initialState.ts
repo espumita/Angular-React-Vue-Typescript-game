@@ -14,9 +14,9 @@ export class PerimeterCell {
     position: Position
     numberOfClosestsMines: number
 
-    constructor(position : Position){
+    constructor(position : Position, numberOfClosestsMines: number = 1){
         this.position = position
-        this.numberOfClosestsMines = 1
+        this.numberOfClosestsMines = numberOfClosestsMines
     }
 
     updateNumberOfClosestsMines(){

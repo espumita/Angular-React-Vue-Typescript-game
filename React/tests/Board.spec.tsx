@@ -5,7 +5,7 @@ import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
-import { Store, BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position } from '../src/store/initialState';
+import { Store, BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/store/initialState';
 import { START_GAME_ACTION, MAKE_MOVEMENT } from '../src/actions/actions';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -118,7 +118,7 @@ describe('Board should', () =>{
         expect(movementActions.length).toBe(1)
     })
     
-    test('cell should have no type before be clicked', () =>{
+    test('cell should not show anything before be clicked', () =>{
         const initialStore : Store = {
             difficulty: {
                 boardWidth: 1,
@@ -166,6 +166,35 @@ describe('Board should', () =>{
         const aCell = cells.first()
 
         expect(aCell.prop('type')).toBe(CellType.EmptyCell)
+    })
+
+    test('cell should be show 1 when is clicked and there is one mine close', () =>{
+        const initialStore : Store = {
+            difficulty: {
+                boardWidth: 2,
+                boardHeight : 1,
+                minesNumber: 0
+            },
+            gameState: GameState.Started,
+            mines: {
+                positions: [ new Position(1, 0) ],
+                perimeterCells: [ new PerimeterCell(new Position(0, 0)) ]
+            },
+            showableCells: [
+                new Position(0, 0)
+            ]
+        }
+        const mockStore = configureMockStore<Store>([])
+        const store = mockStore(initialStore)
+        const wrapper = mount(
+            <Provider store={store}>
+                <BoardComponent/>
+            </Provider>
+        )
+        const cells = wrapper.findWhere(node => node.key() === 'cell-0-0')
+        const aCell = cells.first()
+
+        expect(aCell.prop('type')).toBe(CellType.OneMineClose)
     })
 
 })
