@@ -6,7 +6,7 @@ import Cell from '../src/components/Cell'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import { Store, BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty } from '../src/store/initialState';
-import { START_GAME_ACTION } from '../src/actions/actions';
+import { START_GAME_ACTION, MAKE_MOVEMENT } from '../src/actions/actions';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -114,6 +114,8 @@ describe('Board should', () =>{
         const actions = store.getActions()
         const startActions = actions.filter(x => x.type == START_GAME_ACTION)
         expect(startActions.length).toBe(0)
+        const movementActions = actions.filter(x => x.type == MAKE_MOVEMENT)
+        expect(movementActions.length).toBe(1)
     })
     
 
