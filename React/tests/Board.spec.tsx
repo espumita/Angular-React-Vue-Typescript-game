@@ -177,7 +177,7 @@ describe('Board should', () =>{
         [ 6, CellType.SixMinesClose   ],
         [ 7, CellType.SevenMinesClose ],
         [ 8, CellType.EightMinesClose ],
-    ])('show a cell with number when there are mines close',(numberOfMinesClose, cellType) => {
+    ])('show a cell with number %i when there are mines close',(numberOfMinesClose, cellType) => {
         const initialStore : Store = {
             difficulty: {
                 boardWidth: 1,
