@@ -5,7 +5,7 @@ import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
-import { Store, BeginerDifficulty, GameState, IntermediateDifficulty } from '../src/store/initialState';
+import { Store, BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty } from '../src/store/initialState';
 import { START_GAME_ACTION } from '../src/actions/actions';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -48,6 +48,25 @@ describe('Board should', () =>{
         const cells = wrapper.find(Cell)
 
         expect(cells.length).toBe(256)
+    })
+
+    test('have 30 x 16 cells in expert difficulty', () =>{
+        const initialStore : Store = {
+            difficulty: new ExpertDifficulty(),
+            gameState: GameState.NotStarted,
+            mines: { positions: [], perimeterCells: []},
+            showableCells: []
+        }
+        const mockStore = configureMockStore<Store>([])
+        const store = mockStore(initialStore)
+        const wrapper = mount(
+            <Provider store={store}>
+                <BoardComponent/>
+            </Provider>
+        )
+        const cells = wrapper.find(Cell)
+
+        expect(cells.length).toBe(480)
     })
 
     test('game start when click in the first cell', () =>{
