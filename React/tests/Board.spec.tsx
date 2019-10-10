@@ -5,7 +5,7 @@ import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
-import { Store, BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType } from '../src/store/initialState';
+import { Store, BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position } from '../src/store/initialState';
 import { START_GAME_ACTION, MAKE_MOVEMENT } from '../src/actions/actions';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -118,7 +118,7 @@ describe('Board should', () =>{
         expect(movementActions.length).toBe(1)
     })
     
-    test('cell should have not type before be clicked', () =>{
+    test('cell should have no type before be clicked', () =>{
         const initialStore : Store = {
             difficulty: {
                 boardWidth: 1,
@@ -140,6 +140,32 @@ describe('Board should', () =>{
         const aCell = cells.first()
 
         expect(aCell.prop('type')).toBe(CellType.None)
+    })
+
+    test('cell should be empty when was clicked and there is no mines close', () =>{
+        const initialStore : Store = {
+            difficulty: {
+                boardWidth: 1,
+                boardHeight : 1,
+                minesNumber: 0
+            },
+            gameState: GameState.Started,
+            mines: { positions: [], perimeterCells: []},
+            showableCells: [
+                new Position(0, 0)
+            ]
+        }
+        const mockStore = configureMockStore<Store>([])
+        const store = mockStore(initialStore)
+        const wrapper = mount(
+            <Provider store={store}>
+                <BoardComponent/>
+            </Provider>
+        )
+        const cells = wrapper.findWhere(node => node.key() === 'cell-0-0')
+        const aCell = cells.first()
+
+        expect(aCell.prop('type')).toBe(CellType.EmptyCell)
     })
 
 })
