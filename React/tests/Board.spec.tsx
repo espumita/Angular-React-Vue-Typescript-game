@@ -118,7 +118,7 @@ describe('Board should', () =>{
         expect(movementActions.length).toBe(1)
     })
     
-    test('cell should not show anything before be clicked', () =>{
+    test('not show any cell before be clicked', () =>{
         const initialStore : Store = {
             difficulty: {
                 boardWidth: 1,
@@ -142,7 +142,7 @@ describe('Board should', () =>{
         expect(aCell.prop('type')).toBe(CellType.None)
     })
 
-    test('cell should be empty when was clicked and there is no mines close', () =>{
+    test('show a empty cell when was clicked and there is no mines close', () =>{
         const initialStore : Store = {
             difficulty: {
                 boardWidth: 1,
@@ -168,17 +168,26 @@ describe('Board should', () =>{
         expect(aCell.prop('type')).toBe(CellType.EmptyCell)
     })
 
-    test('cell should be show 1 when is clicked and there is one mine close', () =>{
+    test.each([
+        [ 1, CellType.OneMineClose    ],
+        [ 2, CellType.TwoMinesClose   ],
+        [ 3, CellType.TreeMinesClose  ],
+        [ 4, CellType.FourMinesClose  ],
+        [ 5, CellType.FiveMinesClose  ],
+        [ 6, CellType.SixMinesClose   ],
+        [ 7, CellType.SevenMinesClose ],
+        [ 8, CellType.EightMinesClose ],
+    ])('show a cell with number when there are mines close',(numberOfMinesClose, cellType) => {
         const initialStore : Store = {
             difficulty: {
-                boardWidth: 2,
+                boardWidth: 1,
                 boardHeight : 1,
                 minesNumber: 0
             },
             gameState: GameState.Started,
             mines: {
-                positions: [ new Position(1, 0) ],
-                perimeterCells: [ new PerimeterCell(new Position(0, 0)) ]
+                positions: [],
+                perimeterCells: [ new PerimeterCell(new Position(0, 0), numberOfMinesClose) ]
             },
             showableCells: [
                 new Position(0, 0)
@@ -194,7 +203,7 @@ describe('Board should', () =>{
         const cells = wrapper.findWhere(node => node.key() === 'cell-0-0')
         const aCell = cells.first()
 
-        expect(aCell.prop('type')).toBe(CellType.OneMineClose)
-    })
+        expect(aCell.prop('type')).toBe(cellType)
+    });
 
 })
