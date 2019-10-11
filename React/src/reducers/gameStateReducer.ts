@@ -1,6 +1,6 @@
 import { StartGaneAction } from '../actions/gameActions'
 import initialState, { GameState  } from '../store/initialState'
-import { START_GAME_ACTION } from '../actions/actions'
+import { START_GAME_ACTION } from '../actions/actionsTypes'
 
 export default (state: GameState = undefined, action: StartGaneAction) => {
     if (state == undefined) return initialState.gameState

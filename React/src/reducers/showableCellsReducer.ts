@@ -1,7 +1,7 @@
 
 import initialState, { Position, Mines, Difficulty } from '../store/initialState'
 import { MakeMovementAction } from '../actions/gameActions'
-import { MAKE_MOVEMENT } from '../actions/actions'
+import { MAKE_MOVEMENT } from '../actions/actionsTypes'
 import diff = require('jest-diff')
 
 function getPerimeterFor(position : Position, difficulty : Difficulty){

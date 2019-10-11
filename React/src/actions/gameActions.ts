@@ -1,6 +1,6 @@
 import { Action } from 'redux'
-import { Position, Difficulty, Mines } from '../store/initialState'
-import { START_GAME_ACTION, DEPLOY_MINES_ACTION, MAKE_MOVEMENT } from './actions'
+import { Position } from '../store/initialState'
+import { START_GAME_ACTION, DEPLOY_MINES_ACTION, MAKE_MOVEMENT } from './actionsTypes'
 
 export interface StartGaneAction extends Action {
     type: typeof START_GAME_ACTION,

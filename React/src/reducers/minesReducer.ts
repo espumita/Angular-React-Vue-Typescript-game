@@ -1,7 +1,7 @@
 
 import initialState, { Position, Mines, PerimeterCell, Difficulty } from '../store/initialState'
 import { DeployMinesAction } from '../actions/gameActions'
-import { DEPLOY_MINES_ACTION } from '../actions/actions'
+import { DEPLOY_MINES_ACTION } from '../actions/actionsTypes'
 
 function getPerimeterFor(position : Position, difficulty : Difficulty){
     const perimeter = []

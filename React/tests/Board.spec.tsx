@@ -6,7 +6,7 @@ import Cell from '../src/components/Cell'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import { Store, BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/store/initialState';
-import { START_GAME_ACTION, MAKE_MOVEMENT } from '../src/actions/actions';
+import { START_GAME_ACTION, MAKE_MOVEMENT } from '../src/actions/actionsTypes';
 
 Enzyme.configure({ adapter: new Adapter() });
 
