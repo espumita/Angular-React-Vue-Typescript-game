@@ -38,4 +38,24 @@ describe('Mines reducer should', () => {
         expect(newState.perimeterCells[0].numberOfClosestsMines).toBe(1)
     })
 
+    test('set mines and perimeters when react to deploy mines action for tree mines', () => {
+        const deployMinesAction : DeployMinesAction = {
+            type: DEPLOY_MINES_ACTION
+        }
+        const aDifficutly : Difficulty = {
+            boardWidth: 2,
+            boardHeight: 2,
+            minesNumber: 3
+        }
+        const state = {
+            positions: [],
+            perimeterCells: []
+        }
+
+        const newState = reducer(state, deployMinesAction, aDifficutly)
+
+        expect(newState.positions.length).toBe(aDifficutly.minesNumber)
+        expect(newState.perimeterCells.length).toBe(1)
+        expect(newState.perimeterCells[0].numberOfClosestsMines).toBe(3)
+    })
 })
