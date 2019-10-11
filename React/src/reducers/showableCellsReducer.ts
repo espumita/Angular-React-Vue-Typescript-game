@@ -13,7 +13,7 @@ function getPerimeterFor(position : Position, difficulty : Difficulty){
     if (position.x - 1 >= 0) perimeter.push(new Position(position.x - 1, position.y))
     if (position.y -1 >= 0) perimeter.push(new Position(position.x, position.y - 1))
     if (position.x + 1 < difficulty.boardWidth && position.y -1 >= 0) perimeter.push(new Position(position.x + 1, position.y - 1))
-    if (position.x - 1 >= 0 && position.y < difficulty.boardHeight) perimeter.push(new Position(position.x - 1, position.y + 1))
+    if (position.x - 1 >= 0 && position.y + 1 < difficulty.boardHeight) perimeter.push(new Position(position.x - 1, position.y + 1))
     return perimeter
 }
 
