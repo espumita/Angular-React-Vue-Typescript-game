@@ -3,10 +3,9 @@ import { GameState, Position } from '../../src/store/initialState'
 import { StartGaneAction } from '../../src/actions/gameActions'
 import { START_GAME_ACTION } from '../../src/actions/actions'
 
-describe('Game state reducer should', () => {
+describe('Game state reducer should set game state to', () => {
 
-    test('start initialized to', () => {
-        const state = GameState.NotStarted
+    test('not started at the beginning', () => {
         const startGaneAction : StartGaneAction= {
             type: START_GAME_ACTION,
             position: new Position(0, 0)
@@ -15,6 +14,18 @@ describe('Game state reducer should', () => {
         const newState = reducer(undefined, startGaneAction)
 
         expect(newState).toBe(GameState.NotStarted)
+    })
+
+    test('started when the game start', () => {
+        const state = GameState.NotStarted
+        const startGaneAction : StartGaneAction= {
+            type: START_GAME_ACTION,
+            position: new Position(0, 0)
+        }
+
+        const newState = reducer(state, startGaneAction)
+
+        expect(newState).toBe(GameState.Started)
     })
 
 })
