@@ -59,7 +59,7 @@ describe('Showable cells reducer should', () => {
         expect(newState.length).toBe(1)
     })
 
-    test.only('show all mines when there is a mine', () => {
+    test('show all mines when there is a mine', () => {
         const makeMovementAction : MakeMovementAction = {
             type: MAKE_MOVEMENT,
             position: new Position(0, 0)

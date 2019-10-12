@@ -1,7 +1,44 @@
-
-import initialState, { Position, Mines, Difficulty } from '../store/initialState'
+import initialState, { Position, Mines, Difficulty, PerimeterCell } from '../store/initialState'
 import { MakeMovementAction } from '../actions/gameActions'
 import { MAKE_MOVEMENT } from '../actions/actionsTypes'
+
+export default (state: Position[] = undefined, action: MakeMovementAction, mines: Mines, difficulty : Difficulty) => {
+    if (state == undefined) return initialState.showableCells
+    switch(action.type){
+        case MAKE_MOVEMENT: {
+            if(IsNotShowedYet(action.position, state)) {
+                if (IsMine(action.position, mines.positions)) return [ ...state, ...mines.positions]
+                const showedCells = [...state, action.position ]
+                return [ ...showedCells, ...showPerimeterFor(action.position, showedCells, mines, difficulty) ]
+            }
+        }
+        default: return state
+    }
+}
+
+function IsNotShowedYet(position: Position, positionsToShow: Position[]){
+    return !positionsToShow.some(x => x.sameAs(position))
+}
+
+function IsMine(position: Position, mines: Position[]){
+    return mines.some(x => x.sameAs(position))
+}
+
+function showPerimeterFor(position: Position, showedCells: Position[], mines: Mines, difficulty : Difficulty) : Position [] {
+    if (!IsAEmptyCell(position, mines)) return []
+    return getEmptyCellPerimeter(position, showedCells, mines, difficulty)
+}
+
+function getEmptyCellPerimeter(position: Position, showedCells: Position[], mines: Mines, difficulty : Difficulty){
+    const perimeter = getPerimeterFor(position, difficulty)
+    const numberCells = perimeter.filter(x => IsACellWithNumber(x, mines.perimeterCells) && IsNotShowedYet(x, showedCells))
+    const emptyCells = perimeter.filter(x => IsAEmptyCell(x, mines) && IsNotShowedYet(x, showedCells))
+    const emptyCellPropagation : Position[] = []
+    emptyCells.forEach(y => {
+        emptyCellPropagation.push(...getEmptyCellPerimeter(y, [...showedCells,...numberCells, ...emptyCells ], mines, difficulty))
+    })
+    return [ ...numberCells, ...emptyCells ,...emptyCellPropagation ]
+}
 
 function getPerimeterFor(position : Position, difficulty : Difficulty){
     const perimeter = []
@@ -16,44 +53,23 @@ function getPerimeterFor(position : Position, difficulty : Difficulty){
     return perimeter
 }
 
-function getForPerimeter(position: Position, mines: Mines, state: Position[], difficulty : Difficulty) : Position [] {
- const perimeterCelllsPosiiton = mines.perimeterCells.map(x => x.position)
- if (perimeterCelllsPosiiton.some(x => x.sameAs(position))) return [] //Not applicable
- if (!mines.positions.some(x => x.sameAs(position))) {
-    const positionPerimeter = getPerimeterFor(position, difficulty)
-    const newPerimeterShoweable = positionPerimeter.filter(x => !state.some(y => y.sameAs(x)))
-    const arraysToPropagate = newPerimeterShoweable.filter(x => !perimeterCelllsPosiiton.some(y => y.sameAs(x)))
-    const a : Position[] = []
-    arraysToPropagate.forEach(y=>{
-        a.push(...getForPerimeter(y, mines, [...state, ...newPerimeterShoweable], difficulty))
-    })
-    return [ ...newPerimeterShoweable, ...a  ]
- }
-  return [ ]
+function IsACellWithNumber(position: Position, cellsWithNumber: PerimeterCell[]){
+    return cellsWithNumber.some(x => x.position.sameAs(position))
 }
 
-export default (state: Position[] = undefined, action: MakeMovementAction, mines: Mines, difficulty : Difficulty) => {
-    if (state == undefined) return initialState.showableCells
-    switch(action.type){
-        case MAKE_MOVEMENT: {
-            if(IsNotShowedYet(action.position, state)) {
-                //Check if mine loose?
-                if (IsMine(action.position, mines.positions)){
-                    return [ ...state, ...mines.positions]
-                } 
-
-                return [ ...state, action.position, ...getForPerimeter(action.position, mines, state, difficulty) ]
-                //Win movement?
-            }
-        }
-        default: return state
-    }
+function IsAEmptyCell(position: Position, mines: Mines){
+    return !mines.perimeterCells.some(x => x.position.sameAs(position))
+            && !IsMine(position, mines.positions)
 }
 
-function IsNotShowedYet(position: Position, positionsToShow: Position[]){
-    return !positionsToShow.some(x => x.sameAs(position))
-}
 
-function IsMine(position: Position, mines: Position[]){
-    return mines.some(x => x.sameAs(position))
-}
+
+
+
+
+
+
+
+
+
+
