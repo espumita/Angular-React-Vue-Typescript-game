@@ -34,8 +34,7 @@ function getPerimetersOf(mines: Position[], difficulty: Difficulty){
     const allPerimetersPositions = getAllPerimeterPosition(mines, difficulty)
 
     allPerimetersPositions.forEach(position => {
-        const exists = existsIn(position, newPerimeter)
-        if (!exists){
+        if (hasNotBeenAddedTo(newPerimeter, position)){
             if(isNotAMine(position, mines)) newPerimeter.push(new PerimeterCell(position))
         } else {
             const addedCellPerimeter = newPerimeter.find(perimeter => perimeter.position.sameAs(position))
@@ -62,8 +61,8 @@ function getPerimeterOf(mine : Position, difficulty : Difficulty){
     return perimeter
 }
 
-function existsIn(position : Position, perimeterCells: PerimeterCell[]){
-    return perimeterCells.some(x => x.position.sameAs(position))
+function hasNotBeenAddedTo(perimeterCells: PerimeterCell[], position : Position){
+    return !perimeterCells.some(x => x.position.sameAs(position))
 }
 
 function isNotAMine(position : Position, mines: Position[]){
