@@ -38,7 +38,7 @@ export default (state: Position[] = undefined, action: MakeMovementAction, mines
         case MAKE_MOVEMENT: {
             if(IsNotShowedYet(action.position, state)) {
                 //Check if mine loose?
-                if (mines.positions.some(x => x.sameAs(action.position))){
+                if (IsMine(action.position, mines.positions)){
                     return [ ...state, ...mines.positions]
                 } 
 
@@ -51,5 +51,9 @@ export default (state: Position[] = undefined, action: MakeMovementAction, mines
 }
 
 function IsNotShowedYet(position: Position, positionsToShow: Position[]){
-    return !positionsToShow.some(x => position.sameAs(position))
+    return !positionsToShow.some(x => x.sameAs(position))
+}
+
+function IsMine(position: Position, mines: Position[]){
+    return mines.some(x => x.sameAs(position))
 }
