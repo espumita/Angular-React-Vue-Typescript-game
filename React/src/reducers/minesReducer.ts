@@ -1,8 +1,6 @@
-
 import initialState, { Position, Mines, PerimeterCell, Difficulty } from '../store/initialState'
 import { DeployMinesAction } from '../actions/gameActions'
 import { DEPLOY_MINES_ACTION } from '../actions/actionsTypes'
-
 
 export default (state: Mines = undefined, action: DeployMinesAction, difficulty : Difficulty) => {
     if (state == undefined) return initialState.mines
@@ -22,10 +20,10 @@ export default (state: Mines = undefined, action: DeployMinesAction, difficulty 
 function getMinesFor(difficulty: Difficulty){
     const mines : Position[] = []
     while (mines.length != difficulty.minesNumber){
-        const a = Math.floor(Math.random() * (difficulty.boardWidth))
-        const b = Math.floor(Math.random() * (difficulty.boardHeight))
-        if (mines.every(x => !x.sameAs(new Position(a, b)))){
-            mines.push(new Position(a,b))
+        const widthIndex = Math.floor(Math.random() * (difficulty.boardWidth))
+        const heightIndex = Math.floor(Math.random() * (difficulty.boardHeight))
+        if (mines.every(x => !x.sameAs(new Position(widthIndex, heightIndex)))){
+            mines.push(new Position(widthIndex, heightIndex))
         }
     }
     return mines
@@ -67,6 +65,7 @@ function getPerimeterOf(mine : Position, difficulty : Difficulty){
 function existsIn(position : Position, perimeterCells: PerimeterCell[]){
     return perimeterCells.some(x => x.position.sameAs(position))
 }
+
 function existsInMines(position : Position, mines: Position[]){
     return mines.some(x => x.sameAs(position))
 }
