@@ -33,7 +33,7 @@ function getMinesFor(difficulty: Difficulty){
 
 function getPerimetersOf(mines: Position[], difficulty: Difficulty){
     const newPerimeter : PerimeterCell[] = []
-    const allPerimetersPositions : Position[] = [].concat(...mines.map(mine => getPerimeterOf(mine, difficulty)))
+    const allPerimetersPositions = getAllPerimeterPosition(mines, difficulty)
 
     allPerimetersPositions.forEach(position => {
         const exists = existsIn(position, newPerimeter)
@@ -45,6 +45,10 @@ function getPerimetersOf(mines: Position[], difficulty: Difficulty){
         }
     })
     return newPerimeter
+}
+
+function getAllPerimeterPosition(mines: Position[], difficulty: Difficulty) : Position[] {
+    return [].concat(...mines.map(mine => getPerimeterOf(mine, difficulty)))
 }
 
 function getPerimeterOf(mine : Position, difficulty : Difficulty){
