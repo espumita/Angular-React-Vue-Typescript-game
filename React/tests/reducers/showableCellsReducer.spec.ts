@@ -86,7 +86,7 @@ describe('Showable cells reducer should', () => {
         expect(newState.length).toBe(3)
     })
 
-    test('show nearly number cells when click on empty cell', () => {
+    test('show adjacent number cells when click on empty cell', () => {
         const makeMovementAction : MakeMovementAction = {
             type: MAKE_MOVEMENT,
             position: new Position(0, 0)
@@ -109,6 +109,29 @@ describe('Showable cells reducer should', () => {
         expect(newState.some(x => x.sameAs(mines.positions[0]))).toBeFalsy()
     })
 
+    test('show adjacent empty cells and cells with numbers when click on empty cell', () => {
+        const makeMovementAction : MakeMovementAction = {
+            type: MAKE_MOVEMENT,
+            position: new Position(0, 0)
+            
+        }
+        const aDifficutly :  Difficulty = {
+            boardWidth: 3,
+            boardHeight: 3, 
+            minesNumber: 1
+        }
+        const mines : Mines = { positions: [
+            new Position(2, 2)
+        ], perimeterCells: [ 
+            new PerimeterCell(new Position(2, 1)),
+            new PerimeterCell(new Position(1, 2)),
+            new PerimeterCell(new Position(1, 1))
+        ]}
 
+        const newState = reducer([], makeMovementAction, mines, aDifficutly)
+
+        expect(newState.length).toBe(8)
+        expect(newState.some(x => x.sameAs(mines.positions[0]))).toBeFalsy()
+    })
 
 })
