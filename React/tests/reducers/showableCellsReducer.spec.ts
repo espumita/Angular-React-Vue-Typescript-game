@@ -46,7 +46,7 @@ describe('Showable cells reducer should', () => {
         const aDifficutly :  Difficulty = {
             boardWidth: 2,
             boardHeight: 1, 
-            minesNumber: 0
+            minesNumber: 1
         }
         const mines : Mines = { positions: [
             new Position(1, 0)
@@ -59,4 +59,25 @@ describe('Showable cells reducer should', () => {
         expect(newState.length).toBe(1)
     })
 
+    test('show all mines when there is a mine', () => {
+        const makeMovementAction : MakeMovementAction = {
+            type: MAKE_MOVEMENT,
+            position: new Position(0, 0)
+            
+        }
+        const aDifficutly :  Difficulty = {
+            boardWidth: 2,
+            boardHeight: 1, 
+            minesNumber: 2
+        }
+        const mines : Mines = { positions: [
+            new Position(0, 0),
+            new Position(1, 0)
+        ], perimeterCells: [ ]
+        }
+
+        const newState = reducer([], makeMovementAction, mines, aDifficutly)
+
+        expect(newState.length).toBe(2)
+    })
 })
