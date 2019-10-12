@@ -34,8 +34,9 @@ function getEmptyCellPerimeter(position: Position, showedCells: Position[], mine
     const numberCells = perimeter.filter(x => IsACellWithNumber(x, mines.perimeterCells) && IsNotShowedYet(x, showedCells))
     const emptyCells = perimeter.filter(x => IsAEmptyCell(x, mines) && IsNotShowedYet(x, showedCells))
     const emptyCellPropagation : Position[] = []
+    showCells(numberCells, emptyCells, showedCells)
     emptyCells.forEach(y => {
-        emptyCellPropagation.push(...getEmptyCellPerimeter(y, [...showedCells,...numberCells, ...emptyCells ], mines, difficulty))
+        emptyCellPropagation.push(...getEmptyCellPerimeter(y, showedCells, mines, difficulty))
     })
     return [ ...numberCells, ...emptyCells ,...emptyCellPropagation ]
 }
@@ -60,6 +61,11 @@ function IsACellWithNumber(position: Position, cellsWithNumber: PerimeterCell[])
 function IsAEmptyCell(position: Position, mines: Mines){
     return !mines.perimeterCells.some(x => x.position.sameAs(position))
             && !IsMine(position, mines.positions)
+}
+
+function showCells(numberCells: Position[], emptyCells: Position[], showedCells: Position[]){
+    numberCells.forEach(x => showedCells.push(x))
+    emptyCells.forEach(x => showedCells.push(x))
 }
 
 

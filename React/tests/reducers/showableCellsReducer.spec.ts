@@ -134,4 +134,22 @@ describe('Showable cells reducer should', () => {
         expect(newState.some(x => x.sameAs(mines.positions[0]))).toBeFalsy()
     })
 
+
+    test('show all cells when there is a empty board', () => {
+        const makeMovementAction : MakeMovementAction = {
+            type: MAKE_MOVEMENT,
+            position: new Position(0, 0)
+            
+        }
+        const aDifficutly :  Difficulty = {
+            boardWidth: 10,
+            boardHeight: 10, 
+            minesNumber: 0
+        }
+        const mines : Mines = { positions: [], perimeterCells: [ ]}
+
+        const newState = reducer([], makeMovementAction, mines, aDifficutly)
+
+        expect(newState.length).toBe(100)
+    })
 })
