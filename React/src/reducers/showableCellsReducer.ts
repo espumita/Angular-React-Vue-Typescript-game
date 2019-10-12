@@ -36,7 +36,7 @@ export default (state: Position[] = undefined, action: MakeMovementAction, mines
     if (state == undefined) return initialState.showableCells
     switch(action.type){
         case MAKE_MOVEMENT: {
-            if(!state.some(x => action.position.sameAs(x))) {
+            if(IsNotShowedYet(action.position, state)) {
                 //Check if mine loose?
                 if (mines.positions.some(x => x.sameAs(action.position))){
                     return [ ...state, ...mines.positions]
@@ -48,4 +48,8 @@ export default (state: Position[] = undefined, action: MakeMovementAction, mines
         }
         default: return state
     }
+}
+
+function IsNotShowedYet(position: Position, positionsToShow: Position[]){
+    return !positionsToShow.some(x => position.sameAs(position))
 }
