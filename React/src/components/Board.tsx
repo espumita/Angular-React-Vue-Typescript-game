@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const Board  = () => {
   const { difficulty, gameState, mines, showableCells } = useSelector((state: Store) => state)
   const dispatch = useDispatch()
-  const action = clickAction(gameState, dispatch)
+  const action = getGameClickAction(gameState, dispatch)
   return (
     <div style={{ display: 'flex' }}>
       {createRows(difficulty, action, showableCells, mines)}
@@ -16,7 +16,7 @@ const Board  = () => {
   )
 }
 
-function clickAction(gameState : GameState, dispatch: Function) : Function {
+function getGameClickAction(gameState : GameState, dispatch: Function) : Function {
   if (gameState === GameState.NotStarted) return (position: Position) => distpatchCreateStartGameAction(position)(dispatch)
   return (position: Position) => dispatchCreateMakeMovementAction(position)(dispatch)
 }
@@ -37,10 +37,11 @@ function createRow(rowNumber: number, height : number, clickAction : Function, s
         .map(columnNumber => {
             const position = new Position(rowNumber, columnNumber)
             const type = getCellType(position, showableCells, mines)
+            const action = getCellClickAction(type, clickAction)
             return <Cell
               position={position}
               type={type}
-              clickAction={() => clickAction(position)}
+              clickAction={() => action(position)}
               key={`cell-${rowNumber}-${columnNumber}`}
             />
       })}
@@ -65,6 +66,11 @@ function isMine(position: Position, minesPositions : Position[]) {
 
 function isPerimeterCell(position: Position, perimeterCell : PerimeterCell[]) {
   return perimeterCell.some(x => x.position.sameAs(position))
+}
+
+function getCellClickAction(type : CellType, clickAction: Function): Function {
+  if(type === CellType.None) return clickAction
+  return () => {}
 }
 
 export default Board

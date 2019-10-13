@@ -119,6 +119,31 @@ describe('Board should', () =>{
         expect(movementActions.length).toBe(1)
     })
     
+    test('do not do nothing when click on a showed cell', () => {
+        const initialStore : Store = {
+            difficulty: new BeginerDifficulty(),
+            gameState: GameState.Started,
+            mines: { positions: [], perimeterCells: []},
+            showableCells: [
+                new Position(0, 0)
+            ]
+        }
+        const mockStore = configureMockStore<Store>([])
+        const store = mockStore(initialStore)
+        const wrapper = mount(
+            <Provider store={store}>
+                <BoardComponent/>
+            </Provider>
+        )
+        const cells = wrapper.findWhere(node => node.key() === 'cell-0-0')
+        const aCell = cells.first()
+
+        aCell.simulate('click')
+
+        const actions = store.getActions()
+        expect(actions.length).toBe(0)
+    }) 
+
     test('not show any cell before be clicked', () =>{
         const initialStore : Store = {
             difficulty: {
