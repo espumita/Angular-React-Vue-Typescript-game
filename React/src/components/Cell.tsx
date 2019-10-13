@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Position, CellType, Positionable } from '../store/initialState'
+import { Positionable, CellType } from '../model/index'
 
 function getColor(type : CellType) {
   if (type === CellType.None) return 'grey'

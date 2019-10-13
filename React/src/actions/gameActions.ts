@@ -1,5 +1,5 @@
 import { Action } from 'redux'
-import { Position } from '../store/initialState'
+import { Position } from '../model/index'
 import { START_GAME_ACTION, DEPLOY_MINES_ACTION, MAKE_MOVEMENT } from './actionsTypes'
 
 export interface StartGaneAction extends Action {

@@ -1,4 +1,5 @@
-import initialState, { Position, Mines, PerimeterCell, Difficulty } from '../store/initialState'
+import initialState from '../store/initialState'
+import { Position, Mines, PerimeterCell, Difficulty } from '../model/index'
 import { DeployMinesAction } from '../actions/gameActions'
 import { DEPLOY_MINES_ACTION } from '../actions/actionsTypes'
 

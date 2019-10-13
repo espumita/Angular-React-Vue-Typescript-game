@@ -1,5 +1,5 @@
 import reducer from '../../src/reducers/gameStateReducer' 
-import { GameState, Position } from '../../src/store/initialState'
+import { GameState, Position } from '../../src/model/index'
 import { StartGaneAction } from '../../src/actions/gameActions'
 import { START_GAME_ACTION } from '../../src/actions/actionsTypes'
 

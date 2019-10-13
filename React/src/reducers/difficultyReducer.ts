@@ -1,5 +1,6 @@
 
-import initialState, { Difficulty  } from '../store/initialState'
+import initialState from '../store/initialState'
+import { Difficulty } from '../model/index'
 import { Action } from 'redux'
 
 //This reducer should only be used to change dificulty

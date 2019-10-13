@@ -3,7 +3,7 @@ import { StartGaneAction, DeployMinesAction, MakeMovementAction} from '../action
 import gameStateReducer from './gameStateReducer'
 import minesReducer from './minesReducer' 
 import showableCellsReducer from './showableCellsReducer' 
-import { Store } from '../store/initialState'
+import { Store } from '../store/store'
 import { Action } from 'redux'
 
 const rootReducer = (state: Store, action: Action) => {

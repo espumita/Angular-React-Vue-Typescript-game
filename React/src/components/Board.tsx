@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Store, Position, GameState, CellType, Mines } from '../store/initialState'
+import { Position, Mines, CellType, GameState } from '../model/index'
+import { Store } from '../store/store'
 import Cell from './Cell'
 import { distpatchCreateStartGameAction, dispatchCreateMakeMovementAction } from '../actions/gameActions' 
 import { useSelector, useDispatch } from 'react-redux'

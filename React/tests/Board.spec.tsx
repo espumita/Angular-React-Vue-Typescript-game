@@ -5,7 +5,8 @@ import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
-import { Store, BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/store/initialState';
+import { BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/model/index';
+import { Store } from '../src/store/store';
 import { START_GAME_ACTION, MAKE_MOVEMENT } from '../src/actions/actionsTypes';
 
 Enzyme.configure({ adapter: new Adapter() });
