@@ -1,9 +1,4 @@
-export interface Positionable {
-    x: number
-    y: number
-}
-
-export class Position implements Positionable {
+export class Position {
     x: number
     y: number
 

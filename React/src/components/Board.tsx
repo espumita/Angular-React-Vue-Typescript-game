@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Position, Mines, CellType, GameState } from '../model/index'
+import { Position, Mines, CellType, GameState, Difficulty, PerimeterCell } from '../model/index'
 import { Store } from '../store/store'
 import Cell from './Cell'
 import { distpatchCreateStartGameAction, dispatchCreateMakeMovementAction } from '../actions/index' 
@@ -8,58 +8,63 @@ import { useSelector, useDispatch } from 'react-redux'
 const Board  = () => {
   const { difficulty, gameState, mines, showableCells } = useSelector((state: Store) => state)
   const dispatch = useDispatch()
-  const clickAction = cellAction(gameState, dispatch)
+  const action = clickAction(gameState, dispatch)
   return (
     <div style={{ display: 'flex' }}>
-      {createRows(difficulty.boardWidth, difficulty.boardHeight, clickAction, showableCells, mines)}
+      {createRows(difficulty, action, showableCells, mines)}
     </div>
   )
 }
 
-function cellAction(gameState : GameState, dispatch: Function) : Function {
+function clickAction(gameState : GameState, dispatch: Function) : Function {
   if (gameState === GameState.NotStarted) return (position: Position) => distpatchCreateStartGameAction(position)(dispatch)
   return (position: Position) => dispatchCreateMakeMovementAction(position)(dispatch)
 }
   
-function createRows(width: number, height : Number, clickAction : Function, showableCells : Position[], mines: Mines) {
-  return rangeOf(width)
-            .map(rowNumber => cellRow(height, rowNumber, clickAction, showableCells, mines))
+function createRows(difficulty: Difficulty, clickAction : Function, showableCells : Position[], mines: Mines) {
+  return rangeOf(difficulty.boardWidth)
+            .map(rowNumber => createRow(rowNumber, difficulty.boardHeight, clickAction, showableCells, mines))
 }
 
 function rangeOf(size: number) : number[] {
   return [...Array(size).keys()]
 }
 
-function cellRow(height : Number, rowNumber: number, clickAction : Function, showableCells : Position[], mines: Mines) {
-  const cellsRow = []
-  for (let j = 0; j < height; j++) {
-    const cellType = getCellType(new Position(rowNumber, j), showableCells, mines)
-    cellsRow.push(<Cell x={rowNumber} y={j} type={cellType} key={`cell-${rowNumber}-${j}`} clickAction={() => clickAction(new Position(rowNumber, j))}/>)
-  }
+function createRow(rowNumber: number, height : number, clickAction : Function, showableCells : Position[], mines: Mines) {
   return (
     <div key={`cell-row-${rowNumber}`} style={{backgroundColor: 'red'}}>
-      {cellsRow}
+      {rangeOf(height)
+        .map(columnNumber => {
+            const position = new Position(rowNumber, columnNumber)
+            const type = getCellType(position, showableCells, mines)
+            return <Cell
+              position={position}
+              type={type}
+              clickAction={() => clickAction(position)}
+              key={`cell-${rowNumber}-${columnNumber}`}
+            />
+      })}
     </div>
   ) 
 }
 
 function getCellType(position : Position, showableCells : Position[], mines : Mines) : CellType {
-  if (showableCells.some(x => position.sameAs(x))){
-    if (mines.positions.some(x => x.sameAs(position))) return CellType.Mine
-    if (mines.perimeterCells.some(x => x.position.sameAs(position))) {
-      const perimeterCell = mines.perimeterCells.find(x => x.position.sameAs(position))
-      if(perimeterCell.numberOfClosestsMines === 1) return CellType.OneMineClose
-      if(perimeterCell.numberOfClosestsMines === 2) return CellType.TwoMinesClose
-      if(perimeterCell.numberOfClosestsMines === 3) return CellType.TreeMinesClose
-      if(perimeterCell.numberOfClosestsMines === 4) return CellType.FourMinesClose
-      if(perimeterCell.numberOfClosestsMines === 5) return CellType.FiveMinesClose
-      if(perimeterCell.numberOfClosestsMines === 6) return CellType.SixMinesClose
-      if(perimeterCell.numberOfClosestsMines === 7) return CellType.SevenMinesClose
-      if(perimeterCell.numberOfClosestsMines === 8) return CellType.EightMinesClose
-    }
-    return CellType.EmptyCell
-  } 
-  return CellType.None
+  if (isNotShowable(position, showableCells)) return CellType.None
+  if (isMine(position, mines.positions)) return CellType.Mine
+  if (isPerimeterCell(position, mines.perimeterCells)) return mines.perimeterCells.find(x => position.sameAs(x.position)).cellType()
+  return CellType.EmptyCell
+}
+
+function isNotShowable(position: Position, showableCells : Position[]) {
+  return !showableCells.some(x => position.sameAs(x))
+}
+
+function isMine(position: Position, minesPositions : Position[]) {
+  return minesPositions.some(x => x.sameAs(position))
+}
+
+function isPerimeterCell(position: Position, perimeterCell : PerimeterCell[]) {
+  return perimeterCell.some(x => x.position.sameAs(position))
 }
 
 export default Board

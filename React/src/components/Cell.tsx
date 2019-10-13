@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Positionable, CellType } from '../model/index'
+import { Position, CellType } from '../model/index'
 
 function getColor(type : CellType) {
   if (type === CellType.None) return 'grey'
@@ -19,7 +19,7 @@ function getNumber(type : CellType) {
   return ''
 }
 
-const Cell = function Cell(props: Positionable & { clickAction : Function, type: CellType }) {
+const Cell = function Cell(props: { position: Position, type: CellType, clickAction : Function }) {
     const color = getColor(props.type)
     const number = getNumber(props.type)
     const clickAction = props.type === CellType.None ? () => props.clickAction() : () => {}
