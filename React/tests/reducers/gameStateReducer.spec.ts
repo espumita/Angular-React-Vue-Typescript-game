@@ -1,6 +1,6 @@
 import reducer from '../../src/reducers/gameStateReducer' 
 import { GameState, Position } from '../../src/model/index'
-import { StartGaneAction } from '../../src/actions/gameActions'
+import { StartGaneAction } from '../../src/actions/index'
 import { START_GAME_ACTION } from '../../src/actions/actionsTypes'
 
 describe('Game state reducer should set game state to', () => {

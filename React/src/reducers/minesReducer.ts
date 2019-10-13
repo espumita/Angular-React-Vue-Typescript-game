@@ -1,6 +1,6 @@
 import initialState from '../store/initialState'
 import { Position, Mines, PerimeterCell, Difficulty } from '../model/index'
-import { DeployMinesAction } from '../actions/gameActions'
+import { DeployMinesAction } from '../actions/index'
 import { DEPLOY_MINES_ACTION } from '../actions/actionsTypes'
 
 export default (state: Mines = undefined, action: DeployMinesAction, difficulty : Difficulty) => {

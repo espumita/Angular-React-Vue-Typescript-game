@@ -1,4 +1,4 @@
-import { StartGaneAction } from '../actions/gameActions'
+import { StartGaneAction } from '../actions/index'
 import initialState from '../store/initialState'
 import { GameState } from '../model/index'
 import { START_GAME_ACTION } from '../actions/actionsTypes'
