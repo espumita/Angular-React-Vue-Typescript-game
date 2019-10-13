@@ -11,7 +11,7 @@ const Board  = () => {
   const clickAction = cellAction(gameState, dispatch)
   return (
     <div style={{ display: 'flex' }}>
-      {cells(difficulty.boardWidth, difficulty.boardHeight, clickAction, showableCells, mines)}
+      {createRows(difficulty.boardWidth, difficulty.boardHeight, clickAction, showableCells, mines)}
     </div>
   )
 }
@@ -21,12 +21,13 @@ function cellAction(gameState : GameState, dispatch: Function) : Function {
   return (position: Position) => dispatchCreateMakeMovementAction(position)(dispatch)
 }
   
-function cells(width: number, height : Number, clickAction : Function, showableCells : Position[], mines: Mines) {
-  const cellsRows = []
-  for (let i = 0; i < width; i++) {
-    cellsRows.push(cellRow(height, i, clickAction, showableCells, mines))
-  }
-  return cellsRows
+function createRows(width: number, height : Number, clickAction : Function, showableCells : Position[], mines: Mines) {
+  return rangeOf(width)
+            .map(rowNumber => cellRow(height, rowNumber, clickAction, showableCells, mines))
+}
+
+function rangeOf(size: number) : number[] {
+  return [...Array(size).keys()]
 }
 
 function cellRow(height : Number, rowNumber: number, clickAction : Function, showableCells : Position[], mines: Mines) {
