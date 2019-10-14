@@ -3,25 +3,19 @@ import Enzyme, { mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16';
 import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
-import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import { BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/model/index';
-import { Store } from '../src/store/store';
 import { START_GAME_ACTION, MAKE_MOVEMENT } from '../src/actions/actionsTypes';
+import { storeBuilder } from './mockStoreBuilder'
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Board should', () =>{
 
     test('have 8 x 8 cells in beginner difficulty', () =>{
-        const initialStore : Store = {
-            difficulty: new BeginerDifficulty(),
-            gameState: GameState.NotStarted,
-            mines: { positions: [], perimeterCells: []},
-            showableCells: []
-        }
-        const mockStore = configureMockStore<Store>([])
-        const store = mockStore(initialStore)
+        const store = storeBuilder()
+                        .withDifficulty(new BeginerDifficulty())
+                        .build()
         const wrapper = mount(
             <Provider store={store}>
                 <BoardComponent/>
@@ -33,14 +27,9 @@ describe('Board should', () =>{
     })
 
     test('have 16 x 16 cells in intermediate difficulty', () =>{
-        const initialStore : Store = {
-            difficulty: new IntermediateDifficulty(),
-            gameState: GameState.NotStarted,
-            mines: { positions: [], perimeterCells: []},
-            showableCells: []
-        }
-        const mockStore = configureMockStore<Store>([])
-        const store = mockStore(initialStore)
+        const store = storeBuilder()
+                        .withDifficulty(new IntermediateDifficulty())
+                        .build()
         const wrapper = mount(
             <Provider store={store}>
                 <BoardComponent/>
@@ -52,14 +41,9 @@ describe('Board should', () =>{
     })
 
     test('have 30 x 16 cells in expert difficulty', () =>{
-        const initialStore : Store = {
-            difficulty: new ExpertDifficulty(),
-            gameState: GameState.NotStarted,
-            mines: { positions: [], perimeterCells: []},
-            showableCells: []
-        }
-        const mockStore = configureMockStore<Store>([])
-        const store = mockStore(initialStore)
+        const store = storeBuilder()
+                        .withDifficulty(new ExpertDifficulty())
+                        .build()
         const wrapper = mount(
             <Provider store={store}>
                 <BoardComponent/>
@@ -71,14 +55,9 @@ describe('Board should', () =>{
     })
 
     test('game start when click in the first cell', () =>{
-        const initialStore : Store = {
-            difficulty: new BeginerDifficulty(),
-            gameState: GameState.NotStarted,
-            mines: { positions: [], perimeterCells: []},
-            showableCells: []
-        }
-        const mockStore = configureMockStore<Store>([])
-        const store = mockStore(initialStore)
+        const store = storeBuilder()
+                        .withGameState(GameState.NotStarted)
+                        .build()
         const wrapper = mount(
             <Provider store={store}>
                 <BoardComponent/>
@@ -94,14 +73,9 @@ describe('Board should', () =>{
     })
 
     test('game only start once', () =>{
-        const initialStore : Store = {
-            difficulty: new BeginerDifficulty(),
-            gameState: GameState.Started,
-            mines: { positions: [], perimeterCells: []},
-            showableCells: []
-        }
-        const mockStore = configureMockStore<Store>([])
-        const store = mockStore(initialStore)
+        const store = storeBuilder()
+                        .withGameState(GameState.Started)
+                        .build()
         const wrapper = mount(
             <Provider store={store}>
                 <BoardComponent/>
@@ -120,16 +94,10 @@ describe('Board should', () =>{
     })
     
     test('do not do nothing when click on a showed cell', () => {
-        const initialStore : Store = {
-            difficulty: new BeginerDifficulty(),
-            gameState: GameState.Started,
-            mines: { positions: [], perimeterCells: []},
-            showableCells: [
-                new Position(0, 0)
-            ]
-        }
-        const mockStore = configureMockStore<Store>([])
-        const store = mockStore(initialStore)
+        const store = storeBuilder()
+                        .withGameState(GameState.Started)
+                        .withShowableCell(new Position(0, 0))
+                        .build()
         const wrapper = mount(
             <Provider store={store}>
                 <BoardComponent/>
@@ -145,18 +113,14 @@ describe('Board should', () =>{
     }) 
 
     test('not show any cell before be clicked', () =>{
-        const initialStore : Store = {
-            difficulty: {
-                boardWidth: 1,
-                boardHeight : 1,
-                minesNumber: 0
-            },
-            gameState: GameState.Started,
-            mines: { positions: [], perimeterCells: []},
-            showableCells: []
-        }
-        const mockStore = configureMockStore<Store>([])
-        const store = mockStore(initialStore)
+        const store = storeBuilder()
+                        .withDifficulty({
+                            boardWidth: 1,
+                            boardHeight : 1,
+                            minesNumber: 0
+                        })
+                        .withGameState(GameState.Started)
+                        .build()
         const wrapper = mount(
             <Provider store={store}>
                 <BoardComponent/>
@@ -169,20 +133,16 @@ describe('Board should', () =>{
     })
 
     test('show a empty cell when was clicked and there is no mines close', () =>{
-        const initialStore : Store = {
-            difficulty: {
-                boardWidth: 1,
-                boardHeight : 1,
-                minesNumber: 0
-            },
-            gameState: GameState.Started,
-            mines: { positions: [], perimeterCells: []},
-            showableCells: [
-                new Position(0, 0)
-            ]
-        }
-        const mockStore = configureMockStore<Store>([])
-        const store = mockStore(initialStore)
+        const store = storeBuilder()
+                        .withDifficulty({
+                            boardWidth: 1,
+                            boardHeight : 1,
+                            minesNumber: 0
+                        })
+                        .withGameState(GameState.Started)
+                        .withShowableCell(new Position(0, 0))
+                        .build()
+
         const wrapper = mount(
             <Provider store={store}>
                 <BoardComponent/>
@@ -204,23 +164,17 @@ describe('Board should', () =>{
         [ 7, CellType.SevenMinesClose ],
         [ 8, CellType.EightMinesClose ],
     ])('show a cell with number %i when there are mines close',(numberOfMinesClose, cellType) => {
-        const initialStore : Store = {
-            difficulty: {
-                boardWidth: 1,
-                boardHeight : 1,
-                minesNumber: 0
-            },
-            gameState: GameState.Started,
-            mines: {
-                positions: [],
-                perimeterCells: [ new PerimeterCell(new Position(0, 0), numberOfMinesClose) ]
-            },
-            showableCells: [
-                new Position(0, 0)
-            ]
-        }
-        const mockStore = configureMockStore<Store>([])
-        const store = mockStore(initialStore)
+        const store = storeBuilder()
+                        .withDifficulty({
+                            boardWidth: 1,
+                            boardHeight : 1,
+                            minesNumber: 0
+                        })
+                        .withGameState(GameState.Started)
+                        .withShowableCell(new Position(0, 0))
+                        .withPerimeterCell(new PerimeterCell(new Position(0, 0), numberOfMinesClose))
+                        .build()
+
         const wrapper = mount(
             <Provider store={store}>
                 <BoardComponent/>
