@@ -16,13 +16,10 @@ describe('Board should', () =>{
         const store = storeBuilder()
                         .withDifficulty(new BeginerDifficulty())
                         .build()
-        const wrapper = mount(
-            <Provider store={store}>
-                <BoardComponent/>
-            </Provider>
-        )
-        const cells = wrapper.find(Cell)
 
+        const wrapper = mountBoardComponentWith(store)
+
+        const cells = wrapper.find(Cell)
         expect(cells.length).toBe(64)
     })
 
@@ -30,13 +27,10 @@ describe('Board should', () =>{
         const store = storeBuilder()
                         .withDifficulty(new IntermediateDifficulty())
                         .build()
-        const wrapper = mount(
-            <Provider store={store}>
-                <BoardComponent/>
-            </Provider>
-        )
-        const cells = wrapper.find(Cell)
 
+        const wrapper = mountBoardComponentWith(store)
+
+        const cells = wrapper.find(Cell)
         expect(cells.length).toBe(256)
     })
 
@@ -44,13 +38,10 @@ describe('Board should', () =>{
         const store = storeBuilder()
                         .withDifficulty(new ExpertDifficulty())
                         .build()
-        const wrapper = mount(
-            <Provider store={store}>
-                <BoardComponent/>
-            </Provider>
-        )
-        const cells = wrapper.find(Cell)
 
+        const wrapper = mountBoardComponentWith(store)
+
+        const cells = wrapper.find(Cell)
         expect(cells.length).toBe(480)
     })
 
@@ -58,11 +49,7 @@ describe('Board should', () =>{
         const store = storeBuilder()
                         .withGameState(GameState.NotStarted)
                         .build()
-        const wrapper = mount(
-            <Provider store={store}>
-                <BoardComponent/>
-            </Provider>
-        )
+        const wrapper = mountBoardComponentWith(store)
         const cells = wrapper.find(Cell)
         const aCell = cells.first()
 
@@ -76,11 +63,7 @@ describe('Board should', () =>{
         const store = storeBuilder()
                         .withGameState(GameState.Started)
                         .build()
-        const wrapper = mount(
-            <Provider store={store}>
-                <BoardComponent/>
-            </Provider>
-        )
+        const wrapper = mountBoardComponentWith(store)
         const cells = wrapper.find(Cell)
         const aCell = cells.first()
 
@@ -98,11 +81,7 @@ describe('Board should', () =>{
                         .withGameState(GameState.Started)
                         .withShowableCell(new Position(0, 0))
                         .build()
-        const wrapper = mount(
-            <Provider store={store}>
-                <BoardComponent/>
-            </Provider>
-        )
+        const wrapper = mountBoardComponentWith(store)
         const cells = wrapper.findWhere(node => node.key() === 'cell-0-0')
         const aCell = cells.first()
 
@@ -121,14 +100,11 @@ describe('Board should', () =>{
                         })
                         .withGameState(GameState.Started)
                         .build()
-        const wrapper = mount(
-            <Provider store={store}>
-                <BoardComponent/>
-            </Provider>
-        )
+
+        const wrapper = mountBoardComponentWith(store)
+
         const cells = wrapper.findWhere(node => node.key() === 'cell-0-0')
         const aCell = cells.first()
-
         expect(aCell.prop('type')).toBe(CellType.None)
     })
 
@@ -142,15 +118,11 @@ describe('Board should', () =>{
                         .withGameState(GameState.Started)
                         .withShowableCell(new Position(0, 0))
                         .build()
+        
+        const wrapper = mountBoardComponentWith(store)
 
-        const wrapper = mount(
-            <Provider store={store}>
-                <BoardComponent/>
-            </Provider>
-        )
         const cells = wrapper.findWhere(node => node.key() === 'cell-0-0')
         const aCell = cells.first()
-
         expect(aCell.prop('type')).toBe(CellType.EmptyCell)
     })
 
@@ -175,15 +147,19 @@ describe('Board should', () =>{
                         .withPerimeterCell(new PerimeterCell(new Position(0, 0), numberOfMinesClose))
                         .build()
 
-        const wrapper = mount(
-            <Provider store={store}>
-                <BoardComponent/>
-            </Provider>
-        )
+        const wrapper = mountBoardComponentWith(store)
+
         const cells = wrapper.findWhere(node => node.key() === 'cell-0-0')
         const aCell = cells.first()
-
         expect(aCell.prop('type')).toBe(cellType)
     });
 
 })
+
+function mountBoardComponentWith(store: any) {
+    return mount(
+        <Provider store={store}>
+            <BoardComponent/>
+        </Provider>
+    )
+}
