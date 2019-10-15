@@ -14,9 +14,7 @@ describe('Difficulty reducers should', () => {
 
         const newState = reducer(undefined, setDifficultyAction)
 
-        expect(newState.boardWidth).toBe(beginnerDifficulty.boardWidth)
-        expect(newState.boardHeight).toBe(beginnerDifficulty.boardHeight)
-        expect(newState.minesNumber).toBe(beginnerDifficulty.minesNumber)
+        expect(newState).toStrictEqual(beginnerDifficulty)
     })
 
     test('set another difficulty', () => {
@@ -29,9 +27,7 @@ describe('Difficulty reducers should', () => {
 
         const newState = reducer(beginnerDifficulty, setDifficultyAction)
 
-        expect(newState.boardWidth).toBe(expertDifficulty.boardWidth)
-        expect(newState.boardHeight).toBe(expertDifficulty.boardHeight)
-        expect(newState.minesNumber).toBe(expertDifficulty.minesNumber)
+        expect(newState).toStrictEqual(expertDifficulty)
     })
 
 })

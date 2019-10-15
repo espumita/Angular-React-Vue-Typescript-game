@@ -12,7 +12,7 @@ import { RESET_GAME } from '../actions/actionsTypes'
 import initialState from '../store/initialState'
 
 const rootReducer = (state: Store, action: Action) => {
-    if( action.type === RESET_GAME) return initialState
+    if( action.type === RESET_GAME) return { ...initialState, difficulty: state.difficulty }
     return {
         difficulty: difficultyReducer(state.difficulty, action as SetDifficultyAction),
         gameState: gameStateReducer(state.gameState, action as StartGameAction),

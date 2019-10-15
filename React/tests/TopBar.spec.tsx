@@ -33,7 +33,7 @@ describe('Topbar should', () =>{
 
         const actions = store.getActions()
         expect(actions[0].type).toBe(SET_DIFFICULTY)
-        verifyAreEquals(actions[0].difficulty,  new BeginnerDifficulty())
+        expect(actions[0].difficulty).toStrictEqual(new BeginnerDifficulty())
         expect(actions[1].type).toBe(RESET_GAME)
     })
 
@@ -47,7 +47,7 @@ describe('Topbar should', () =>{
 
         const actions = store.getActions()
         expect(actions[0].type).toBe(SET_DIFFICULTY)
-        verifyAreEquals(actions[0].difficulty,  new IntermediateDifficulty())
+        expect(actions[0].difficulty).toStrictEqual(new IntermediateDifficulty())
         expect(actions[1].type).toBe(RESET_GAME)
     })
 
@@ -61,7 +61,7 @@ describe('Topbar should', () =>{
 
         const actions = store.getActions()
         expect(actions[0].type).toBe(SET_DIFFICULTY)
-        verifyAreEquals(actions[0].difficulty,  new ExpertDifficulty())
+        expect(actions[0].difficulty).toStrictEqual(new ExpertDifficulty())
         expect(actions[1].type).toBe(RESET_GAME)
     })
 
@@ -73,10 +73,4 @@ function mountTopBarComponentWith(store: any) {
             <TopBar/>
         </Provider>
     )
-}
-
-function verifyAreEquals(difficulty: Difficulty, expectedDifficulty: Difficulty) {
-    expect(difficulty.boardWidth).toBe(expectedDifficulty.boardWidth)
-    expect(difficulty.boardHeight).toBe(expectedDifficulty.boardHeight)
-    expect(difficulty.minesNumber).toBe(expectedDifficulty.minesNumber)
 }
