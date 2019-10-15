@@ -5,7 +5,7 @@ import TopBar from '../src/components/TopBar'
 import { Provider } from 'react-redux'
 import { storeBuilder } from './mockStoreBuilder'
 import { RESET_GAME, SET_DIFFICULTY } from '../src/actions/actionsTypes'
-import { BeginnerDifficulty } from '../src/model'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty } from '../src/model'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -37,6 +37,40 @@ describe('Topbar should', () =>{
         expect(actions[0].difficulty.boardWidth).toBe(begginerDifficulty.boardWidth)
         expect(actions[0].difficulty.boardHeight).toBe(begginerDifficulty.boardHeight)
         expect(actions[0].difficulty.minesNumber).toBe(begginerDifficulty.minesNumber)
+        expect(actions[1].type).toBe(RESET_GAME)
+    })
+
+    test('change to intemediate difficulty and reset game when click on buttom', () =>{
+        const store = storeBuilder()
+                        .build()
+        const wrapper = mountTopBarComponentWith(store)
+        const resetButton = wrapper.findWhere(node => node.key() === 'set-intermediate-difficulty-button')
+
+        resetButton.simulate('click')
+
+        const actions = store.getActions()
+        expect(actions[0].type).toBe(SET_DIFFICULTY)
+        const intermediateDifficulty = new IntermediateDifficulty()
+        expect(actions[0].difficulty.boardWidth).toBe(intermediateDifficulty.boardWidth)
+        expect(actions[0].difficulty.boardHeight).toBe(intermediateDifficulty.boardHeight)
+        expect(actions[0].difficulty.minesNumber).toBe(intermediateDifficulty.minesNumber)
+        expect(actions[1].type).toBe(RESET_GAME)
+    })
+
+    test('change to expert difficulty and reset game when click on buttom', () =>{
+        const store = storeBuilder()
+                        .build()
+        const wrapper = mountTopBarComponentWith(store)
+        const resetButton = wrapper.findWhere(node => node.key() === 'set-expert-difficulty-button')
+
+        resetButton.simulate('click')
+
+        const actions = store.getActions()
+        expect(actions[0].type).toBe(SET_DIFFICULTY)
+        const expertDifficulty = new ExpertDifficulty()
+        expect(actions[0].difficulty.boardWidth).toBe(expertDifficulty.boardWidth)
+        expect(actions[0].difficulty.boardHeight).toBe(expertDifficulty.boardHeight)
+        expect(actions[0].difficulty.minesNumber).toBe(expertDifficulty.minesNumber)
         expect(actions[1].type).toBe(RESET_GAME)
     })
 
