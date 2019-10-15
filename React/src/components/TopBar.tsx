@@ -6,7 +6,7 @@ const TopBar  = () => {
     const dispatch = useDispatch()
     return (
       <div>
-        <button onClick={() => dispatch(createResetGameAction())}>
+        <button onClick={() => dispatch(createResetGameAction())} style={{ margin: "16px", fontSize: "20px" }}>
           Reset
         </button>
       </div>

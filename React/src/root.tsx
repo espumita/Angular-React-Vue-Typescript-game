@@ -9,7 +9,7 @@ const store = configStore()
 
 ReactDOM.render(
     <Provider store={store}>
-        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <TopBar/>
             <Board/>
         </div>
