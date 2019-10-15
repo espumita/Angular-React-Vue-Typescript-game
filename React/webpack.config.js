@@ -1,6 +1,6 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
-import path from 'path';
+import path from 'path'
 
 export default {
     resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx', '.css'] },
