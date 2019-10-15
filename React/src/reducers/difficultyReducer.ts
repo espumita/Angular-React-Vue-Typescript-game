@@ -1,13 +1,12 @@
-
 import initialState from '../store/initialState'
 import { SetDifficultyAction } from '../actions/setDifficulty'
 import { Difficulty } from '../model/index'
-import { Action } from 'redux'
+import { SET_DIFFICULTY } from '../actions/actionsTypes'
 
-//This reducer should only be used to change dificulty
 export default (state: Difficulty = undefined, action: SetDifficultyAction) => {
     if (state == undefined) return initialState.difficulty
     switch(action.type){
+        case SET_DIFFICULTY: return action.difficulty
         default: return state
     }
 }
