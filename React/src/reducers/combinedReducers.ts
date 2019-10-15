@@ -7,12 +7,14 @@ import minesReducer from './minesReducer'
 import showableCellsReducer from './showableCellsReducer' 
 import { Store } from '../store/store'
 import { Action } from 'redux'
-import { ResetGameAction } from '../actions/resetGame'
+import { RESET_GAME } from '../actions/actionsTypes'
+import initialState from '../store/initialState'
 
 const rootReducer = (state: Store, action: Action) => {
+    if( action.type === RESET_GAME) return initialState
     return {
         difficulty: difficultyReducer(state.difficulty, action),
-        gameState: gameStateReducer(state.gameState, action as StartGaneAction),
+        gameState: gameStateReducer(state.gameState, action as StartGameAction),
         mines: minesReducer(state.mines, action as DeployMinesAction, state.difficulty),
         showableCells: showableCellsReducer(state.showableCells, action as MakeMovementAction, state.mines, state.difficulty)
     }

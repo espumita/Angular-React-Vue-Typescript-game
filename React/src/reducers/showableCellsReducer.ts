@@ -1,6 +1,6 @@
 import initialState from '../store/initialState'
 import { Position, Mines, Difficulty, PerimeterCell } from '../model/index'
-import { MakeMovementAction } from '../actions/index'
+import { MakeMovementAction } from '../actions/makeMovement'
 import { MAKE_MOVEMENT } from '../actions/actionsTypes'
 
 export default (state: Position[] = undefined, action: MakeMovementAction, mines: Mines, difficulty : Difficulty) => {
