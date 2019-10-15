@@ -2,7 +2,8 @@ import * as React from 'react'
 import { Position, Mines, CellType, GameState, Difficulty, PerimeterCell } from '../model/index'
 import { Store } from '../store/store'
 import Cell from './Cell'
-import { distpatchCreateStartGameAction, dispatchCreateMakeMovementAction } from '../actions/index' 
+import { distpatchCreateStartGameAction } from '../actions/startGame' 
+import { dispatchCreateMakeMovementAction } from '../actions/makeMovement' 
 import { useSelector, useDispatch } from 'react-redux'
 
 const Board  = () => {

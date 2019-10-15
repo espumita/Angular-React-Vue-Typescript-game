@@ -1,13 +1,13 @@
 import reducer from '../../src/reducers/minesReducer' 
 import { BeginerDifficulty, Difficulty } from '../../src/model/index'
-import { DeployMinesAction } from '../../src/actions/index'
-import { DEPLOY_MINES_ACTION } from '../../src/actions/actionsTypes'
+import { DeployMinesAction } from '../../src/actions/deployMines'
+import { DEPLOY_MINES } from '../../src/actions/actionsTypes'
 
 describe('Mines reducer should', () => {
 
     test('set empty mines and perimeters state at the beginning', () => {
         const deployMinesAction : DeployMinesAction = {
-            type: DEPLOY_MINES_ACTION
+            type: DEPLOY_MINES
         }
         const aDifficutly = new BeginerDifficulty()
 
@@ -19,7 +19,7 @@ describe('Mines reducer should', () => {
 
     test('set mines and perimeters when react to deploy mines action for one mine', () => {
         const deployMinesAction : DeployMinesAction = {
-            type: DEPLOY_MINES_ACTION
+            type: DEPLOY_MINES
         }
         const aDifficutly : Difficulty = {
             boardWidth: 2,
@@ -42,7 +42,7 @@ describe('Mines reducer should', () => {
 
     test('set mines and perimeters when react to deploy mines action for tree mines', () => {
         const deployMinesAction : DeployMinesAction = {
-            type: DEPLOY_MINES_ACTION
+            type: DEPLOY_MINES
         }
         const aDifficutly : Difficulty = {
             boardWidth: 2,
@@ -63,7 +63,7 @@ describe('Mines reducer should', () => {
 
     test('set mines and perimeters when react to deploy mines action for eight mines', () => {
         const deployMinesAction : DeployMinesAction = {
-            type: DEPLOY_MINES_ACTION
+            type: DEPLOY_MINES
         }
         const aDifficutly : Difficulty = {
             boardWidth: 3,

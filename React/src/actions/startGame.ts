@@ -1,17 +1,17 @@
 import { Action } from 'redux'
-import { START_GAME_ACTION } from './actionsTypes'
+import { START_GAME } from './actionsTypes'
 import { Position } from '../model/index'
 import { createDeployMinesAction } from './deployMines'
 import { createMakeMovementAction } from './makeMovement'
 
-export interface StartGaneAction extends Action {
-    type: typeof START_GAME_ACTION,
+export interface StartGameAction extends Action {
+    type: typeof START_GAME,
     position: Position
 }
 
-export function createStartGameAction(position: Position) : StartGaneAction {
+export function createStartGameAction(position: Position) : StartGameAction {
     return {
-        type: START_GAME_ACTION,
+        type: START_GAME,
         position: position
     }
 }

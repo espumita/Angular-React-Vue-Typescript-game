@@ -1,12 +1,12 @@
 import initialState from '../store/initialState'
 import { Position, Mines, PerimeterCell, Difficulty } from '../model/index'
 import { DeployMinesAction } from '../actions/index'
-import { DEPLOY_MINES_ACTION } from '../actions/actionsTypes'
+import { DEPLOY_MINES } from '../actions/actionsTypes'
 
 export default (state: Mines = undefined, action: DeployMinesAction, difficulty : Difficulty) => {
     if (state == undefined) return initialState.mines
     switch(action.type){
-        case DEPLOY_MINES_ACTION: {
+        case DEPLOY_MINES: {
             const mines = getMinesFor(difficulty)
             const perimeters = getPerimetersOf(mines, difficulty)
             return { 

@@ -5,7 +5,7 @@ import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import { Provider } from 'react-redux'
 import { BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/model/index';
-import { START_GAME_ACTION, MAKE_MOVEMENT } from '../src/actions/actionsTypes';
+import { START_GAME, MAKE_MOVEMENT } from '../src/actions/actionsTypes';
 import { storeBuilder } from './mockStoreBuilder'
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -56,7 +56,7 @@ describe('Board should', () =>{
         aCell.simulate('click')
 
         const actions = store.getActions()
-        expect(actions[0].type).toBe(START_GAME_ACTION)
+        expect(actions[0].type).toBe(START_GAME)
     })
 
     test('game only start once', () =>{
@@ -70,7 +70,7 @@ describe('Board should', () =>{
         aCell.simulate('click')
 
         const actions = store.getActions()
-        const startActions = actions.filter(x => x.type == START_GAME_ACTION)
+        const startActions = actions.filter(x => x.type == START_GAME)
         expect(startActions.length).toBe(0)
         const movementActions = actions.filter(x => x.type == MAKE_MOVEMENT)
         expect(movementActions.length).toBe(1)
