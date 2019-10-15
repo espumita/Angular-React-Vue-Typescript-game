@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store'
 import { Store } from '../src/store/store';
-import { GameState, Difficulty, BeginerDifficulty, Position, PerimeterCell } from '../src/model/index';
+import { GameState, Difficulty, BeginnerDifficulty, Position, PerimeterCell } from '../src/model/index';
 
 export function storeBuilder(){
     return new MockStoreBuilder()
@@ -11,7 +11,7 @@ export class MockStoreBuilder {
 
     constructor(){
         this.initialStore = {
-            difficulty: new BeginerDifficulty(),
+            difficulty: new BeginnerDifficulty(),
             gameState: GameState.NotStarted,
             mines: { positions: [], perimeterCells: []},
             showableCells: []

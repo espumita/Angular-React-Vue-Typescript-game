@@ -4,7 +4,7 @@ export interface Difficulty {
     boardHeight: number
 }
 
-export class BeginerDifficulty implements Difficulty {
+export class BeginnerDifficulty implements Difficulty {
     minesNumber: number
     boardWidth: number
     boardHeight: number

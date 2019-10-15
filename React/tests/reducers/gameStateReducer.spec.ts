@@ -2,29 +2,28 @@ import reducer from '../../src/reducers/gameStateReducer'
 import { GameState, Position } from '../../src/model/index'
 import { StartGameAction } from '../../src/actions/startGame'
 import { START_GAME, RESET_GAME } from '../../src/actions/actionsTypes'
-import { ResetGameAction } from '../../src/actions/resetGame'
 
 describe('Game state reducer should set game state to', () => {
 
     test('not started at the beginning', () => {
-        const startGaneAction : StartGameAction = {
+        const startGameAction : StartGameAction = {
             type: START_GAME,
             position: new Position(0, 0)
         }
 
-        const newState = reducer(undefined, startGaneAction)
+        const newState = reducer(undefined, startGameAction)
 
         expect(newState).toBe(GameState.NotStarted)
     })
 
     test('started when the game start', () => {
         const state = GameState.NotStarted
-        const startGaneAction : StartGameAction = {
+        const startGameAction : StartGameAction = {
             type: START_GAME,
             position: new Position(0, 0)
         }
 
-        const newState = reducer(state, startGaneAction)
+        const newState = reducer(state, startGameAction)
 
         expect(newState).toBe(GameState.Started)
     })

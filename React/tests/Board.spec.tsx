@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import { Provider } from 'react-redux'
-import { BeginerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/model/index';
+import { BeginnerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/model/index';
 import { START_GAME, MAKE_MOVEMENT } from '../src/actions/actionsTypes';
 import { storeBuilder } from './mockStoreBuilder'
 
@@ -14,7 +14,7 @@ describe('Board should', () =>{
 
     test('have 8 x 8 cells in beginner difficulty', () =>{
         const store = storeBuilder()
-                        .withDifficulty(new BeginerDifficulty())
+                        .withDifficulty(new BeginnerDifficulty())
                         .build()
 
         const wrapper = mountBoardComponentWith(store)

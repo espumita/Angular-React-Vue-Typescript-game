@@ -1,5 +1,5 @@
 import reducer from '../../src/reducers/minesReducer' 
-import { BeginerDifficulty, Difficulty } from '../../src/model/index'
+import { BeginnerDifficulty, Difficulty } from '../../src/model/index'
 import { DeployMinesAction } from '../../src/actions/deployMines'
 import { DEPLOY_MINES } from '../../src/actions/actionsTypes'
 
@@ -9,7 +9,7 @@ describe('Mines reducer should', () => {
         const deployMinesAction : DeployMinesAction = {
             type: DEPLOY_MINES
         }
-        const aDifficutly = new BeginerDifficulty()
+        const aDifficutly = new BeginnerDifficulty()
 
         const newState = reducer(undefined, deployMinesAction, aDifficutly)
 

@@ -1,5 +1,5 @@
 import reducer from '../../src/reducers/showableCellsReducer' 
-import { BeginerDifficulty, Position, Mines, Difficulty, PerimeterCell } from '../../src/model/index'
+import { BeginnerDifficulty, Position, Mines, Difficulty, PerimeterCell } from '../../src/model/index'
 import { MakeMovementAction } from '../../src/actions/makeMovement'
 import { MAKE_MOVEMENT } from '../../src/actions/actionsTypes'
 
@@ -11,7 +11,7 @@ describe('Showable cells reducer should', () => {
             position: new Position(0, 0)
             
         }
-        const aDifficutly = new BeginerDifficulty()
+        const aDifficutly = new BeginnerDifficulty()
         const mines : Mines = { positions: [], perimeterCells: [] }
 
         const newState = reducer(undefined, makeMovementAction, mines, aDifficutly)
