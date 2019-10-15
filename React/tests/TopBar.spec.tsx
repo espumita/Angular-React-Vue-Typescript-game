@@ -4,7 +4,8 @@ import Adapter from 'enzyme-adapter-react-16'
 import TopBar from '../src/components/TopBar'
 import { Provider } from 'react-redux'
 import { storeBuilder } from './mockStoreBuilder'
-import { RESET_GAME } from '../src/actions/actionsTypes'
+import { RESET_GAME, SET_DIFFICULTY } from '../src/actions/actionsTypes'
+import { BeginnerDifficulty } from '../src/model'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -20,6 +21,23 @@ describe('Topbar should', () =>{
 
         const actions = store.getActions()
         expect(actions[0].type).toBe(RESET_GAME)
+    })
+
+    test('change to begginer difficulty and reset game when click on buttom', () =>{
+        const store = storeBuilder()
+                        .build()
+        const wrapper = mountTopBarComponentWith(store)
+        const resetButton = wrapper.findWhere(node => node.key() === 'set-beginner-difficulty-button')
+
+        resetButton.simulate('click')
+
+        const actions = store.getActions()
+        expect(actions[0].type).toBe(SET_DIFFICULTY)
+        const begginerDifficulty = new BeginnerDifficulty()
+        expect(actions[0].difficulty.boardWidth).toBe(begginerDifficulty.boardWidth)
+        expect(actions[0].difficulty.boardHeight).toBe(begginerDifficulty.boardHeight)
+        expect(actions[0].difficulty.minesNumber).toBe(begginerDifficulty.minesNumber)
+        expect(actions[1].type).toBe(RESET_GAME)
     })
 
 })
