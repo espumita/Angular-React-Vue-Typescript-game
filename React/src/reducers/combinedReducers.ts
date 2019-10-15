@@ -20,4 +20,4 @@ const rootReducer = (state: Store, action: Action) => {
         showableCells: showableCellsReducer(state.showableCells, action as MakeMovementAction, state.mines, state.difficulty)
     }
 }
-export default rootReducer;
+export default rootReducer

@@ -1,14 +1,14 @@
 import * as React from 'react'
 import Enzyme, { mount } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from 'enzyme-adapter-react-16'
 import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import { Provider } from 'react-redux'
-import { BeginnerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/model/index';
-import { START_GAME, MAKE_MOVEMENT } from '../src/actions/actionsTypes';
+import { BeginnerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/model/index'
+import { START_GAME, MAKE_MOVEMENT } from '../src/actions/actionsTypes'
 import { storeBuilder } from './mockStoreBuilder'
 
-Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new Adapter() })
 
 describe('Board should', () =>{
 
@@ -152,7 +152,7 @@ describe('Board should', () =>{
         const cells = wrapper.findWhere(node => node.key() === 'cell-0-0')
         const aCell = cells.first()
         expect(aCell.prop('type')).toBe(cellType)
-    });
+    })
 
 })
 

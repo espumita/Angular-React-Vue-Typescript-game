@@ -1,9 +1,9 @@
-import browserSync from 'browser-sync';
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import config from './webpack.config';
+import browserSync from 'browser-sync'
+import webpack from 'webpack'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import config from './webpack.config'
 
-const bundler = webpack({mode: 'development', ...config});
+const bundler = webpack({mode: 'development', ...config})
 
 browserSync({
   port: 3000,
@@ -28,4 +28,4 @@ browserSync({
     ]
   },
   files: [ 'src/*.html' ]
-});
+})
