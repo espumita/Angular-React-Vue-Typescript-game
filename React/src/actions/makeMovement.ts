@@ -8,7 +8,6 @@ export interface MakeMovementAction extends Action {
 }
 
 export function createMakeMovementAction(position: Position) : MakeMovementAction {
-    //if poisiton is in mines => return LOSE GAME ACTION?
     return {
         type: MAKE_MOVEMENT,
         position: position

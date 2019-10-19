@@ -33,7 +33,7 @@ function rangeOf(size: number) : number[] {
 
 function createRow(rowNumber: number, height : number, clickAction : Function, showableCells : Position[], mines: Mines) {
   return (
-    <div key={`cell-row-${rowNumber}`} style={{backgroundColor: 'red'}}>
+    <div key={`cell-row-${rowNumber}`}>
       {rangeOf(height)
         .map(columnNumber => {
             const position = new Position(rowNumber, columnNumber)
