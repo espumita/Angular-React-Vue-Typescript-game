@@ -71,6 +71,21 @@ describe('Board should', () => {
     expect(store.dispatch).toHaveBeenCalledWith(MAKE_MOVEMENT, expect.any(Position))
   })
 
+  test('do not do nothing when click on a showed cell', () => {
+    const store = storeBuilder()
+                    .withGameState(GameState.Started)
+                    .withShowableCell(new Position(0, 0))
+                    .withActions()
+                    .build()
+    const wrapper = mountBoardComponentWith(store)
+    const aCell = wrapper.find('#cell-0-0')
+
+    aCell.trigger('click')
+
+    expect(store.dispatch).not.toHaveBeenCalled()
+  }) 
+
+
 })
 
 function mountBoardComponentWith(store: any) {
