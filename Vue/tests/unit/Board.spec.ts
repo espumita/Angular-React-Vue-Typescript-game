@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Board from '@/components/Board.vue'
 import Cell from '@/components/Cell.vue'
 import { storeBuilder } from './mockStoreBuilder'
-import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState, Position, CellType } from '@/model'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState, Position, CellType, PerimeterCell } from '@/model'
 import { START_GAME, MAKE_MOVEMENT } from '@/actions/actionsTypes'
 
 const localVue = createLocalVue()
@@ -116,7 +116,34 @@ describe('Board should', () => {
 
     const aCell = wrapper.find('#cell-0-0')
     expect(aCell.props('type')).toBe(CellType.EmptyCell)
-})
+  })
+
+  test.each([
+    [ 1, CellType.OneMineClose    ],
+    [ 2, CellType.TwoMinesClose   ],
+    [ 3, CellType.TreeMinesClose  ],
+    [ 4, CellType.FourMinesClose  ],
+    [ 5, CellType.FiveMinesClose  ],
+    [ 6, CellType.SixMinesClose   ],
+    [ 7, CellType.SevenMinesClose ],
+    [ 8, CellType.EightMinesClose ],
+  ])('show a cell with number %i when there are mines close',(numberOfMinesClose, cellType) => {
+      const store = storeBuilder()
+                      .withDifficulty({
+                          boardWidth: 1,
+                          boardHeight : 1,
+                          minesNumber: 0
+                      })
+                      .withGameState(GameState.Started)
+                      .withShowableCell(new Position(0, 0))
+                      .withPerimeterCell(new PerimeterCell(new Position(0, 0), numberOfMinesClose))
+                      .build()
+
+      const wrapper = mountBoardComponentWith(store)
+
+      const aCell = wrapper.find('#cell-0-0')
+      expect(aCell.props('type')).toBe(cellType)
+  })
 
 })
 
