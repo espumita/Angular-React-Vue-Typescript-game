@@ -101,6 +101,22 @@ describe('Board should', () => {
       expect(aCell.props('type')).toBe(CellType.None)
   })
 
+  test('show a empty cell when was clicked and there is no mines close', () =>{
+    const store = storeBuilder()
+                    .withDifficulty({
+                        boardWidth: 1,
+                        boardHeight : 1,
+                        minesNumber: 0
+                    })
+                    .withGameState(GameState.Started)
+                    .withShowableCell(new Position(0, 0))
+                    .build()
+    
+    const wrapper = mountBoardComponentWith(store)
+
+    const aCell = wrapper.find('#cell-0-0')
+    expect(aCell.props('type')).toBe(CellType.EmptyCell)
+})
 
 })
 
