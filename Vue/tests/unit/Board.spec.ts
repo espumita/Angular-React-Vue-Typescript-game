@@ -4,7 +4,7 @@ import Board from '@/components/Board.vue'
 import Cell from '@/components/Cell.vue'
 import { storeBuilder } from './mockStoreBuilder'
 import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState, Position } from '@/model'
-import { START_GAME } from '@/actions/actionsTypes'
+import { START_GAME, MAKE_MOVEMENT } from '@/actions/actionsTypes'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -55,7 +55,21 @@ describe('Board should', () => {
     aCell.trigger('click')
 
     expect(store.dispatch).toHaveBeenCalledWith(START_GAME, expect.any(Position))
-})
+  })
+
+  test('game only start once', () =>{
+    const store = storeBuilder()
+                    .withGameState(GameState.Started)
+                    .withActions()
+                    .build()
+    const wrapper = mountBoardComponentWith(store)
+    const aCell = wrapper.find(Cell)
+
+    aCell.trigger('click')
+
+    expect(store.dispatch).not.toHaveBeenCalledWith(START_GAME, expect.any(Position))
+    expect(store.dispatch).toHaveBeenCalledWith(MAKE_MOVEMENT, expect.any(Position))
+  })
 
 })
 

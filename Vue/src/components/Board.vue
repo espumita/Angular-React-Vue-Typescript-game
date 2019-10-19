@@ -16,7 +16,7 @@
 import Vue from 'vue';
 import Cell from './Cell.vue';
 import { Position, CellType, Difficulty, Mines, PerimeterCell, GameState } from '../model'
-import { START_GAME } from '../actions/actionsTypes'
+import { START_GAME, MAKE_MOVEMENT } from '../actions/actionsTypes'
 
 export default Vue.extend({
   name: 'Board',
@@ -56,8 +56,8 @@ export default Vue.extend({
       return perimeterCell.some(x => x.position.sameAs(position))
     },
     getGameClickAction(gameState : GameState, dispatch: Function) : Function {
-      if (gameState === GameState.NotStarted) return (position: Position) => this.$store.dispatch(START_GAME, position)//console.log('distpatchCreateStartGameAction')//distpatchCreateStartGameAction(position)(dispatch)
-      return (position: Position) => console.log('dispatchCreateMakeMovementAction')//dispatchCreateMakeMovementAction(position)(dispatch)
+      if (gameState === GameState.NotStarted) return (position: Position) => this.$store.dispatch(START_GAME, position)//distpatchCreateStartGameAction(position)(dispatch)
+      return (position: Position) => this.$store.dispatch(MAKE_MOVEMENT, position)//dispatchCreateMakeMovementAction(position)(dispatch)
     },
     getCellClickAction(type : CellType, clickAction: Function): Function {
       if(type === CellType.None) return clickAction
