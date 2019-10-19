@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Board from '@/components/Board.vue'
 import Cell from '@/components/Cell.vue'
 import { storeBuilder } from './mockStoreBuilder'
-import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState, Position } from '@/model'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState, Position, CellType } from '@/model'
 import { START_GAME, MAKE_MOVEMENT } from '@/actions/actionsTypes'
 
 const localVue = createLocalVue()
@@ -84,6 +84,22 @@ describe('Board should', () => {
 
     expect(store.dispatch).not.toHaveBeenCalled()
   }) 
+
+  test('not show any cell before be clicked', () =>{
+    const store = storeBuilder()
+                    .withDifficulty({
+                        boardWidth: 1,
+                        boardHeight : 1,
+                        minesNumber: 0
+                    })
+                    .withGameState(GameState.Started)
+                    .build()
+
+      const wrapper = mountBoardComponentWith(store)
+
+      const aCell = wrapper.find('#cell-0-0')
+      expect(aCell.props('type')).toBe(CellType.None)
+  })
 
 
 })
