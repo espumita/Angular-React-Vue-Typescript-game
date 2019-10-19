@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import Board from '@/components/Board.vue'
 import Cell from '@/components/Cell.vue'
 import { storeBuilder } from './mockStoreBuilder'
-import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty } from '@/model'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState, Position } from '@/model'
+import { START_GAME } from '@/actions/actionsTypes'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -43,6 +44,18 @@ describe('Board should', () => {
     expect(cells.length).toBe(480)
   })
 
+  test('game start when click in the first cell', () =>{
+    const store = storeBuilder()
+                    .withGameState(GameState.NotStarted)
+                    .withActions()
+                    .build()
+    const wrapper = mountBoardComponentWith(store)
+    const aCell = wrapper.find(Cell)
+
+    aCell.trigger('click')
+
+    expect(store.dispatch).toHaveBeenCalledWith(START_GAME, expect.any(Position))
+})
 
 })
 

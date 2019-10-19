@@ -8,6 +8,7 @@ export function storeBuilder(){
 
 export class MockStoreBuilder {
     initialStore : Store
+    mockDispatch : boolean
 
     constructor(){
         this.initialStore = {
@@ -16,6 +17,7 @@ export class MockStoreBuilder {
             mines: { positions: [], perimeterCells: []},
             showableCells: []
         }
+        this.mockDispatch = false
     }
 
     withDifficulty(difficulty: Difficulty): MockStoreBuilder {
@@ -38,9 +40,16 @@ export class MockStoreBuilder {
         return this
     }
 
+    withActions() : MockStoreBuilder{
+        this.mockDispatch = true
+        return this
+    }
+
     build(){
-        return new Vuex.Store({
+        const store = new Vuex.Store({
             state: { ...this.initialStore },
         })
+        if (this.mockDispatch) store.dispatch = jest.fn()
+        return store
     }
 }
