@@ -1,6 +1,6 @@
 <template>
-  <div @click="clickAction"  :class="[{mineColor: isMine}, {noneColor: isNone}, {otherColor: isOther}]">
-    <div>{{type}}</div>
+  <div @click="clickAction"  :class="[{cell: true}, {mineColor: isMine}, {noneColor: isNone}, {otherColor: isOther}]">
+    <div>{{getNumber}}</div>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default Vue.extend({
   },
   methods: {
     clickAction(){
-      this.$emit('cellCliked')
+      this.$emit('cellCliked', [this.$props.position, this.$props.type])
     }
   },
   computed: {
@@ -27,7 +27,7 @@ export default Vue.extend({
       return this.type === CellType.None
     },
     isOther() {
-      return this.type !== CellType.None && this.type !== CellType.Mine
+      return this.type != CellType.None && this.type != CellType.Mine
     },
     getNumber() {
       if (this.type === CellType.OneMineClose) return '1'
