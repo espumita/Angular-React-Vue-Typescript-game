@@ -51,7 +51,7 @@ export default Vue.extend({
   .cell {
     display: flex;
     align-items: center;
-    justify-content: content;
+    justify-content: center;
     width: 40px;
     height: 40px;
     border-color: black;

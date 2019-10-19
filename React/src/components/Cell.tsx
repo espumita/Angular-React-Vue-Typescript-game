@@ -6,7 +6,7 @@ const Cell = function Cell(props: { position: Position, type: CellType, clickAct
     const number = getNumber(props.type)
 
     return (
-      <div onClick={() => props.clickAction()} style={{ display:'flex', alignItems: 'center', justifyContent: 'content', width: '40px', height: '40px', backgroundColor: color, borderBlockColor: 'black', borderStyle: 'solid', borderWidth: '1px' }}>
+      <div onClick={() => props.clickAction()} style={{ display:'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', backgroundColor: color, borderBlockColor: 'black', borderStyle: 'solid', borderWidth: '1px' }}>
         <div>{number}</div>
       </div>
     )
