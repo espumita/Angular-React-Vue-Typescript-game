@@ -122,4 +122,23 @@ describe('Showable cells mutations should', () => {
         expect(state.length).toBe(8)
         expect(state.some(x => x.sameAs(mines.positions[0]))).toBeFalsy()
     })
+
+    test('show all cells when there is a empty board', () => {
+        const position = new Position(0, 0)
+        const state : Position[] = []
+        const difficulty :  Difficulty = {
+            boardWidth: 10,
+            boardHeight: 10, 
+            minesNumber: 0
+        }
+        const mines : Mines = { positions: [], perimeterCells: [ ]}
+        const rootGetters = {
+            difficulty,
+            mines
+        }
+
+        mutations[MAKE_MOVEMENT_MUTATION](state, { position, rootGetters })
+
+        expect(state.length).toBe(100)
+    })
 })
