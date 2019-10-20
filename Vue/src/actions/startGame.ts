@@ -9,5 +9,5 @@ export function distpatchCreateStartGameAction(position: Position){
 }
 
 export default {
-    [START_GAME]: (context: any, position : Position) => context.commit(START_GAME_MUTATION, position)
+    [START_GAME]: (context: any, position : Position) =>context.commit(START_GAME_MUTATION, position)
 }

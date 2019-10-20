@@ -1,4 +1,5 @@
 import { MAKE_MOVEMENT } from './actionsTypes'
+import { MAKE_MOVEMENT_MUTATION } from '../mutations/mutationTypes'
 import { Position } from '../model'
 
 export function dispatchCreateMakeMovementAction(position: Position){
@@ -8,5 +9,5 @@ export function dispatchCreateMakeMovementAction(position: Position){
 }
 
 export default {
-    [MAKE_MOVEMENT]: (context: any, position : Position) => {}
+    [MAKE_MOVEMENT]: ({commit, rootGetters }: any, position : Position) => commit(MAKE_MOVEMENT_MUTATION, { position, rootGetters })
 }

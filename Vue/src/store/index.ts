@@ -5,13 +5,14 @@ import initialState from './initialState'
 import { GameState, Difficulty, Mines, Position } from '@/model'
 import startGameActions from '../actions/startGame'
 import makeMovementActions from '../actions/makeMovement'
-import gameStateMutation from '../mutations/gameStateMutation'
+import gameStateMutations from '../mutations/gameStateMutation'
+import showableCellsMutations from '../mutations/showableCellsMutation'
 
 Vue.use(Vuex)
 
 const gameStateModule :  Module<{ state: GameState }, any> = {
   state: initialState.gameState,
-  mutations: gameStateMutation,
+  mutations: gameStateMutations,
   actions: startGameActions
 }
 
@@ -25,7 +26,8 @@ const minesModule :  Module<Mines, any> = {
 
 const showableCellsModule :  Module<Position[], any> = {
   state: initialState.showableCells,
-  actions: makeMovementActions
+  actions: makeMovementActions,
+  mutations: showableCellsMutations
 }
 
 export default new Vuex.Store<Store>({
@@ -34,6 +36,10 @@ export default new Vuex.Store<Store>({
     gameState: gameStateModule,
     mines: minesModule,
     showableCells : showableCellsModule
+  },
+  getters: {
+    difficulty(state) { return state.difficulty },
+    mines(state) { return state.mines }
   }
 })
 
