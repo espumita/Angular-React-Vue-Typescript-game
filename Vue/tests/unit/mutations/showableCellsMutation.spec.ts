@@ -1,6 +1,6 @@
 import mutations from '@/mutations/showableCellsMutation'
 import { MAKE_MOVEMENT_MUTATION } from '@/mutations/mutationTypes'
-import { Position, Mines, Difficulty } from '@/model'
+import { Position, Mines, Difficulty, PerimeterCell } from '@/model'
 
 describe('Showable cells mutations should', () => {
 
@@ -18,8 +18,34 @@ describe('Showable cells mutations should', () => {
             difficulty,
             mines
         }
+
         mutations[MAKE_MOVEMENT_MUTATION](state, { position, rootGetters })
 
         expect(state.length).toBe(1)
     })
+
+    test('show cell with number', () => {
+        const position = new Position(0, 0)
+        const state :Position[] = []
+        const difficulty :  Difficulty = {
+            boardWidth: 2,
+            boardHeight: 1, 
+            minesNumber: 1
+        }
+        const mines : Mines = { positions: [
+            new Position(1, 0)
+        ], perimeterCells: [
+            new PerimeterCell(new Position(0, 0))
+        ] }
+        const rootGetters = {
+            difficulty,
+            mines
+        }
+
+        mutations[MAKE_MOVEMENT_MUTATION](state, { position, rootGetters })
+
+        expect(state.length).toBe(1)
+    })
+
+
 })

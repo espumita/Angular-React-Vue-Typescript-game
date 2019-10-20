@@ -134,7 +134,6 @@ describe('Showable cells reducer should', () => {
         expect(newState.some(x => x.sameAs(mines.positions[0]))).toBeFalsy()
     })
 
-
     test('show all cells when there is a empty board', () => {
         const makeMovementAction : MakeMovementAction = {
             type: MAKE_MOVEMENT,
