@@ -4,6 +4,6 @@ import { START_GAME_MUTATION } from './mutationTypes'
 
 export default {
     [START_GAME_MUTATION]: (state: { state: GameState }) => {
-        state.state = 90
+        state.state = GameState.Started
     }
 }
