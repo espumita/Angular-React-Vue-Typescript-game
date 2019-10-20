@@ -97,4 +97,29 @@ describe('Showable cells mutations should', () => {
         expect(state.some(x => x.sameAs(mines.positions[0]))).toBeFalsy()
     })
 
+    test('show adjacent empty cells and cells with numbers when click on empty cell', () => {
+        const position = new Position(0, 0)
+        const state : Position[] = []
+        const difficulty :  Difficulty = {
+            boardWidth: 3,
+            boardHeight: 3, 
+            minesNumber: 1
+        }
+        const mines : Mines = { positions: [
+            new Position(2, 2)
+        ], perimeterCells: [ 
+            new PerimeterCell(new Position(2, 1)),
+            new PerimeterCell(new Position(1, 2)),
+            new PerimeterCell(new Position(1, 1))
+        ]}
+        const rootGetters = {
+            difficulty,
+            mines
+        }
+
+        mutations[MAKE_MOVEMENT_MUTATION](state, { position, rootGetters })
+
+        expect(state.length).toBe(8)
+        expect(state.some(x => x.sameAs(mines.positions[0]))).toBeFalsy()
+    })
 })
