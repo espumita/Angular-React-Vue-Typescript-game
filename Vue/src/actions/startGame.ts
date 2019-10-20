@@ -8,6 +8,6 @@ export function distpatchCreateStartGameAction(position: Position){
     }
 }
 
-export const startGameActions = {
+export default {
     [START_GAME]: (context: any, position : Position) => context.commit(START_GAME_MUTATION, position)
 }

@@ -1,6 +1,5 @@
 <template>
   <div :class="[{root: true}]">
-    <div>{{TEST}}</div>
     <div :class="[{board: true}]">
       <div v-for="rowNumber in rangeOf(rows)">
         <div v-bind:key="`cell-row-${rowNumber}`" >
@@ -18,6 +17,7 @@ import Vue from 'vue';
 import Cell from './Cell.vue';
 import { Position, CellType, Difficulty, Mines, PerimeterCell, GameState } from '../model'
 import { distpatchCreateStartGameAction } from '../actions/startGame'
+import { dispatchCreateMakeMovementAction } from '../actions/makeMovement'
 
 export default Vue.extend({
   name: 'Board',
@@ -26,7 +26,7 @@ export default Vue.extend({
   },
   methods: {
     cellClikedAction (args: any[]) {
-      const gameClickAction = this.getGameClickAction(this.$store.state.gameState, () => {})
+      const gameClickAction = this.getGameClickAction(this.$store.state.gameState.state, () => {})
       const action = this.getCellClickAction(args[1], gameClickAction)
       action(args[0])
     },
@@ -58,7 +58,7 @@ export default Vue.extend({
     },
     getGameClickAction(gameState : GameState, dispatch: Function) : Function {
       if (gameState === GameState.NotStarted) return (position: Position) => distpatchCreateStartGameAction(position)(this.$store.dispatch)
-      return (position: Position) => distpatchCreateStartGameAction(position)(this.$store.dispatch)//dispatchCreateMakeMovementAction(position)(dispatch)
+      return (position: Position) => dispatchCreateMakeMovementAction(position)(this.$store.dispatch)
     },
     getCellClickAction(type : CellType, clickAction: Function): Function {
       if(type === CellType.None) return clickAction
@@ -73,10 +73,6 @@ export default Vue.extend({
     columns(){
       const difficulty : Difficulty = this.$store.state.difficulty
       return difficulty.boardHeight
-    },
-    TEST(){
-      console.log(this.$store.state)
-      return this.$store.state
     }
   }
 });
