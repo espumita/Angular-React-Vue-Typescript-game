@@ -3,8 +3,8 @@ import { GameState } from '../model'
 import { START_GAME_MUTATION } from './mutationTypes'
 
 export default {
-    [START_GAME_MUTATION]: (game: { state: GameState}) => {
+    [START_GAME_MUTATION]: (state: { state: GameState }) => {
         //return 90
-        game.state = 90
+        state.state = 90
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <div :class="[{root: true}]">
-    <div>test {{TEST}}</div>
+    <div>{{TEST}}</div>
     <div :class="[{board: true}]">
       <div v-for="rowNumber in rangeOf(rows)">
         <div v-bind:key="`cell-row-${rowNumber}`" >
@@ -76,7 +76,7 @@ export default Vue.extend({
     },
     TEST(){
       console.log(this.$store.state)
-      return this.$store.state.game.state
+      return this.$store.state
     }
   }
 });

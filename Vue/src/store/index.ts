@@ -9,7 +9,7 @@ import gameStateMutation from '../mutations/gameStateMutation'
 Vue.use(Vuex)
 
 const gameStateModule :  Module<{ state: GameState }, any> = {
-  state: initialState.game,
+  state: initialState.gameSate,
   mutations: gameStateMutation,
   actions: startGameActions
 }
@@ -26,11 +26,10 @@ const showableCellsModule :  Module<Position[], any> = {
   state: initialState.showableCells
 }
 
-
 export default new Vuex.Store<CustomStore>({
   modules: {
     difficulty: difficultyModule,
-    game: gameStateModule,
+    gameSate: gameStateModule,
     mines: minesModule,
     showableCells : showableCellsModule
   }
