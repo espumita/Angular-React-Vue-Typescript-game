@@ -48,4 +48,25 @@ describe('Mines mutations should', () => {
         expect(state.perimeterCells[0].numberOfClosestsMines).toBe(3)
     })
 
+    test('set mines and perimeters when react to deploy mines action for eight mines', () => {
+        const difficulty : Difficulty = {
+            boardWidth: 3,
+            boardHeight: 3,
+            minesNumber: 8
+        }
+        const state : Mines = {
+            positions: [],
+            perimeterCells: []
+        }
+        const rootGetters = {
+            difficulty
+        }
+
+        mutations[DEPLOY_MINES_MUTATION](state, rootGetters)
+
+        expect(state.positions.length).toBe(difficulty.minesNumber)
+        expect(state.perimeterCells.length).toBe(1)
+        const closestMines = state.perimeterCells[0].numberOfClosestsMines 
+        expect(closestMines === 3 || closestMines === 5 || closestMines === 8 ).toBeTruthy()
+    })
 })
