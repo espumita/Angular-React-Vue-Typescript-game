@@ -3,7 +3,7 @@ import { Store } from './store'
 
 const initialState: Store = {
     difficulty: new BeginnerDifficulty(),
-    gameState: GameState.NotStarted,
+    game: { state: GameState.NotStarted},
     mines: {
         positions: [],
         perimeterCells: []
