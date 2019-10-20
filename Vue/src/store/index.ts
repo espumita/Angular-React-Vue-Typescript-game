@@ -3,17 +3,19 @@ import Vuex, { Module } from 'vuex'
 import { Store } from './store'
 import initialState from './initialState'
 import { GameState, Difficulty, Mines, Position } from '@/model'
-import startGameActions from '../actions/startGame'
-import makeMovementActions from '../actions/makeMovement'
+import startGameAction from '../actions/startGame'
+import makeMovementAction from '../actions/makeMovement'
 import gameStateMutations from '../mutations/gameStateMutation'
 import showableCellsMutations from '../mutations/showableCellsMutation'
+import deployMinesAction from '../actions/deployMines'
+import minesMutation from '../mutations/minesMutation'
 
 Vue.use(Vuex)
 
 const gameStateModule :  Module<{ state: GameState }, any> = {
   state: initialState.gameState,
   mutations: gameStateMutations,
-  actions: startGameActions
+  actions: startGameAction
 }
 
 const difficultyModule :  Module<Difficulty, any> = {
@@ -21,12 +23,14 @@ const difficultyModule :  Module<Difficulty, any> = {
 }
 
 const minesModule :  Module<Mines, any> = {
-  state: initialState.mines
+  state: initialState.mines,
+  actions: deployMinesAction,
+  mutations: minesMutation
 }
 
 const showableCellsModule :  Module<Position[], any> = {
   state: initialState.showableCells,
-  actions: makeMovementActions,
+  actions: makeMovementAction,
   mutations: showableCellsMutations
 }
 
