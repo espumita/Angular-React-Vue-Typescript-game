@@ -7,7 +7,10 @@ export default {
         const mines : Mines = payload.rootGetters.mines
         
         if(IsNotShowedYet(payload.position, state)) {
-            if (IsMine(payload.position, mines.positions)) return [ ...state, ...mines.positions]
+            if (IsMine(payload.position, mines.positions)) {
+                mines.positions.forEach(x => state.push(x))
+                return
+            }
             state.push(payload.position)
             const showedCells = [...state, payload.position ]
             const cellsToShow = showPerimeterFor(payload.position, showedCells, mines, difficulty)
