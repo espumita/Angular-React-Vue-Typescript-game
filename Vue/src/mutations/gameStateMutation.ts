@@ -1,4 +1,3 @@
-import initialState from '../store/initialState'
 import { GameState } from '../model'
 import { START_GAME_MUTATION } from './mutationTypes'
 
