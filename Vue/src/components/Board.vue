@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Cell from './Cell.vue';
+import Vue from 'vue'
+import Cell from './Cell.vue'
 import { Position, CellType, Difficulty, Mines, PerimeterCell, GameState } from '../model'
 import { distpatchCreateStartGameAction } from '../actions/startGame'
 import { dispatchCreateMakeMovementAction } from '../actions/makeMovement'
@@ -75,10 +75,10 @@ export default Vue.extend({
       return difficulty.boardHeight
     }
   }
-});
+})
 </script>
 
-<style>
+<style scoped>
 .root {
   display: flex;
   flex-direction: column;
