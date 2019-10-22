@@ -10,7 +10,7 @@ import gameStateMutations from '../mutations/gameStateMutation'
 import showableCellsMutations from '../mutations/showableCellsMutation'
 import deployMinesAction from '../actions/deployMines'
 import minesMutation from '../mutations/minesMutation'
-import { RESET_GAME_MUTATION } from '../mutations/mutationTypes'
+import globalMutations from '../mutations/globalMutations'
 
 Vue.use(Vuex)
 
@@ -43,11 +43,7 @@ export default new Vuex.Store<Store>({
     mines: minesModule,
     showableCells : showableCellsModule
   },
-  mutations: {
-    [RESET_GAME_MUTATION] (state){
-      console.log("HI")
-    }
-  },
+  mutations: globalMutations,
   getters: {
     difficulty(state) { return state.difficulty },
     mines(state) { return state.mines }
