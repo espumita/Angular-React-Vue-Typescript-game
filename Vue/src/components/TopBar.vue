@@ -3,13 +3,13 @@
         <button id="reset-game-button" v-on:click="resetGame" :class="[{button: true}]">
           Reset
         </button>
-        <button id="set-beginner-difficulty-button" v-on:click="setBeginnerDifficulty">
+        <button id="set-beginner-difficulty-button" v-on:click="setBeginnerDifficulty" :class="[{button: true}]">
           Beginner
         </button>
-        <button  id="set-intermediate-difficulty-button" v-on:click="setIntermediateDifficulty">
+        <button  id="set-intermediate-difficulty-button" v-on:click="setIntermediateDifficulty" :class="[{button: true}]">
           Intermediate
         </button>
-        <button  id="set-expert-difficulty-button" v-on:click="setExpertDifficulty">
+        <button  id="set-expert-difficulty-button" v-on:click="setExpertDifficulty" :class="[{button: true}]">
           Expert
         </button>
     </div>
