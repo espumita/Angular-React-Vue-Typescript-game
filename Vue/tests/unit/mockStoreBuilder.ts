@@ -1,15 +1,9 @@
 import { Store } from '../../src/store/store'
 import { GameState, Difficulty, BeginnerDifficulty, Position, PerimeterCell } from '../../src/model'
-import Vuex, { Module } from 'vuex'
+import Vuex from 'vuex'
 
 export function storeBuilder(){
     return new MockStoreBuilder()
-}
-
-function createStoreModuleWith<T>(initialStore : T) : Module<T, any> {
-    return {
-        state: initialStore
-    }
 }
 
 export class MockStoreBuilder {
@@ -46,18 +40,18 @@ export class MockStoreBuilder {
         return this
     }
 
-    withDispatch() : MockStoreBuilder{
+    withDispatch() : MockStoreBuilder {
         this.mockDispatch = true
         return this
     }
 
     build(){
         const store = new Vuex.Store({
-            modules: {
-                difficulty: createStoreModuleWith(this.initialStore.difficulty),
-                gameState: createStoreModuleWith(this.initialStore.gameState),
-                mines: createStoreModuleWith(this.initialStore.mines),
-                showableCells : createStoreModuleWith(this.initialStore.showableCells)
+            state: {
+                difficulty: this.initialStore.difficulty,
+                gameState: this.initialStore.gameState,
+                mines: this.initialStore.mines,
+                showableCells: this.initialStore.showableCells
             }
         })
         if (this.mockDispatch) store.dispatch = jest.fn()
