@@ -4,18 +4,20 @@ import { Store } from './store'
 import initialState from './initialState'
 import { GameState, Difficulty, Mines, Position } from '@/model'
 import startGameAction from '../actions/startGame'
+import resetGameAction from '../actions/resetGame'
 import makeMovementAction from '../actions/makeMovement'
 import gameStateMutations from '../mutations/gameStateMutation'
 import showableCellsMutations from '../mutations/showableCellsMutation'
 import deployMinesAction from '../actions/deployMines'
 import minesMutation from '../mutations/minesMutation'
+import { RESET_GAME_MUTATION } from '../mutations/mutationTypes'
 
 Vue.use(Vuex)
 
 const gameStateModule :  Module<{ state: GameState }, any> = {
   state: initialState.gameState,
   mutations: gameStateMutations,
-  actions: startGameAction
+  actions: {...startGameAction, ...resetGameAction }
 }
 
 const difficultyModule :  Module<Difficulty, any> = {
@@ -41,10 +43,16 @@ export default new Vuex.Store<Store>({
     mines: minesModule,
     showableCells : showableCellsModule
   },
+  mutations: {
+    [RESET_GAME_MUTATION] (state){
+      console.log("HI")
+    }
+  },
   getters: {
     difficulty(state) { return state.difficulty },
     mines(state) { return state.mines }
   }
+
 })
 
 
