@@ -12,7 +12,7 @@ describe('Topbar should', () =>{
   
     test('reset game when click reset button', () =>{
         const store = storeBuilder()
-                        .withActions()
+                        .withDispatch()
                         .build()
         const wrapper = mountTopBarComponentWith(store)
         const resetButton = wrapper.find('#reset-game-button')
@@ -24,7 +24,7 @@ describe('Topbar should', () =>{
 
     test('change to begginer difficulty and reset game when click on buttom', () =>{
         const store = storeBuilder()
-                        .withActions()
+                        .withDispatch()
                         .build()
         const wrapper = mountTopBarComponentWith(store)
         const resetButton = wrapper.find('#set-beginner-difficulty-button')
@@ -37,7 +37,7 @@ describe('Topbar should', () =>{
 
     test('change to intemediate difficulty and reset game when click on buttom', () =>{
         const store = storeBuilder()
-                        .withActions()
+                        .withDispatch()
                         .build()
         const wrapper = mountTopBarComponentWith(store)
         const resetButton = wrapper.find('#set-intermediate-difficulty-button')
@@ -50,7 +50,7 @@ describe('Topbar should', () =>{
 
     test('change to expert difficulty and reset game when click on buttom', () =>{
         const store = storeBuilder()
-                        .withActions()
+                        .withDispatch()
                         .build()
         const wrapper = mountTopBarComponentWith(store)
         const resetButton = wrapper.find('#set-expert-difficulty-button')

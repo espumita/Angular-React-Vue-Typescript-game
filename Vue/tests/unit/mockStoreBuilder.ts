@@ -46,7 +46,7 @@ export class MockStoreBuilder {
         return this
     }
 
-    withActions() : MockStoreBuilder{
+    withDispatch() : MockStoreBuilder{
         this.mockDispatch = true
         return this
     }

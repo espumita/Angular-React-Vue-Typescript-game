@@ -47,7 +47,7 @@ describe('Board should', () => {
   test('game start when click in the first cell', () =>{
     const store = storeBuilder()
                     .withGameState(GameState.NotStarted)
-                    .withActions()
+                    .withDispatch()
                     .build()
     const wrapper = mountBoardComponentWith(store)
     const aCell = wrapper.find(Cell)
@@ -60,7 +60,7 @@ describe('Board should', () => {
   test('game only start once', () =>{
     const store = storeBuilder()
                     .withGameState(GameState.Started)
-                    .withActions()
+                    .withDispatch()
                     .build()
     const wrapper = mountBoardComponentWith(store)
     const aCell = wrapper.find(Cell)
@@ -75,7 +75,7 @@ describe('Board should', () => {
     const store = storeBuilder()
                     .withGameState(GameState.Started)
                     .withShowableCell(new Position(0, 0))
-                    .withActions()
+                    .withDispatch()
                     .build()
     const wrapper = mountBoardComponentWith(store)
     const aCell = wrapper.find('#cell-0-0')
