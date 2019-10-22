@@ -11,17 +11,21 @@ import showableCellsMutations from '../mutations/showableCellsMutation'
 import deployMinesAction from '../actions/deployMines'
 import minesMutation from '../mutations/minesMutation'
 import globalMutations from '../mutations/globalMutations'
+import setDifficulty from '../actions/setDifficulty'
+import difficultyMutations from '../mutations/difficultyMutation'
 
 Vue.use(Vuex)
 
 const gameStateModule :  Module<{ state: GameState }, any> = {
   state: initialState.gameState,
-  mutations: gameStateMutations,
-  actions: startGameAction
+  actions: startGameAction,
+  mutations: gameStateMutations
 }
 
 const difficultyModule :  Module<Difficulty, any> = {
-  state: initialState.difficulty
+  state: initialState.difficulty,
+  actions: setDifficulty,
+  mutations: difficultyMutations
 }
 
 const minesModule :  Module<Mines, any> = {
