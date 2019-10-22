@@ -1,11 +1,9 @@
 <template>
-  <div :class="[{root: true}]">
-    <div :class="[{board: true}]">
-      <div v-for="rowNumber in rangeOf(rows)">
-        <div v-bind:key="`cell-row-${rowNumber}`" >
-          <div v-for="columnNumber in rangeOf(columns)">
-            <Cell :position="position(rowNumber, columnNumber)" :type="getCellType(position(rowNumber, columnNumber))" @cellCliked="cellClikedAction" v-bind:key="`cell-${rowNumber}-${columnNumber}`" :id="`cell-${rowNumber}-${columnNumber}`"/>
-          </div>
+  <div :class="[{board: true}]">
+    <div v-for="rowNumber in rangeOf(rows)">
+      <div v-bind:key="`cell-row-${rowNumber}`" >
+        <div v-for="columnNumber in rangeOf(columns)">
+          <Cell :position="position(rowNumber, columnNumber)" :type="getCellType(position(rowNumber, columnNumber))" @cellCliked="cellClikedAction" v-bind:key="`cell-${rowNumber}-${columnNumber}`" :id="`cell-${rowNumber}-${columnNumber}`"/>
         </div>
       </div>
     </div>
@@ -79,12 +77,7 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 .board {
   display: flex;
 }

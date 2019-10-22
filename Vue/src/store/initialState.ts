@@ -1,7 +1,7 @@
 import { GameState, BeginnerDifficulty } from '../model/index'
 import { Store } from './store'
 
-const initialState: Store = {
+export default {
     difficulty: new BeginnerDifficulty(),
     gameState: { state: GameState.NotStarted },
     mines: {
@@ -9,6 +9,4 @@ const initialState: Store = {
         perimeterCells: []
     },
     showableCells: []
-}
-
-export default initialState
+} as Store

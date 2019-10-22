@@ -19,7 +19,6 @@ describe('Topbar should', () =>{
 
         resetButton.trigger('click')
 
-        
         expect(store.dispatch).toHaveBeenCalledWith(RESET_GAME)
     })
 
