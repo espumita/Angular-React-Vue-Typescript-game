@@ -1,7 +1,6 @@
 import { Store } from '../../src/store/store'
-import { GameState, Difficulty, BeginnerDifficulty, Position, PerimeterCell, Mines } from '../../src/model'
+import { GameState, Difficulty, BeginnerDifficulty, Position, PerimeterCell } from '../../src/model'
 import Vuex, { Module } from 'vuex'
-import initialState from '@/store/initialState'
 
 export function storeBuilder(){
     return new MockStoreBuilder()
