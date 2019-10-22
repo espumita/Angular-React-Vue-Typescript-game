@@ -17,7 +17,7 @@ Vue.use(Vuex)
 const gameStateModule :  Module<{ state: GameState }, any> = {
   state: initialState.gameState,
   mutations: gameStateMutations,
-  actions: {...startGameAction, ...resetGameAction }
+  actions: startGameAction
 }
 
 const difficultyModule :  Module<Difficulty, any> = {
@@ -43,6 +43,7 @@ export default new Vuex.Store<Store>({
     mines: minesModule,
     showableCells : showableCellsModule
   },
+  actions: resetGameAction,
   mutations: globalMutations,
   getters: {
     difficulty(state) { return state.difficulty },
