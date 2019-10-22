@@ -1,9 +1,9 @@
 <template>
   <div :class="[{board: true}]">
-    <div v-for="rowNumber in rangeOf(rows)">
-      <div v-bind:key="`cell-row-${rowNumber}`" >
-        <div v-for="columnNumber in rangeOf(columns)">
-          <Cell :position="position(rowNumber, columnNumber)" :type="getCellType(position(rowNumber, columnNumber))" @cellCliked="cellClikedAction" v-bind:key="`cell-${rowNumber}-${columnNumber}`" :id="`cell-${rowNumber}-${columnNumber}`"/>
+    <div v-for="rowNumber in rangeOf(rows)" v-bind:key="`cell-row-${rowNumber}`">
+      <div>
+        <div v-for="columnNumber in rangeOf(columns)" v-bind:key="`cell-${rowNumber}-${columnNumber}`">
+          <Cell :position="position(rowNumber, columnNumber)" :type="getCellType(position(rowNumber, columnNumber))" @cellCliked="cellClikedAction" :id="`cell-${rowNumber}-${columnNumber}`"/>
         </div>
       </div>
     </div>
@@ -28,11 +28,19 @@ export default Vue.extend({
       const action = this.getCellClickAction(args[1], gameClickAction)
       action(args[0])
     },
-    position(x: number, y: number){
-      return new Position(x, y)
+    getGameClickAction(gameState : GameState, dispatch: Function) : Function {
+      if (gameState === GameState.NotStarted) return (position: Position) => distpatchCreateStartGameAction(position)(this.$store.dispatch)
+      return (position: Position) => dispatchCreateMakeMovementAction(position)(this.$store.dispatch)
+    },
+    getCellClickAction(type : CellType, clickAction: Function): Function {
+      if(type === CellType.None) return clickAction
+      return () => {}
     },
     rangeOf(size: number) : number[] {
       return [...Array(size).keys()]
+    },
+    position(x: number, y: number){
+      return new Position(x, y)
     },
     getCellType(position: Position){
       const showableCells = this.$store.state.showableCells
@@ -53,14 +61,6 @@ export default Vue.extend({
     },
     isPerimeterCell(position: Position, perimeterCell : PerimeterCell[]) {
       return perimeterCell.some(x => x.position.sameAs(position))
-    },
-    getGameClickAction(gameState : GameState, dispatch: Function) : Function {
-      if (gameState === GameState.NotStarted) return (position: Position) => distpatchCreateStartGameAction(position)(this.$store.dispatch)
-      return (position: Position) => dispatchCreateMakeMovementAction(position)(this.$store.dispatch)
-    },
-    getCellClickAction(type : CellType, clickAction: Function): Function {
-      if(type === CellType.None) return clickAction
-      return () => {}
     }
   },
   computed: {
@@ -77,7 +77,6 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-
 .board {
   display: flex;
 }
