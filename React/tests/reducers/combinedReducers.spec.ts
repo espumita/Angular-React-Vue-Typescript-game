@@ -2,7 +2,7 @@ import reducer from '../../src/reducers/combinedReducers'
 import { RESET_GAME } from '../../src/actions/actionsTypes'
 import { ResetGameAction } from '../../src/actions/resetGame'
 import { Store } from '../../src/store/store'
-import { ExpertDifficulty, GameState, Mines, Position, PerimeterCell } from '../../src/model'
+import { ExpertDifficulty, GameState, Position, PerimeterCell } from '../../src/model'
 
 
 describe('Combined reducers should', () => {
@@ -28,7 +28,6 @@ describe('Combined reducers should', () => {
 
         expect(newState.difficulty).toStrictEqual(expertDifficulty)
         expect(newState.gameState).toBe(GameState.NotStarted)
-        expect(newState.mines.positions.length).toBe(0)
         expect(newState.mines.positions.length).toBe(0)
         expect(newState.mines.perimeterCells.length).toBe(0)
         expect(newState.showableCells.length).toBe(0)
