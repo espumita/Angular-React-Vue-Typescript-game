@@ -1,10 +1,8 @@
 <template>
   <div :class="[{board: true}]">
     <div v-for="rowNumber in rangeOf(rows)" v-bind:key="`cell-row-${rowNumber}`">
-      <div>
-        <div v-for="columnNumber in rangeOf(columns)" v-bind:key="`cell-${rowNumber}-${columnNumber}`">
-          <Cell :position="position(rowNumber, columnNumber)" :type="getCellType(position(rowNumber, columnNumber))" @cellCliked="cellClikedAction" :id="`cell-${rowNumber}-${columnNumber}`"/>
-        </div>
+      <div v-for="columnNumber in rangeOf(columns)" v-bind:key="`cell-${rowNumber}-${columnNumber}`">
+        <Cell :position="position(rowNumber, columnNumber)" :type="getCellType(position(rowNumber, columnNumber))" @cellCliked="cellClikedAction" :id="`cell-${rowNumber}-${columnNumber}`"/>
       </div>
     </div>
   </div>
