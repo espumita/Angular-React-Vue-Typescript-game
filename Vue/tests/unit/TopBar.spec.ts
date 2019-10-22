@@ -22,6 +22,44 @@ describe('Topbar should', () =>{
         expect(store.dispatch).toHaveBeenCalledWith(RESET_GAME)
     })
 
+    test('change to begginer difficulty and reset game when click on buttom', () =>{
+        const store = storeBuilder()
+                        .withActions()
+                        .build()
+        const wrapper = mountTopBarComponentWith(store)
+        const resetButton = wrapper.find('#set-beginner-difficulty-button')
+
+        resetButton.trigger('click')
+
+        expect(store.dispatch).toHaveBeenCalledWith(SET_DIFFICULTY, new BeginnerDifficulty())
+        expect(store.dispatch).toHaveBeenCalledWith(RESET_GAME)
+    })
+
+    test('change to intemediate difficulty and reset game when click on buttom', () =>{
+        const store = storeBuilder()
+                        .withActions()
+                        .build()
+        const wrapper = mountTopBarComponentWith(store)
+        const resetButton = wrapper.find('#set-intermediate-difficulty-button')
+
+        resetButton.trigger('click')
+
+        expect(store.dispatch).toHaveBeenCalledWith(SET_DIFFICULTY, new IntermediateDifficulty())
+        expect(store.dispatch).toHaveBeenCalledWith(RESET_GAME)
+    })
+
+    test('change to expert difficulty and reset game when click on buttom', () =>{
+        const store = storeBuilder()
+                        .withActions()
+                        .build()
+        const wrapper = mountTopBarComponentWith(store)
+        const resetButton = wrapper.find('#set-expert-difficulty-button')
+
+        resetButton.trigger('click')
+
+        expect(store.dispatch).toHaveBeenCalledWith(SET_DIFFICULTY, new ExpertDifficulty())
+        expect(store.dispatch).toHaveBeenCalledWith(RESET_GAME)
+    })
 })
 
 function mountTopBarComponentWith(store: any) {
