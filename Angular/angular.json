@@ -14,8 +14,8 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/minesweeper",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "index": "src/root.html",
+            "main": "src/root.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.json",
             "aot": false,
