@@ -175,7 +175,7 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@^8.2.12":
+"@angular/core@~8.2.11":
   version "8.2.12"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-8.2.12.tgz#faef656cfa3b0bf4c1579d1498034045981c791a"
   integrity sha512-wEFwhHCuuXynXAMeA1G+0KIYY0jqXYs7I8p+GO+ufKoUmzWHFTvtMJ6nvKgy+LmZTByO2gf9oVAAlRodNb8ttQ==
