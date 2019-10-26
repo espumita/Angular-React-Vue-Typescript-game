@@ -1,7 +1,7 @@
 <div class="board">
     <div>
         <div>
-            <Cell [type]='getCellType()' ></Cell>
+            <Cell [position]="position(1,1)" [type]="getCellType(position(1,1))" (cellCliked)="cellClikedAction($event)" ></Cell>
         </div>
     </div>
 </div>

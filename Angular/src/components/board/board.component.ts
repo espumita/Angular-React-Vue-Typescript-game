@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CellType } from 'src/model';
+import { Position } from '../../model'
 
 @Component({
   selector: 'Board',
@@ -9,7 +10,15 @@ import { CellType } from 'src/model';
 
 export class BoardComponent {
 
-  getCellType(){
+
+  position(x: number, y: number){
+    return new Position(x, y)
+  }
+  getCellType(position: Position){
     return CellType.SevenMinesClose
+  }
+
+  cellClikedAction($event){
+    console.log($event)
   }
 }

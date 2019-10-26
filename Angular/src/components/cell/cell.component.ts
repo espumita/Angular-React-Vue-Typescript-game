@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CellType, Position } from '../../model'
 
 @Component({
@@ -8,8 +8,12 @@ import { CellType, Position } from '../../model'
 })
 export class CellComponent {
   @Input() type : CellType
-  @Input() postion : Position
+  @Input() position : Position
+  @Output() cellCliked = new EventEmitter<Position>()
 
+  clickAction(){
+    this.cellCliked.emit(this.position)
+  }
   classes() {
     return {
       cell: true,
