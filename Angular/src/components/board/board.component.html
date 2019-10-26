@@ -1,7 +1,7 @@
 <div class="board">
-    <div>
-        <div>
-            <Cell [position]="position(1,1)" [type]="getCellType(position(1,1))" (cellCliked)="cellClikedAction($event)" ></Cell>
+    <div *ngFor="let rowNumber of rangeOf(rows())">
+        <div *ngFor="let columnNumber of rangeOf(columns())">
+            <Cell [position]="position(rowNumber, columnNumber)" [type]="getCellType(position(rowNumber, columnNumber))" (cellCliked)="cellClikedAction($event)" ></Cell>
         </div>
     </div>
 </div>

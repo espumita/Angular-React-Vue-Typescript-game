@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CellType } from 'src/model';
+import { CellType, BeginnerDifficulty, ExpertDifficulty } from 'src/model';
 import { Position } from '../../model'
 
 @Component({
@@ -10,12 +10,22 @@ import { Position } from '../../model'
 
 export class BoardComponent {
 
-
+  rows(){
+    const difficulty = new ExpertDifficulty()
+    return difficulty.boardWidth
+  }
+  columns(){
+    const difficulty = new ExpertDifficulty()
+    return difficulty.boardHeight
+  }
+  rangeOf(size: number) : number[] {
+    return [...Array(size).keys()]
+  }
   position(x: number, y: number){
     return new Position(x, y)
   }
   getCellType(position: Position){
-    return CellType.SevenMinesClose
+    return CellType.None
   }
 
   cellClikedAction($event){
