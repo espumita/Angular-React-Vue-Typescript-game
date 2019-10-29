@@ -12,7 +12,7 @@ export class MockStoreBuilder {
     constructor(){
         this.initialStore = {
             difficulty: new BeginnerDifficulty(),
-            gameState: { state: GameState.NotStarted },
+            gameState: GameState.NotStarted,
             mines: { positions: [], perimeterCells: []},
             showableCells: []
         }
@@ -25,7 +25,7 @@ export class MockStoreBuilder {
     }
 
     withGameState(gameState: GameState) : MockStoreBuilder {
-        this.initialStore.gameState.state = gameState
+        this.initialStore.gameState = gameState
         return this
     }
 

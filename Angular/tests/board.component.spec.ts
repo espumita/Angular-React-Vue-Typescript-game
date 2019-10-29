@@ -3,11 +3,9 @@ import { By } from "@angular/platform-browser";
 import { storeBuilder } from './mockStoreBuilder'
 import { BoardComponent } from '../src/components/board/board.component';
 import { CellComponent } from '../src/components/cell/cell.component';
-import { BeginnerDifficulty } from '../src/model'
+import { BeginnerDifficulty, IntermediateDifficulty } from '../src/model'
 
 describe('Board should', () => {
-  let component: BoardComponent;
-  let fixture: ComponentFixture<BoardComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,9 +22,20 @@ describe('Board should', () => {
                     .build()
 
     const wrapper = mountBoardComponentWith(store)
-    
+
     const cells = wrapper.debugElement.queryAll(By.directive(CellComponent))
     expect(cells.length).toBe(64)
+  })
+
+  test('have 16 x 16 cells in intermediate difficulty', () => {
+    const store = storeBuilder()
+                    .withDifficulty(new IntermediateDifficulty())
+                    .build()
+
+    const wrapper = mountBoardComponentWith(store)
+
+    const cells = wrapper.debugElement.queryAll(By.directive(CellComponent))
+    expect(cells.length).toBe(256)
   })
 
 })

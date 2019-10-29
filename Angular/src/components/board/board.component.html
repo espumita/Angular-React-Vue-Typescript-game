@@ -1,6 +1,6 @@
 <div class="board">
-    <div *ngFor="let rowNumber of rangeOf(rows())">
-        <div *ngFor="let columnNumber of rangeOf(columns())">
+    <div *ngFor="let rowNumber of rangeOf(rows$ | async)">
+        <div *ngFor="let columnNumber of rangeOf(columns$ | async)">
             <Cell [position]="position(rowNumber, columnNumber)" [type]="getCellType(position(rowNumber, columnNumber))" (cellCliked)="cellClikedAction($event)" ></Cell>
         </div>
     </div>

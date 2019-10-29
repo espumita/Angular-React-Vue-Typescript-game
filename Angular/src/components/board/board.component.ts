@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { CellType, ExpertDifficulty, BeginnerDifficulty } from 'src/model';
+import { CellType } from 'src/model';
 import { Position } from '../../model'
+import { Store as ngrxStore } from '@ngrx/store';
+import { Store } from '../../store/store'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'Board',
@@ -9,14 +12,12 @@ import { Position } from '../../model'
 })
 
 export class BoardComponent {
+  rows$ : Observable<number>
+  columns$ : Observable<number>
 
-  rows(){
-    const difficulty = new BeginnerDifficulty()
-    return difficulty.boardWidth
-  }
-  columns(){
-    const difficulty = new BeginnerDifficulty()
-    return difficulty.boardHeight
+  constructor(private store: ngrxStore<Store>){
+    this.rows$ = store.select( state => state.difficulty.boardWidth)
+    this.columns$ = store.select( state => state.difficulty.boardHeight)
   }
   rangeOf(size: number) : number[] {
     return [...Array(size).keys()]
