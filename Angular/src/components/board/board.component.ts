@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CellType, BeginnerDifficulty, ExpertDifficulty } from 'src/model';
+import { CellType, ExpertDifficulty, BeginnerDifficulty } from 'src/model';
 import { Position } from '../../model'
 
 @Component({
@@ -11,11 +11,11 @@ import { Position } from '../../model'
 export class BoardComponent {
 
   rows(){
-    const difficulty = new ExpertDifficulty()
+    const difficulty = new BeginnerDifficulty()
     return difficulty.boardWidth
   }
   columns(){
-    const difficulty = new ExpertDifficulty()
+    const difficulty = new BeginnerDifficulty()
     return difficulty.boardHeight
   }
   rangeOf(size: number) : number[] {
