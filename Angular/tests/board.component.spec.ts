@@ -3,7 +3,7 @@ import { By } from "@angular/platform-browser";
 import { storeBuilder } from './mockStoreBuilder'
 import { BoardComponent } from '../src/components/board/board.component';
 import { CellComponent } from '../src/components/cell/cell.component';
-import { BeginnerDifficulty, IntermediateDifficulty } from '../src/model'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty } from '../src/model'
 import { provideMockStore }  from '@ngrx/store/testing'
 
 describe('Board should', () => {
@@ -29,6 +29,18 @@ describe('Board should', () => {
     const cells = wrapper.debugElement.queryAll(By.directive(CellComponent))
     expect(cells.length).toBe(256)
   })
+
+  test('have 30 x 16 cells in expert difficulty', () =>{
+    const store = storeBuilder()
+                    .withDifficulty(new ExpertDifficulty())
+                    .build()
+
+    const wrapper = mountBoardComponentWith(store)
+
+    const cells = wrapper.debugElement.queryAll(By.directive(CellComponent))
+    expect(cells.length).toBe(480)
+  })
+
 
 })
 
