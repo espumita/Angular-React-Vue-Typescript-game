@@ -70,7 +70,22 @@ describe('Board should', () => {
 
     expect(mockStore.dispatch).not.toHaveBeenCalledWith({type: START_GAME, position: expect.any(Position)})
     expect(mockStore.dispatch).toHaveBeenCalledWith({type: MAKE_MOVEMENT, position: expect.any(Position)})
-})
+  })
+
+  test('do not do nothing when click on a showed cell', () => {
+    const store = storeBuilder()
+                    .withGameState(GameState.Started)
+                    .withShowableCell(new Position(0, 0))
+                    .build()
+    const wrapper = mountBoardComponentWith(store)
+    const mockStore = getStoreWithMockDispatch()
+    const aCell = wrapper.debugElement.query(By.directive(CellComponent))
+
+    aCell.componentInstance.clickAction()
+
+    expect(mockStore.dispatch).not.toHaveBeenCalled()
+  }) 
+
 
 })
 
