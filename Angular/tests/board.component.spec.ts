@@ -7,7 +7,7 @@ import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState
 import { provideMockStore, MockStore }  from '@ngrx/store/testing'
 import { Store as  NgrxStore } from '@ngrx/store'
 import { Store } from '../src/store/store'
-import { START_GAME } from 'src/actions/actionsTypes';
+import { START_GAME, MAKE_MOVEMENT } from 'src/actions/actionsTypes';
 
 
 describe('Board should', () => {
@@ -50,15 +50,27 @@ describe('Board should', () => {
                     .withGameState(GameState.NotStarted)
                     .build()
     const wrapper = mountBoardComponentWith(store)
-
-    const aCell = wrapper.debugElement.query(By.directive(CellComponent))
     const mockStore = getStoreWithMockDispatch()
+    const aCell = wrapper.debugElement.query(By.directive(CellComponent))
 
     aCell.componentInstance.clickAction()
 
     expect(mockStore.dispatch).toBeCalledWith({type: START_GAME, position: expect.any(Position)})
   })
 
+  test('game only start once', () =>{
+    const store = storeBuilder()
+                    .withGameState(GameState.Started)
+                    .build()
+    const wrapper = mountBoardComponentWith(store)
+    const mockStore = getStoreWithMockDispatch()
+    const aCell = wrapper.debugElement.query(By.directive(CellComponent))
+
+    aCell.componentInstance.clickAction()
+
+    expect(mockStore.dispatch).not.toHaveBeenCalledWith({type: START_GAME, position: expect.any(Position)})
+    expect(mockStore.dispatch).toHaveBeenCalledWith({type: MAKE_MOVEMENT, position: expect.any(Position)})
+})
 
 })
 

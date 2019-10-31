@@ -4,7 +4,12 @@ import { Position, GameState } from '../../model'
 import { Store as NgrxStore } from '@ngrx/store';
 import { Store } from '../../store/store'
 import { Observable } from 'rxjs';
-import {  createStartGameAction } from '../../actions/startGame'
+import { createStartGameAction } from '../../actions/startGame'
+import { createMakeMovementAction } from 'src/actions/makeMovement';
+import { createFeatureSelector } from '@ngrx/store'
+
+
+export const getGameState = createFeatureSelector('gameState');
 
 @Component({
   selector: 'Board',
@@ -15,12 +20,12 @@ import {  createStartGameAction } from '../../actions/startGame'
 export class BoardComponent {
   rows$ : Observable<number>
   columns$ : Observable<number>
-  gameState$ : Observable<GameState>
+  gameState: GameState
 
   constructor(private store: NgrxStore<Store>){
     this.rows$ = this.store.select( state => state.difficulty.boardWidth)
     this.columns$ = this.store.select( state => state.difficulty.boardHeight)
-    this.gameState$ = this.store.select( state => state.gameState)
+    this.store.select(state => state.gameState).subscribe(gameState => this.gameState = gameState)
   }
   rangeOf(size: number) : number[] {
     return [...Array(size).keys()]
@@ -31,9 +36,12 @@ export class BoardComponent {
   getCellType(position: Position){
     return CellType.None
   }
-
   cellClikedAction(position: Position, cellType: CellType){
-    this.store.dispatch(createStartGameAction(position))
+    if (this.gameState === GameState.NotStarted){
+      this.store.dispatch(createStartGameAction(position))
+    } else{
+      this.store.dispatch(createMakeMovementAction(position))
+    }
   }
 
 }
