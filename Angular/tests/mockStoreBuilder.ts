@@ -39,12 +39,7 @@ export class MockStoreBuilder {
         return this
     }
 
-    withDispatch() : MockStoreBuilder {
-        this.mockDispatch = true
-        return this
-    }
-
     build(){
-        return {}
+        return this.initialStore
     }
 }

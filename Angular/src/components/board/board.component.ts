@@ -16,7 +16,6 @@ export class BoardComponent {
   columns$ : Observable<number>
 
   constructor(private store: ngrxStore<Store>){
-    console.log(this.store)
     this.rows$ = this.store.select( state => state.difficulty.boardWidth)
     this.columns$ = this.store.select( state => state.difficulty.boardHeight)
   }
