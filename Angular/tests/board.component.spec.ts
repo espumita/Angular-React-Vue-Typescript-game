@@ -3,7 +3,7 @@ import { By } from "@angular/platform-browser";
 import { storeBuilder } from './mockStoreBuilder'
 import { BoardComponent } from '../src/components/board/board.component'
 import { CellComponent } from '../src/components/cell/cell.component'
-import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState, Position } from '../src/model'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState, Position, CellType, PerimeterCell } from '../src/model'
 import { provideMockStore, MockStore }  from '@ngrx/store/testing'
 import { Store as  NgrxStore } from '@ngrx/store'
 import { Store } from '../src/store/store'
@@ -86,6 +86,32 @@ describe('Board should', () => {
     expect(mockStore.dispatch).not.toHaveBeenCalled()
   }) 
 
+  test.each([
+    [ 1, CellType.OneMineClose    ],
+    [ 2, CellType.TwoMinesClose   ],
+    [ 3, CellType.TreeMinesClose  ],
+    [ 4, CellType.FourMinesClose  ],
+    [ 5, CellType.FiveMinesClose  ],
+    [ 6, CellType.SixMinesClose   ],
+    [ 7, CellType.SevenMinesClose ],
+    [ 8, CellType.EightMinesClose ],
+  ])('show a cell with number %i when there are mines close',(numberOfMinesClose, cellType) => {
+      const store = storeBuilder()
+                      .withDifficulty({
+                          boardWidth: 1,
+                          boardHeight : 1,
+                          minesNumber: 0
+                      })
+                      .withGameState(GameState.Started)
+                      .withShowableCell(new Position(0, 0))
+                      .withPerimeterCell(new PerimeterCell(new Position(0, 0), numberOfMinesClose))
+                      .build()
+
+      const wrapper = mountBoardComponentWith(store)
+
+      const aCell = wrapper.debugElement.query(By.css('#cell-0-0'))
+      expect(aCell.componentInstance.type).toBe(cellType)
+  })
 
 })
 

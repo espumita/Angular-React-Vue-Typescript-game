@@ -1,7 +1,7 @@
 <div class="board">
     <div *ngFor="let rowNumber of rangeOf(rows$ | async)">
         <div *ngFor="let columnNumber of rangeOf(columns$ | async)">
-            <Cell [position]="position(rowNumber, columnNumber)" [type]="getCellType(position(rowNumber, columnNumber))" (cellCliked)="cellClikedAction($event.position, $event.cellType)" ></Cell>
+            <Cell [position]="position(rowNumber, columnNumber)" [type]="getCellType(position(rowNumber, columnNumber))" (cellCliked)="cellClikedAction($event.position, $event.cellType)" id="{{'cell-' + rowNumber +'-' + columnNumber}}" ></Cell>
         </div>
     </div>
 </div>
