@@ -22,17 +22,11 @@ export default Vue.extend({
   },
   methods: {
     cellClikedAction ({position, cellType }: {position: Position, cellType: CellType}) {
-      const gameClickAction = this.getGameClickAction(this.$store.state.gameState.state, () => {})
-      const action = this.getCellClickAction(cellType, gameClickAction)
-      action(position)
-    },
-    getGameClickAction(gameState : GameState, dispatch: Function) : Function {
-      if (gameState === GameState.NotStarted) return (position: Position) => distpatchCreateStartGameAction(position)(this.$store.dispatch)
-      return (position: Position) => dispatchCreateMakeMovementAction(position)(this.$store.dispatch)
-    },
-    getCellClickAction(type : CellType, clickAction: Function): Function {
-      if(type === CellType.None) return clickAction
-      return () => {}
+      if (this.$store.state.gameState.state === GameState.NotStarted){
+        distpatchCreateStartGameAction(position)(this.$store.dispatch)
+      } else if(cellType === CellType.None){
+        dispatchCreateMakeMovementAction(position)(this.$store.dispatch)
+      }
     },
     rangeOf(size: number) : number[] {
       return [...Array(size).keys()]
