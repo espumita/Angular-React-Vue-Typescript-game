@@ -3,10 +3,12 @@ import { By } from "@angular/platform-browser";
 import { storeBuilder } from './mockStoreBuilder'
 import { BoardComponent } from '../src/components/board/board.component'
 import { CellComponent } from '../src/components/cell/cell.component'
-import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState } from '../src/model'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState, Position } from '../src/model'
 import { provideMockStore, MockStore }  from '@ngrx/store/testing'
 import { Store as  NgrxStore } from '@ngrx/store'
 import { Store } from '../src/store/store'
+import { START_GAME } from 'src/actions/actionsTypes';
+
 
 describe('Board should', () => {
 
@@ -53,10 +55,10 @@ describe('Board should', () => {
     const mockStore : MockStore<Store> = TestBed.get<NgrxStore<Store>>(NgrxStore)
     spyOn(mockStore, 'dispatch')
 
-    aCell.triggerEventHandler('click', {})
+    aCell.componentInstance.clickAction()
 
-    expect(mockStore.dispatch).toBeCalled()
-})
+    expect(mockStore.dispatch).toBeCalledWith({type: START_GAME, position: expect.any(Position)})
+  })
 
 
 })
@@ -71,9 +73,7 @@ function mountBoardComponentWith(store: any) {
       provideMockStore({ initialState: store })
     ]
   }).compileComponents();
-  //return mount(Board, { store, localVue })
   const fixture = TestBed.createComponent(BoardComponent);
-  const component = fixture.componentInstance;
   fixture.detectChanges();
   return fixture
 }
