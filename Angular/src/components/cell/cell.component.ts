@@ -9,10 +9,10 @@ import { CellType, Position } from '../../model'
 export class CellComponent {
   @Input() type : CellType
   @Input() position : Position
-  @Output() cellCliked = new EventEmitter<Position>()
+  @Output() cellCliked = new EventEmitter<{position: Position, cellType: CellType}>()
 
   clickAction(){
-    this.cellCliked.emit(this.position)
+    this.cellCliked.emit({ position: this.position, cellType: this.type})
   }
   classes() {
     return {
