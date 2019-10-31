@@ -16,7 +16,7 @@ export default Vue.extend({
   },
   methods: {
     clickAction(){
-      this.$emit('cellCliked', [this.$props.position, this.$props.type])
+      this.$emit('cellCliked', { position: this.$props.position, cellType: this.$props.type})
     }
   },
   computed: {

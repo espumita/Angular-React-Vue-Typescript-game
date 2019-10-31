@@ -21,10 +21,10 @@ export default Vue.extend({
     Cell
   },
   methods: {
-    cellClikedAction (args: any[]) {
+    cellClikedAction ({position, cellType }: {position: Position, cellType: CellType}) {
       const gameClickAction = this.getGameClickAction(this.$store.state.gameState.state, () => {})
-      const action = this.getCellClickAction(args[1], gameClickAction)
-      action(args[0])
+      const action = this.getCellClickAction(cellType, gameClickAction)
+      action(position)
     },
     getGameClickAction(gameState : GameState, dispatch: Function) : Function {
       if (gameState === GameState.NotStarted) return (position: Position) => distpatchCreateStartGameAction(position)(this.$store.dispatch)
