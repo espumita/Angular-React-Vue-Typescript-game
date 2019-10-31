@@ -3,16 +3,27 @@ import { By } from "@angular/platform-browser";
 import { storeBuilder } from './mockStoreBuilder'
 import { BoardComponent } from '../src/components/board/board.component';
 import { CellComponent } from '../src/components/cell/cell.component';
-import { BeginnerDifficulty, IntermediateDifficulty } from '../src/model'
+import { BeginnerDifficulty, IntermediateDifficulty, GameState } from '../src/model'
+import { provideMockStore }  from '@ngrx/store/testing'
+import { Store } from '../src/store/store'
 
 describe('Board should', () => {
 
   beforeEach(async(() => {
+    const initialState : Store = {
+      difficulty: new BeginnerDifficulty(),       
+      gameState: GameState.NotStarted,
+      mines: { positions: [], perimeterCells: [] },
+      showableCells: []
+    }
     TestBed.configureTestingModule({
       declarations: [
         BoardComponent,
         CellComponent
       ],
+      providers: [
+        provideMockStore({ initialState})
+      ]
     }).compileComponents();
   }))
 

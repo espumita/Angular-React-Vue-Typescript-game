@@ -16,8 +16,9 @@ export class BoardComponent {
   columns$ : Observable<number>
 
   constructor(private store: ngrxStore<Store>){
-    this.rows$ = store.select( state => state.difficulty.boardWidth)
-    this.columns$ = store.select( state => state.difficulty.boardHeight)
+    console.log(this.store)
+    this.rows$ = this.store.select( state => state.difficulty.boardWidth)
+    this.columns$ = this.store.select( state => state.difficulty.boardHeight)
   }
   rangeOf(size: number) : number[] {
     return [...Array(size).keys()]
