@@ -33,21 +33,7 @@ export class BoardComponent {
   }
 
   cellClikedAction(position: Position, cellType: CellType){
-    console.log(position)
     this.store.dispatch(createStartGameAction(position))
-    //const gameClickAction = this.getGameClickAction(gameState, () => {})
-   // const action = this.getCellClickAction(args[1], gameClickAction)
-    //action(args[0])
   }
 
-  getGameClickAction(gameState : GameState, dispatch: Function) : Function {
-   // if (gameState === GameState.NotStarted) return (position: Position) => distpatchCreateStartGameAction(position)(this.$store.dispatch)
-  //  return (position: Position) => dispatchCreateMakeMovementAction(position)(this.$store.dispatch)
-    return () => {}
-}
-
-  getCellClickAction(type : CellType, clickAction: Function): Function {
-    if(type === CellType.None) return clickAction
-    return () => {}
-  }
 }
