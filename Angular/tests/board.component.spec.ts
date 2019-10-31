@@ -52,8 +52,7 @@ describe('Board should', () => {
     const wrapper = mountBoardComponentWith(store)
 
     const aCell = wrapper.debugElement.query(By.directive(CellComponent))
-    const mockStore : MockStore<Store> = TestBed.get<NgrxStore<Store>>(NgrxStore)
-    spyOn(mockStore, 'dispatch')
+    const mockStore = getStoreWithMockDispatch()
 
     aCell.componentInstance.clickAction()
 
@@ -76,4 +75,10 @@ function mountBoardComponentWith(store: any) {
   const fixture = TestBed.createComponent(BoardComponent);
   fixture.detectChanges();
   return fixture
+}
+
+function getStoreWithMockDispatch(){
+  const mockStore : MockStore<Store> = TestBed.get<NgrxStore<Store>>(NgrxStore)
+  spyOn(mockStore, 'dispatch')
+  return mockStore
 }
