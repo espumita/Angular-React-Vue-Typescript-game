@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CellType } from 'src/model';
 import { Position } from '../../model'
-import { Store as ngrxStore } from '@ngrx/store';
+import { Store as NgrxStore } from '@ngrx/store';
 import { Store } from '../../store/store'
 import { Observable } from 'rxjs';
 
@@ -15,7 +15,7 @@ export class BoardComponent {
   rows$ : Observable<number>
   columns$ : Observable<number>
 
-  constructor(private store: ngrxStore<Store>){
+  constructor(private store: NgrxStore<Store>){
     this.rows$ = this.store.select( state => state.difficulty.boardWidth)
     this.columns$ = this.store.select( state => state.difficulty.boardHeight)
   }

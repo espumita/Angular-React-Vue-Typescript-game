@@ -1,10 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { By } from "@angular/platform-browser";
 import { storeBuilder } from './mockStoreBuilder'
-import { BoardComponent } from '../src/components/board/board.component';
-import { CellComponent } from '../src/components/cell/cell.component';
-import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty } from '../src/model'
-import { provideMockStore }  from '@ngrx/store/testing'
+import { BoardComponent } from '../src/components/board/board.component'
+import { CellComponent } from '../src/components/cell/cell.component'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState } from '../src/model'
+import { provideMockStore, MockStore }  from '@ngrx/store/testing'
+import { Store as  NgrxStore } from '@ngrx/store'
+import { Store } from '../src/store/store'
 
 describe('Board should', () => {
 
@@ -40,6 +42,21 @@ describe('Board should', () => {
     const cells = wrapper.debugElement.queryAll(By.directive(CellComponent))
     expect(cells.length).toBe(480)
   })
+
+  test('game start when click in the first cell', () =>{
+    const store = storeBuilder()
+                    .withGameState(GameState.NotStarted)
+                    .build()
+    const wrapper = mountBoardComponentWith(store)
+
+    const aCell = wrapper.debugElement.query(By.directive(CellComponent))
+    const mockStore : MockStore<Store> = TestBed.get<NgrxStore<Store>>(NgrxStore)
+    spyOn(mockStore, 'dispatch')
+
+    aCell.triggerEventHandler('click', {})
+
+    expect(mockStore.dispatch).toBeCalled()
+})
 
 
 })
