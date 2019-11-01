@@ -7,8 +7,10 @@ import { TopBarComponent } from '../topBar/topBar.component'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
-import difficultyReducer from '../../reducers/difficulty.reducer'
+import { difficultyReducer } from '../../reducers/difficulty.reducer'
 import { showableCellsReducer } from '../../reducers/showableCells.reducer'
+import { gameStateReducer } from '../../reducers/gameState.reducer'
+import { minesReducer } from '../../reducers/mines.reducer'
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { showableCellsReducer } from '../../reducers/showableCells.reducer'
     BrowserModule,
     StoreModule.forRoot({
       difficulty: difficultyReducer,
+      gameState: gameStateReducer,
+      mines: minesReducer,
       showableCells: showableCellsReducer
     }),
     StoreDevtoolsModule.instrument({ maxAge: 10})
