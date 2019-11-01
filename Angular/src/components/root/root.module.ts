@@ -7,7 +7,7 @@ import { TopBarComponent } from '../topBar/topBar.component'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
-import { difficultyReducer } from '../../reducers/difficulty.reducer'
+import difficultyReducer from '../../reducers/difficulty.reducer'
 import { showableCellsReducer } from '../../reducers/showableCells.reducer'
 
 @NgModule({
