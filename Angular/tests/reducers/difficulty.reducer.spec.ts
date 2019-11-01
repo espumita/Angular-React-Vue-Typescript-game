@@ -1,15 +1,14 @@
 import { difficultyReducer as reducer } from '../../src/reducers/difficulty.reducer'
 import { SET_DIFFICULTY } from '../../src/actions/actionsTypes'
 import { ExpertDifficulty, BeginnerDifficulty } from '../../src/model'
-import { SetDifficultyAction } from '../../src/actions/setDifficulty'
 
 describe('Difficulty reducers should', () => {
 
     test('set beginner at the beginning', () => {
         const beginnerDifficulty = new BeginnerDifficulty()
-        const setDifficultyAction : SetDifficultyAction = {
+        const setDifficultyAction = {
             type: SET_DIFFICULTY,
-            difficulty: beginnerDifficulty
+            newDifficulty: beginnerDifficulty
         }
 
         const newState = reducer(undefined, setDifficultyAction)
@@ -20,9 +19,9 @@ describe('Difficulty reducers should', () => {
     test('set another difficulty', () => {
         const beginnerDifficulty = new BeginnerDifficulty()
         const expertDifficulty = new ExpertDifficulty()
-        const setDifficultyAction : SetDifficultyAction = {
+        const setDifficultyAction = {
             type: SET_DIFFICULTY,
-            difficulty: expertDifficulty
+            newDifficulty: expertDifficulty
         }
 
         const newState = reducer(beginnerDifficulty, setDifficultyAction)
