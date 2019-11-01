@@ -7,7 +7,7 @@ describe('Difficulty reducers should', () => {
     test('set beginner at the beginning', () => {
         const beginnerDifficulty = new BeginnerDifficulty()
         const setDifficultyAction = {
-            type: SET_DIFFICULTY,
+            type: undefined,
             newDifficulty: beginnerDifficulty
         }
 
