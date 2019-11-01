@@ -1,6 +1,6 @@
 
 import { DEPLOY_MINES_MUTATION } from './mutationTypes'
-import { Position, Mines, PerimeterCell, Difficulty } from '../model/index'
+import { Position, Mines, PerimeterCell, Difficulty } from '../model'
 
 export default {
     [DEPLOY_MINES_MUTATION]: (state: Mines, rootGetters: any) => {

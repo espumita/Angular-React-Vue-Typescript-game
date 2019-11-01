@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Position, Mines, CellType, GameState, Difficulty, PerimeterCell } from '../model/index'
+import { Position, Mines, CellType, GameState, Difficulty, PerimeterCell } from '../model'
 import { Store } from '../store/store'
 import Cell from './Cell'
 import { distpatchCreateStartGameAction } from '../actions/startGame' 

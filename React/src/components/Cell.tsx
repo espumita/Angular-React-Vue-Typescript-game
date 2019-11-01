@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Position, CellType } from '../model/index'
+import { Position, CellType } from '../model'
 
 const Cell = function Cell(props: { position: Position, type: CellType, clickAction : Function }) {
     const color = getColor(props.type)

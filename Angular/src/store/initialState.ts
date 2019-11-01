@@ -1,4 +1,4 @@
-import { GameState, BeginnerDifficulty } from '../model/index'
+import { GameState, BeginnerDifficulty } from '../model'
 import { Store } from './store'
 
 const initialState: Store = {

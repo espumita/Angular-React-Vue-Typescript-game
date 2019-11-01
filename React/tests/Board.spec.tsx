@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16'
 import BoardComponent from '../src/components/Board'
 import Cell from '../src/components/Cell'
 import { Provider } from 'react-redux'
-import { BeginnerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/model/index'
+import { BeginnerDifficulty, GameState, IntermediateDifficulty, ExpertDifficulty, CellType, Position, PerimeterCell } from '../src/model'
 import { START_GAME, MAKE_MOVEMENT } from '../src/actions/actionsTypes'
 import { storeBuilder } from './mockStoreBuilder'
 

@@ -1,5 +1,5 @@
 import reducer from '../../src/reducers/showableCellsReducer' 
-import { BeginnerDifficulty, Position, Mines, Difficulty, PerimeterCell } from '../../src/model/index'
+import { BeginnerDifficulty, Position, Mines, Difficulty, PerimeterCell } from '../../src/model'
 import { MakeMovementAction } from '../../src/actions/makeMovement'
 import { MAKE_MOVEMENT } from '../../src/actions/actionsTypes'
 

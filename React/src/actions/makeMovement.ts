@@ -1,6 +1,6 @@
 import { Action } from 'redux'
 import { MAKE_MOVEMENT } from './actionsTypes'
-import { Position } from '../model/index'
+import { Position } from '../model'
 
 export interface MakeMovementAction extends Action {
     type: typeof MAKE_MOVEMENT

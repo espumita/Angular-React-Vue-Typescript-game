@@ -1,4 +1,4 @@
-import { Difficulty, GameState, Mines, Position } from '../model/index'
+import { Difficulty, GameState, Mines, Position } from '../model'
 
 export interface Store {
     difficulty: Difficulty          

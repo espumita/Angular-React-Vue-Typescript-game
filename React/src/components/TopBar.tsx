@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useDispatch } from 'react-redux'
 import { createResetGameAction } from '../actions/resetGame'
 import { createDistpatchSetDifficultyAction } from '../actions/setDifficulty'
-import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty } from '../model/index'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty } from '../model'
 
 const TopBar  = () => {
     const dispatch = useDispatch()

@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store'
 import { Store } from '../src/store/store'
-import { GameState, Difficulty, BeginnerDifficulty, Position, PerimeterCell } from '../src/model/index'
+import { GameState, Difficulty, BeginnerDifficulty, Position, PerimeterCell } from '../src/model'
 
 export function storeBuilder(){
     return new MockStoreBuilder()

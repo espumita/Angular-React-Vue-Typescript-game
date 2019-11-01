@@ -1,5 +1,5 @@
 import reducer from '../../src/reducers/minesReducer' 
-import { BeginnerDifficulty, Difficulty } from '../../src/model/index'
+import { BeginnerDifficulty, Difficulty } from '../../src/model'
 import { DeployMinesAction } from '../../src/actions/deployMines'
 import { DEPLOY_MINES } from '../../src/actions/actionsTypes'
 

@@ -1,5 +1,5 @@
 import { showableCellsReducer as reducer } from '../../src/reducers/showableCells.reducer' 
-import { BeginnerDifficulty, Position, Mines, Difficulty, PerimeterCell } from '../../src/model/index'
+import { BeginnerDifficulty, Position, Mines, Difficulty, PerimeterCell } from '../../src/model'
 import { MAKE_MOVEMENT } from '../../src/actions/actionsTypes'
 
 describe('Showable cells reducer should', () => {

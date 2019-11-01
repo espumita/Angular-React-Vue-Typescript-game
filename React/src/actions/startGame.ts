@@ -1,6 +1,6 @@
 import { Action } from 'redux'
 import { START_GAME } from './actionsTypes'
-import { Position } from '../model/index'
+import { Position } from '../model'
 import { createDeployMinesAction } from './deployMines'
 import { createMakeMovementAction } from './makeMovement'
 
