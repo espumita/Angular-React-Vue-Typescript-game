@@ -31,7 +31,7 @@ describe('Topbar should', () =>{
 
       resetButton.nativeElement.click()
 
-      expect(mockStore.dispatch).toBeCalledWith({type: SET_DIFFICULTY, difficulty: new BeginnerDifficulty()})
+      expect(mockStore.dispatch).toBeCalledWith({type: SET_DIFFICULTY, newDifficulty: new BeginnerDifficulty()})
       expect(mockStore.dispatch).toBeCalledWith({type: RESET_GAME})
   })
 
@@ -44,7 +44,7 @@ describe('Topbar should', () =>{
 
     resetButton.nativeElement.click()
 
-    expect(mockStore.dispatch).toBeCalledWith({type: SET_DIFFICULTY, difficulty: new IntermediateDifficulty()})
+    expect(mockStore.dispatch).toBeCalledWith({type: SET_DIFFICULTY, newDifficulty: new IntermediateDifficulty()})
     expect(mockStore.dispatch).toBeCalledWith({type: RESET_GAME})
   })
 
@@ -57,7 +57,7 @@ describe('Topbar should', () =>{
 
       resetButton.nativeElement.click()
 
-      expect(mockStore.dispatch).toBeCalledWith({type: SET_DIFFICULTY, difficulty: new ExpertDifficulty()})
+      expect(mockStore.dispatch).toBeCalledWith({type: SET_DIFFICULTY, newDifficulty: new ExpertDifficulty()})
       expect(mockStore.dispatch).toBeCalledWith({type: RESET_GAME})
   })
 

@@ -32,7 +32,7 @@ export class BoardComponent {
   
   cellClikedAction(position: Position, cellType: CellType){
     if (this.gameState === GameState.NotStarted){
-      this.store.dispatch(createStartGameAction(position))
+      this.store.dispatch(createStartGameAction())
       this.store.dispatch(createDeployMinesAction())
       this.store.dispatch(createMakeMovementAction(position))
     } else if(cellType === CellType.None){

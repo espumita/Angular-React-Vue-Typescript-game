@@ -55,7 +55,7 @@ describe('Board should', () => {
 
     aCell.componentInstance.clickAction()
 
-    expect(mockStore.dispatch).toBeCalledWith({type: START_GAME, position: expect.any(Position)})
+    expect(mockStore.dispatch).toBeCalledWith({type: START_GAME })
   })
 
   test('game only start once', () =>{
@@ -68,7 +68,7 @@ describe('Board should', () => {
 
     aCell.componentInstance.clickAction()
 
-    expect(mockStore.dispatch).not.toHaveBeenCalledWith({type: START_GAME, position: expect.any(Position)})
+    expect(mockStore.dispatch).not.toHaveBeenCalledWith({type: START_GAME })
     expect(mockStore.dispatch).toHaveBeenCalledWith({type: MAKE_MOVEMENT, position: expect.any(Position)})
   })
 
