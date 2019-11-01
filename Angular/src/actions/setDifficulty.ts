@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store'
+import { Action, createAction } from '@ngrx/store'
 import { SET_DIFFICULTY } from "./actionsTypes"
 import { Difficulty } from '../model'
 
@@ -7,11 +7,15 @@ export interface SetDifficultyAction extends Action {
     difficulty: Difficulty
 }
 
-export function createSetDifficultyAction(difficulty: Difficulty) : SetDifficultyAction {
+export const setDifficulty = createAction(SET_DIFFICULTY)
+
+export function createSetDifficultyAction(difficulty: Difficulty) {
+    return setDifficulty()
     return {
         type: SET_DIFFICULTY,
         difficulty: difficulty
     }
 }
+
 
 
