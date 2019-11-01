@@ -4,8 +4,9 @@ import { Position, GameState, Mines, PerimeterCell } from '../../model'
 import { Store as NgrxStore } from '@ngrx/store'
 import { Store } from '../../store/store'
 import { Observable } from 'rxjs'
-import { distpatchCreateStartGameAction } from '../../actions/startGame'
-import { dispatchCreateMakeMovementAction } from 'src/actions/makeMovement'
+import { createStartGameAction } from '../../actions/startGame'
+import { createMakeMovementAction } from 'src/actions/makeMovement'
+import { createDeployMinesAction } from 'src/actions/deployMines'
 
 
 @Component({
@@ -31,9 +32,11 @@ export class BoardComponent {
   
   cellClikedAction(position: Position, cellType: CellType){
     if (this.gameState === GameState.NotStarted){
-      distpatchCreateStartGameAction(position)(this.store.dispatch)
+      this.store.dispatch(createStartGameAction(position))
+      this.store.dispatch(createDeployMinesAction())
+      this.store.dispatch(createMakeMovementAction(position))
     } else if(cellType === CellType.None){
-      dispatchCreateMakeMovementAction(position)(this.store.dispatch)
+      this.store.dispatch(createMakeMovementAction(position))
     }
   }
   rangeOf(size: number) : number[] {

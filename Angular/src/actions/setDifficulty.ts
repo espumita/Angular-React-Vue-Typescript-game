@@ -1,7 +1,6 @@
 import { Action } from '@ngrx/store'
 import { SET_DIFFICULTY } from "./actionsTypes"
 import { Difficulty } from '../model'
-import { createResetGameAction } from './resetGame'
 
 export interface SetDifficultyAction extends Action {
     type: typeof SET_DIFFICULTY,
@@ -15,10 +14,4 @@ export function createSetDifficultyAction(difficulty: Difficulty) : SetDifficult
     }
 }
 
-export function createDistpatchSetDifficultyAction(difficulty: Difficulty){
-    return (dispatch: Function) => {
-        dispatch(createSetDifficultyAction(difficulty))
-        dispatch(createResetGameAction())
-    }
-}
 

@@ -1,4 +1,4 @@
-import reducer from '../../src/reducers/difficulty.reducer'
+import { difficultyReducer as reducer } from '../../src/reducers/difficulty.reducer'
 import { SET_DIFFICULTY } from '../../src/actions/actionsTypes'
 import { ExpertDifficulty, BeginnerDifficulty } from '../../src/model'
 import { SetDifficultyAction } from '../../src/actions/setDifficulty'
