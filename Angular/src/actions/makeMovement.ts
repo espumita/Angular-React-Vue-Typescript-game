@@ -13,3 +13,9 @@ export function createMakeMovementAction(position: Position) : MakeMovementActio
         position: position
     }
 }
+
+export function dispatchCreateMakeMovementAction(position: Position){
+    return (dispatch: Function) => {
+        dispatch(createMakeMovementAction(position))
+    }
+}
