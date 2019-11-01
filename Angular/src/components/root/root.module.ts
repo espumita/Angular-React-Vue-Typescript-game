@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
 
 import { RootComponent } from './root.component'
 import { BoardComponent } from '../board/board.component'

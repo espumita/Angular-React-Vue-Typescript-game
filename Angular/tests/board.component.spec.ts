@@ -1,5 +1,5 @@
-import { TestBed } from '@angular/core/testing';
-import { By } from "@angular/platform-browser";
+import { TestBed } from '@angular/core/testing'
+import { By } from "@angular/platform-browser"
 import { storeBuilder } from './mockStoreBuilder'
 import { BoardComponent } from '../src/components/board/board.component'
 import { CellComponent } from '../src/components/cell/cell.component'
@@ -7,7 +7,7 @@ import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty, GameState
 import { provideMockStore, MockStore }  from '@ngrx/store/testing'
 import { Store as  NgrxStore } from '@ngrx/store'
 import { Store } from '../src/store/store'
-import { START_GAME, MAKE_MOVEMENT } from 'src/actions/actionsTypes';
+import { START_GAME, MAKE_MOVEMENT } from 'src/actions/actionsTypes'
 
 
 describe('Board should', () => {
@@ -124,9 +124,9 @@ function mountBoardComponentWith(store: any) {
     providers: [
       provideMockStore({ initialState: store })
     ]
-  }).compileComponents();
-  const fixture = TestBed.createComponent(BoardComponent);
-  fixture.detectChanges();
+  }).compileComponents()
+  const fixture = TestBed.createComponent(BoardComponent)
+  fixture.detectChanges()
   return fixture
 }
 

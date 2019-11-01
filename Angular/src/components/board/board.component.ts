@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { CellType } from 'src/model';
+import { Component } from '@angular/core'
+import { CellType } from 'src/model'
 import { Position, GameState, Mines, PerimeterCell } from '../../model'
-import { Store as NgrxStore } from '@ngrx/store';
+import { Store as NgrxStore } from '@ngrx/store'
 import { Store } from '../../store/store'
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs'
 import { createStartGameAction } from '../../actions/startGame'
-import { createMakeMovementAction } from 'src/actions/makeMovement';
+import { createMakeMovementAction } from 'src/actions/makeMovement'
 import { createFeatureSelector } from '@ngrx/store'
 
 
-export const getGameState = createFeatureSelector('gameState');
+export const getGameState = createFeatureSelector('gameState')
 
 @Component({
   selector: 'Board',
