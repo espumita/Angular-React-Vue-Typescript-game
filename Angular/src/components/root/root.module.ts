@@ -11,6 +11,7 @@ import { difficultyReducer } from '../../reducers/difficulty.reducer'
 import { showableCellsReducer } from '../../reducers/showableCells.reducer'
 import { gameStateReducer } from '../../reducers/gameState.reducer'
 import { minesReducer } from '../../reducers/mines.reducer'
+import { rootStateInjectorReducer } from './rootStateInjector.reducer'
 
 @NgModule({
   declarations: [
@@ -26,6 +27,9 @@ import { minesReducer } from '../../reducers/mines.reducer'
       gameState: gameStateReducer,
       mines: minesReducer,
       showableCells: showableCellsReducer
+    },
+    {
+      metaReducers: [ rootStateInjectorReducer ]
     }),
     StoreDevtoolsModule.instrument({ maxAge: 10})
   ],
