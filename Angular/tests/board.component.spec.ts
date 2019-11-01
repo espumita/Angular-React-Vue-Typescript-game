@@ -69,7 +69,7 @@ describe('Board should', () => {
     aCell.componentInstance.clickAction()
 
     expect(mockStore.dispatch).not.toHaveBeenCalledWith({type: START_GAME })
-    expect(mockStore.dispatch).toHaveBeenCalledWith({type: MAKE_MOVEMENT, position: expect.any(Position)})
+    expect(mockStore.dispatch).toHaveBeenCalledWith({type: MAKE_MOVEMENT, selectedPosition: expect.any(Position)})
   })
 
   test('do not do nothing when click on a showed cell', () => {
