@@ -7,7 +7,7 @@ describe('Mines reducer should', () => {
 
     test('set empty mines and perimeters state at the beginning', () => {
         const deployMinesAction : DeployMinesAction = {
-            type: DEPLOY_MINES
+            type: undefined
         }
         const aDifficutly = new BeginnerDifficulty()
 

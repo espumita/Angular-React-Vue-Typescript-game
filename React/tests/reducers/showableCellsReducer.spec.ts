@@ -7,7 +7,7 @@ describe('Showable cells reducer should', () => {
 
     test('not show any cell at the beginning', () => {
         const makeMovementAction : MakeMovementAction = {
-            type: MAKE_MOVEMENT,
+            type: undefined,
             position: new Position(0, 0)
             
         }

@@ -7,7 +7,7 @@ describe('Game state reducer should set game state to', () => {
 
     test('not started at the beginning', () => {
         const startGameAction : StartGameAction = {
-            type: START_GAME,
+            type: undefined,
             position: new Position(0, 0)
         }
 
