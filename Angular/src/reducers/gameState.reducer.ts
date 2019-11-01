@@ -7,7 +7,7 @@ const _gameStateReducer = createReducer(initialState.gameState,
    on(startGame, state => GameState.Started)
 )
 
-export function gameStateReducer (state: GameState, action) {
+export function gameStateReducer (state: GameState, action) : GameState {
     return _gameStateReducer(state, action)
 }
 

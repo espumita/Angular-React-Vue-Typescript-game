@@ -1,12 +1,8 @@
-import { Action } from '@ngrx/store'
 import { DEPLOY_MINES } from './actionsTypes'
+import { createAction } from '@ngrx/store'
 
-export interface DeployMinesAction extends Action {
-    type: typeof DEPLOY_MINES
-}
+export const deployMines = createAction(DEPLOY_MINES)
 
-export function createDeployMinesAction() : DeployMinesAction {
-    return {
-        type: DEPLOY_MINES
-    }
+export function createDeployMinesAction() {
+    return deployMines()
 }

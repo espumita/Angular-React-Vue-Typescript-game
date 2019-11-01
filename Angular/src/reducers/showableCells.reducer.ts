@@ -7,6 +7,6 @@ const _showableCellsReducer = createReducer(initialState.showableCells
    // on(action2, state => state - 1),
 )
 
-export function showableCellsReducer(state : Position[], action){
+export function showableCellsReducer(state : Position[], action) : Position[]{
     return _showableCellsReducer(state, action)
 }
