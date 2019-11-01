@@ -11,7 +11,7 @@ import { difficultyReducer } from '../../reducers/difficulty.reducer'
 import { showableCellsReducer } from '../../reducers/showableCells.reducer'
 import { gameStateReducer } from '../../reducers/gameState.reducer'
 import { minesReducer } from '../../reducers/mines.reducer'
-import { rootStateInjectorReducer } from './rootStateInjector.reducer'
+import { rootStateInjectorReducer } from '../../reducers/rootStateInjector.reducer'
 
 @NgModule({
   declarations: [

@@ -1,12 +1,9 @@
-import { Action } from '@ngrx/store'
-import { RESET_GAME } from "./actionsTypes"
+import { RESET_GAME } from './actionsTypes'
+import { createAction  } from '@ngrx/store'
 
-export interface ResetGameAction extends Action {
-    type: typeof RESET_GAME
+export const resetGame = createAction(RESET_GAME)
+
+export function createResetGameAction() {
+    return resetGame()
 }
 
-export function createResetGameAction() : ResetGameAction {
-    return {
-        type: RESET_GAME
-    }
-}
