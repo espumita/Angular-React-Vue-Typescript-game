@@ -6,10 +6,7 @@ import { Store } from '../../store/store'
 import { Observable } from 'rxjs'
 import { createStartGameAction } from '../../actions/startGame'
 import { createMakeMovementAction } from 'src/actions/makeMovement'
-import { createFeatureSelector } from '@ngrx/store'
 
-
-export const getGameState = createFeatureSelector('gameState')
 
 @Component({
   selector: 'Board',
