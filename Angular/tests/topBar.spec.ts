@@ -5,7 +5,8 @@ import { By } from "@angular/platform-browser"
 import { TopBarComponent } from '../src/components/topBar/topBar.component'
 import { Store as NgrxStore } from '@ngrx/store'
 import { Store } from '../src/store/store'
-import { RESET_GAME } from '../src/actions/actionsTypes'
+import { RESET_GAME, SET_DIFFICULTY } from '../src/actions/actionsTypes'
+import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty } from '../src/model'
 
 describe('Topbar should', () =>{
   
@@ -20,6 +21,45 @@ describe('Topbar should', () =>{
 
         expect(mockStore.dispatch).toBeCalledWith({type: RESET_GAME})
     })
+
+    test('change to begginer difficulty and reset game when click on buttom', () =>{
+      const store = storeBuilder()
+                      .build()
+      const wrapper = mountTopBarComponentWith(store)
+      const resetButton = wrapper.debugElement.query(By.css('#set-beginner-difficulty-button'))
+      const mockStore = getStoreWithMockDispatch()
+
+      resetButton.nativeElement.click()
+
+      expect(mockStore.dispatch).toBeCalledWith({type: SET_DIFFICULTY, difficulty: new BeginnerDifficulty()})
+      expect(mockStore.dispatch).toBeCalledWith({type: RESET_GAME})
+  })
+
+  test('change to intemediate difficulty and reset game when click on buttom', () =>{
+    const store = storeBuilder()
+                    .build()
+    const wrapper = mountTopBarComponentWith(store)
+    const resetButton = wrapper.debugElement.query(By.css('#set-intermediate-difficulty-button'))
+    const mockStore = getStoreWithMockDispatch()
+
+    resetButton.nativeElement.click()
+
+    expect(mockStore.dispatch).toBeCalledWith({type: SET_DIFFICULTY, difficulty: new IntermediateDifficulty()})
+    expect(mockStore.dispatch).toBeCalledWith({type: RESET_GAME})
+  })
+
+  test('change to expert difficulty and reset game when click on buttom', () =>{
+      const store = storeBuilder()
+                      .build()
+      const wrapper = mountTopBarComponentWith(store)
+      const resetButton = wrapper.debugElement.query(By.css('#set-expert-difficulty-button'))
+      const mockStore = getStoreWithMockDispatch()
+
+      resetButton.nativeElement.click()
+
+      expect(mockStore.dispatch).toBeCalledWith({type: SET_DIFFICULTY, difficulty: new ExpertDifficulty()})
+      expect(mockStore.dispatch).toBeCalledWith({type: RESET_GAME})
+  })
 
 
 })
