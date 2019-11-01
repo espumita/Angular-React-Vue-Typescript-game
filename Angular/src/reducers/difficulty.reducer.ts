@@ -1,12 +1,12 @@
+import { createReducer, on, Action } from '@ngrx/store'
 import initialState from 'src/store/initialState'
 import { Difficulty } from 'src/model'
-import { SET_DIFFICULTY } from '../actions/actionsTypes'
-import { SetDifficultyAction } from 'src/actions/setDifficulty'
 
-export default (state: Difficulty, action: SetDifficultyAction) => {
-    if (state == undefined) return initialState.difficulty
-    switch(action.type) {
-        case SET_DIFFICULTY: return action.difficulty
-        default: return state
-    }
+const _difficultyReducer = createReducer(initialState.difficulty 
+   // on(action1, state => state + 1),
+   // on(action2, state => state - 1),
+)
+
+export default (state: Difficulty, action: Action) => {
+    return _difficultyReducer(state, action)
 }
