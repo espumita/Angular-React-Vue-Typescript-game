@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { BeginnerDifficulty, IntermediateDifficulty, ExpertDifficulty } from '../../model'
 import { Store as NgrxStore } from '@ngrx/store'
 import { Store } from '../../store/store'
+import { createResetGameAction } from 'src/actions/resetGame'
 
 @Component({
   selector: 'TopBar',
@@ -14,11 +15,10 @@ export class TopBarComponent {
     constructor(private store: NgrxStore<Store>){
     }
     resetGame() {
-        this.store.dispatch({ type: ""})
-        //dispatchResetGameAction(this.$store.dispatch)
+        this.store.dispatch(createResetGameAction())
     }
     setBeginnerDifficulty(){
-         this.store.dispatch({ type: ""})
+         this.store.dispatch(createResetGameAction())
         //dispatchSetDifficultyAction(new BeginnerDifficulty())(this.$store.dispatch)
     }
     setIntermediateDifficulty() {
