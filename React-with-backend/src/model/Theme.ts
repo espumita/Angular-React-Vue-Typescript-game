@@ -1,6 +1,5 @@
-import { ThemeType }  from "./ThemeType";
+import {ThemeColors} from "./ThemeColors";
 
 export interface Theme {
-    type: ThemeType,
-    change: Function
+    colors: ThemeColors
 }

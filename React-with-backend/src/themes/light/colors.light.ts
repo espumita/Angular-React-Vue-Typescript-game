@@ -1,7 +1,7 @@
 import {ThemeColors} from "../../model/ThemeColors";
 
 const colors : ThemeColors = {
-    background: '#10171e',
-    primary: '#1c2938'
+    background: '#f8f9fa',
+    primary: '#f06595'
 }
 export default colors

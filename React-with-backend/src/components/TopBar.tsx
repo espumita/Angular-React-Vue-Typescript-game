@@ -1,6 +1,9 @@
 import * as React from 'react'
+import useThemeContext from "../hooks/useThemeContext"
 
 const TopBar = () => {
+    const a = useThemeContext()
+
     const topBarStyle = {
         overflow: 'hidden',
         position: 'fixed',
