@@ -1,4 +1,4 @@
-import { createStore, compose, applyMiddleware } from 'redux'
+import {createStore, compose, applyMiddleware} from 'redux'
 import combinedReducers from '../reducers/combinedReducers'
 import initialState from './initialState'
 
