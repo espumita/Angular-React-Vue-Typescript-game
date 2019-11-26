@@ -1,4 +1,5 @@
 export interface ThemeColors {
     background: string,
-    primary: string
+    primary: string,
+    secondary: string
 }

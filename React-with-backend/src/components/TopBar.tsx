@@ -16,9 +16,20 @@ const TopBar = () => {
         alignItems: 'center',
         backgroundColor: themeColors.primary
     }
+    const changeThemeButtonStyle = {
+        color: themeColors.primary,
+        textAlign: 'center',
+        padding: '18px 16px',
+        fontSize: '17px',
+        backgroundColor: themeColors.secondary,
+        cursor: 'pointer'
+    }
+
     return (
         <div style={topBarStyle}>
-            This is a topbar
+            <div onClick={changeTheme} style={changeThemeButtonStyle}>
+                Change Theme
+            </div>
         </div>
     )
 }

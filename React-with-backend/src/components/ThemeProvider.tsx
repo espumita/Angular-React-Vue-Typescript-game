@@ -9,7 +9,7 @@ const ThemeProvider = ({children}) => {
     const theme = new LightTheme()
     const themeContext : ThemeContext = {
         themeColors: theme.colors,
-        changeTheme: () => {}
+        changeTheme: () => { console.log('asd')}
     }
     return (
         <CustomThemeContext.Provider value={themeContext}>
