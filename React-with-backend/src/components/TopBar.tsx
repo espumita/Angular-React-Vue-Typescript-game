@@ -27,9 +27,8 @@ const TopBar = () => {
 
     return (
         <div style={topBarStyle}>
-            <div onClick={changeTheme} style={changeThemeButtonStyle}>
-                Change Theme
-            </div>
+            <div>🐢</div>
+            <div onClick={changeTheme} style={changeThemeButtonStyle}>⚡</div>
         </div>
     )
 }
