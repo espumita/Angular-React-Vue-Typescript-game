@@ -1,4 +1,4 @@
-import {ThemeColors} from "../../model/ThemeColors";
+import {ThemeColors} from "../../model/ThemeColors"
 
 const colors : ThemeColors = {
     background: '#10171e',

@@ -1,6 +1,6 @@
-import {ThemeColors} from "../model/ThemeColors";
+import {Theme} from "../model/Theme"
 
 export interface ThemeContext {
-    themeColors: ThemeColors;
-    changeTheme: Function;
+    theme: Theme
+    changeTheme: Function
 }

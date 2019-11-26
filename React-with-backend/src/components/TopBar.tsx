@@ -2,7 +2,7 @@ import * as React from 'react'
 import useThemeContext from "../hooks/useThemeContext"
 
 const TopBar = () => {
-    const { themeColors, changeTheme } = useThemeContext()
+    const { theme, changeTheme } = useThemeContext()
 
     const topBarStyle = {
         overflow: 'hidden',
@@ -14,14 +14,14 @@ const TopBar = () => {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: themeColors.primary
+        backgroundColor: theme.colors.primary
     }
     const changeThemeButtonStyle = {
-        color: themeColors.primary,
+        color: theme.colors.primary,
         textAlign: 'center',
         padding: '18px 16px',
         fontSize: '17px',
-        backgroundColor: themeColors.secondary,
+        backgroundColor: theme.colors.secondary,
         cursor: 'pointer'
     }
 
