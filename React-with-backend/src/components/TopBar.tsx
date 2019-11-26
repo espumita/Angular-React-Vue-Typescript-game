@@ -2,7 +2,7 @@ import * as React from 'react'
 import useThemeContext from "../hooks/useThemeContext"
 
 const TopBar = () => {
-    const a = useThemeContext()
+    const { themeColors, changeTheme } = useThemeContext()
 
     const topBarStyle = {
         overflow: 'hidden',
@@ -13,7 +13,8 @@ const TopBar = () => {
         fontSize: '24px',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: themeColors.primary
     }
     return (
         <div style={topBarStyle}>

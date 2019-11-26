@@ -1,9 +1,9 @@
-import { createContext, useContext } from 'react'
-import { Theme } from "../model/Theme";
+import {useContext} from 'react'
+import {ThemeContext} from "./ThemeContext";
+import {CustomThemeContext} from "../components/ThemeProvider";
 
-const useThemeContext = () : Theme => {
-    const themeContext = createContext<Theme| null>(null);
-    return useContext(themeContext)
+const useThemeContext = () : ThemeContext => {
+    return useContext(CustomThemeContext)
 }
 
 export default useThemeContext

@@ -1,15 +1,20 @@
 import * as React from 'react'
-import { Theme } from "../model/Theme";
 import {DarkTheme} from "../themes/dark/theme.dark";
-import {LightTheme} from "../themes/light/theme.ligth";
+import {LightTheme} from "../themes/light/theme.ligth"
+import {ThemeContext} from "../hooks/ThemeContext"
+
+export const CustomThemeContext =  React.createContext<ThemeContext | null >(null)
 
 const ThemeProvider = ({children}) => {
-    const context = React.createContext<Theme | null >(null);
     const theme = new LightTheme()
+    const themeContext : ThemeContext = {
+        themeColors: theme.colors,
+        changeTheme: () => {}
+    }
     return (
-        <context.Provider value={theme}>
+        <CustomThemeContext.Provider value={themeContext}>
             {children}
-        </context.Provider>
+        </CustomThemeContext.Provider>
     )
 }
 
