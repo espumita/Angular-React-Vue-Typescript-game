@@ -2,6 +2,7 @@ import useThemeState from "../src/hooks/useThemeState";
 import {Theme} from "../src/model/Theme";
 import { renderHook, act } from "@testing-library/react-hooks";
 import {LightTheme} from "../src/themes/light/theme.ligth";
+import {DarkTheme} from "../src/themes/dark/theme.dark";
 
 describe('use theme state should', () => {
 
@@ -12,4 +13,16 @@ describe('use theme state should', () => {
 
          expect(result.current.theme).toStrictEqual(new LightTheme())
      })
+
+    test('change theme when change state', () => {
+        const aTheme : Theme = new LightTheme()
+
+        const { result } = renderHook(() => useThemeState(aTheme))
+
+        act(() =>{
+            result.current.changeTheme()
+        })
+
+        expect(result.current.theme).toStrictEqual(new DarkTheme())
+    })
  })
