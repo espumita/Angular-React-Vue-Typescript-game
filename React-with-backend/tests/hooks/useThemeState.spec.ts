@@ -1,8 +1,8 @@
-import useThemeState from "../src/hooks/useThemeState";
-import {Theme} from "../src/model/Theme";
+import useThemeState from "../../src/hooks/useThemeState";
+import {Theme} from "../../src/model/Theme";
 import { renderHook, act } from "@testing-library/react-hooks";
-import {LightTheme} from "../src/themes/light/theme.ligth";
-import {DarkTheme} from "../src/themes/dark/theme.dark";
+import {LightTheme} from "../../src/themes/light/theme.ligth";
+import {DarkTheme} from "../../src/themes/dark/theme.dark";
 
 describe('use theme state should', () => {
 
