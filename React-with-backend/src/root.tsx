@@ -2,19 +2,18 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import configStore from './store/configStore'
-import TopBar from './components/TopBar'
 import ThemeProvider from './components/ThemeProvider'
 import App from './components/App'
-import Footer from './components/Footer'
+import { BrowserRouter } from 'react-router-dom'
 
 const store = configStore()
 
 ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider>
-            <TopBar/>
-            <App/>
-            <Footer/>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
         </ThemeProvider>
     </Provider>,
     document.getElementById("root")
