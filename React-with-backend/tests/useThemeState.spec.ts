@@ -14,7 +14,7 @@ describe('use theme state should', () => {
          expect(result.current.theme).toStrictEqual(new LightTheme())
      })
 
-    test('change theme when change state', () => {
+    test('set another theme when change theme', () => {
         const aTheme : Theme = new LightTheme()
         const { result } = renderHook(() => useThemeState(aTheme))
 
