@@ -16,13 +16,20 @@ describe('use theme state should', () => {
 
     test('change theme when change state', () => {
         const aTheme : Theme = new LightTheme()
-
         const { result } = renderHook(() => useThemeState(aTheme))
 
-        act(() =>{
-            result.current.changeTheme()
-        })
+        act(() =>{ result.current.changeTheme() })
 
         expect(result.current.theme).toStrictEqual(new DarkTheme())
+    })
+
+    test('set initial state when change two times', () => {
+        const aTheme : Theme = new LightTheme()
+        const { result } = renderHook(() => useThemeState(aTheme))
+
+        act(() =>{ result.current.changeTheme() })
+        act(() =>{ result.current.changeTheme() })
+
+        expect(result.current.theme).toStrictEqual(new LightTheme())
     })
  })
