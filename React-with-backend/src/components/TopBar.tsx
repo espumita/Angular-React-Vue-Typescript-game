@@ -15,7 +15,7 @@ const TopBar = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: theme.colors.primary
-    }
+    } as React.CSSProperties
     const changeThemeButtonStyle = {
         color: theme.colors.primary,
         textAlign: 'center',
@@ -23,12 +23,12 @@ const TopBar = () => {
         fontSize: '17px',
         backgroundColor: theme.colors.secondary,
         cursor: 'pointer'
-    }
+    } as React.CSSProperties
 
     return (
         <div style={topBarStyle}>
             <div>🐢</div>
-            <div onClick={changeTheme} style={changeThemeButtonStyle}>⚡</div>
+            <div onClick={() => changeTheme()} style={changeThemeButtonStyle}>⚡</div>
         </div>
     )
 }

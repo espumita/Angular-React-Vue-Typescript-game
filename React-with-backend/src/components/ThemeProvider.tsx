@@ -5,7 +5,7 @@ import useThemeState from "../hooks/useThemeState";
 
 export const CustomThemeContext =  React.createContext<ThemeContext | null >(null)
 
-const ThemeProvider = ({children}) => {
+const ThemeProvider = ({children} : { children: React.ReactChild}) => {
     const themeContext = useThemeState(new LightTheme())
     return (
         <CustomThemeContext.Provider value={themeContext}>
