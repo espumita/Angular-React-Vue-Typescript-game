@@ -6,8 +6,14 @@ function getShuffledArrayOf(length : number) : Array<number>{
     const numbers = [...Array(length).keys()]
     return numbers.sort(() => 0.5 - Math.random());
 }
+const cors = [
+    context => server.reply.header("Access-Control-Allow-Origin", "*"),
+    context => server.reply.header("Access-Control-Allow-Methods", "GET"),
+    context => server.reply.header("Access-Control-Allow-Headers", "Origin")
+]
 
 server({ port: 8080 }, [
+    ...cors,
     get('/images/:imageId', context => {
         const imagePath = `./images/${context.req.params.imageId}.jpg`;
         const fileBuffer = fs.readFileSync(imagePath)
