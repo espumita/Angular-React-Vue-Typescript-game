@@ -1,0 +1,13 @@
+{
+  "license": "MIT",
+  "dependencies": {
+    "@types/server": "^1.0.2",
+    "server": "^1.0.21",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "start": "ts-node-dev --respawn --transpileOnly ./server.ts"
+  }
+}
