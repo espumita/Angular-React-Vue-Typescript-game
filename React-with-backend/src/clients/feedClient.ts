@@ -1,11 +1,7 @@
-import {get} from 'axios'
+import axios from 'axios'
+import {FeedContent} from "./FeedContent";
 
-export function getFeed(){
-    get('http://localhost:8080/feeds')
-        .then(out => {
-            const { data } = out
-            console.log(data)
-        }).catch(out => {
-            console.log(out)
-        })
+export async function getFeed(): Promise<Array<FeedContent>>{
+    const {data} = await axios.get('http://localhost:8080/feeds')
+    return data
 }

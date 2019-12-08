@@ -1,9 +1,13 @@
 import * as React from 'react'
 import {useEffect} from 'react';
-import {getFeed} from '../../clients/feedClient'
+import {createLoadFeedAction} from '../../actions/loadFreed'
+import {useDispatch} from "react-redux";
+
+
 const Page1 = () => {
-        useEffect(() =>{
-               getFeed()
+        const dispatch = useDispatch()
+        useEffect(() => {
+            createLoadFeedAction(dispatch)
         }, [])
 
     return(
