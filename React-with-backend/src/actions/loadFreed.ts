@@ -1,7 +1,7 @@
 import { Action, Dispatch } from 'redux'
 import { LOAD_FEED } from "./actionTypes"
 import {getFeed} from '../clients/feedClient'
-import {FeedContent} from "../clients/FeedContent";
+import {FeedContent} from "../model/FeedContent"
 
 export interface LoadFeedAction extends Action {
     type: typeof LOAD_FEED,
