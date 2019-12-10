@@ -25,7 +25,7 @@ server({ port: 8080 }, [
     get('/feeds', context => {
         const numbers = getShuffledArrayOf(15)
         const feeds = numbers.map(i =>
-            Object.assign({}, { url: `https://localhost:8080/images/${i}`, width: 520 + i*8, height: 500 + i*10 })
+            Object.assign({}, { url: `http://localhost:8080/images/${i}`, width: 520 + i*8, height: 500 + i*10, color: "#"+((1<<24)*Math.random()|0).toString(16)})
         )
         context.res.writeHead(200, { 'Content-Type': 'application/json'})
         context.res.end(JSON.stringify(feeds))
