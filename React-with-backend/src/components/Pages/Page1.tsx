@@ -43,9 +43,13 @@ const Page1 = () => {
     const { content } = useSelector((state: Store) => state.feed)
     const feedWall = {
         paddingTop: '24px',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
-        alignItems: 'center'
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        alignContent: 'flex-start',
+        height: `${content.length/5 * 250}px`,
+        width: '1260px',
+        maxWidth: '1260px'
     }
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
