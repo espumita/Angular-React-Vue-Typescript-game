@@ -2,14 +2,12 @@ import * as React from 'react'
 import {useEffect} from 'react';
 import {loadFeed} from '../../actions/loadFreed'
 import {useDispatch, useSelector} from "react-redux";
-import {Feed} from "../../model/Feed";
 import {Store} from "../../store/store";
 import {FeedContent} from "../../model/FeedContent";
 
 
 function feed(feedContent: Array<FeedContent>) {
     const contentStyle = {
-        display: 'flex',
         paddingTop: '0px',
         paddingRight: '8px',
         paddingLeft: '8px',
@@ -27,6 +25,7 @@ function feed(feedContent: Array<FeedContent>) {
         minHeight: '162px'
 
     }
+
     return feedContent.map((content, i) => (
         <div key={`content-${i}`} >
             <div style={contentStyle}>
@@ -44,14 +43,15 @@ const Page1 = () => {
     const { content } = useSelector((state: Store) => state.feed)
     const feedWall = {
         paddingTop: '24px',
-        display: 'flex',
-        alignItems: 'center',
-        maxWidth: '500px'
-
+        display: 'grid',
+        gridTemplateColumns: '252px 252px 252px 252px 252px',
+        gridAutoFlow: 'dense'
     }
     return (
-        <div style={feedWall}>
-            {feed(content)}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={feedWall}>
+                {feed(content)}
+            </div>
         </div>
     )
 }
