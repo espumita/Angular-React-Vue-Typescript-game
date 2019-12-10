@@ -44,8 +44,8 @@ const Page1 = () => {
     const feedWall = {
         paddingTop: '24px',
         display: 'grid',
-        gridTemplateColumns: '252px 252px 252px 252px 252px',
-        gridAutoFlow: 'dense'
+        gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
+        alignItems: 'center'
     }
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
