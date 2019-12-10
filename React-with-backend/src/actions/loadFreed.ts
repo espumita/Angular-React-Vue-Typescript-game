@@ -8,7 +8,7 @@ export interface LoadFeedAction extends Action {
     feedContents: Array<FeedContent>
 }
 
-export const createLoadFeedAction = async (dispatch: Dispatch) => {
+export const loadFeed = async (dispatch: Dispatch) => {
     const feedContents = await getFeed()
     const action : LoadFeedAction = {
         type: LOAD_FEED,
