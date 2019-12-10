@@ -27,7 +27,7 @@ const TopBar = () => {
 
     return (
         <div style={topBarStyle}>
-            <div>🐢</div>
+            <div style={{padding: '14px' }}>🐢</div>
             <div onClick={() => changeTheme()} style={changeThemeButtonStyle}>⚡</div>
         </div>
     )
