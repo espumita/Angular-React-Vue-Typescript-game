@@ -23,7 +23,7 @@ server({ port: 8080 }, [
         context.res.end(base64ImageContent, 'Base64')
     }),
     get('/feeds', context => {
-        const numbers = getShuffledArrayOf(19)
+        const numbers = getShuffledArrayOf(16)
         const feeds = numbers.map(i =>
             Object.assign({}, { url: `http://localhost:8080/images/${i}`, width: 520 + i*8, height: 500 + i*10, color: "#"+((1<<24)*Math.random()|0).toString(16)})
         )
