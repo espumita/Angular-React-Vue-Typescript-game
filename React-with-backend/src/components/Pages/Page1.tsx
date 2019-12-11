@@ -5,11 +5,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {Store} from "../../store/store";
 import {FeedContent} from "../../model/FeedContent";
 
-function chunkArray(myArray : Array) {
+function chunkArray(myArray : Array, numberOfChunks : number) {
     if (myArray.length === 0) return []
-    const numberOfColumns = 5;
-    const chunk_size = Math.floor(myArray.length / numberOfColumns)
-    const difference = myArray.length - numberOfColumns * chunk_size
+    const chunk_size = Math.floor(myArray.length / numberOfChunks)
+    const difference = myArray.length - numberOfChunks * chunk_size
     let index = 0;
     const tempArray = [];
     for (index = 0; index + chunk_size <= myArray.length - difference; index += chunk_size) {
@@ -19,7 +18,7 @@ function chunkArray(myArray : Array) {
     if (difference > 0) {
         const restContentList = myArray.slice(myArray.length - difference , myArray.length )
         restContentList.forEach(content => {
-            const randomNumber = Math.floor(Math.random() * numberOfColumns)
+            const randomNumber = Math.floor(Math.random() * numberOfChunks)
             tempArray[randomNumber].push(content)
         })
     }
@@ -50,9 +49,7 @@ function feeds(feedContent: Array<FeedContent>) {
         flexWrap: 'wrap',
         alignContent: 'flex-start'
     }
-
-    const chunkedFeedContent = chunkArray(feedContent)
-
+    const chunkedFeedContent = chunkArray(feedContent, 5) //This should change in column template too
     return chunkedFeedContent.map((chunk, i) => {
         return (
             <div key={`column-${i}`} style={aasd}>
@@ -76,7 +73,7 @@ const Page1 = () => {
     const { content } = useSelector((state: Store) => state.feed)
     const feedWall = {
         paddingTop: '24px',
-        display: 'gird',
+        display: 'grid',
         gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr'
     }
     return (
