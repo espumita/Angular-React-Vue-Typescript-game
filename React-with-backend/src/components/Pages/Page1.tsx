@@ -5,6 +5,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {Store} from "../../store/store";
 import {FeedContent} from "../../model/FeedContent";
 
+//TODO
+//Send random text in some images
+//Inifite load
+//do not reload in theme change
+
+
+
 function chunkArray(myArray : Array, numberOfChunks : number) {
     if (myArray.length === 0) return []
     const chunk_size = Math.floor(myArray.length / numberOfChunks)
