@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useEffect} from 'react';
+import {CSSProperties, useEffect} from 'react';
 import {loadFeed} from '../../actions/loadFreed'
 import {useDispatch, useSelector} from "react-redux";
 import {Store} from "../../store/store";
@@ -10,16 +10,14 @@ import {FeedContent} from "../../model/FeedContent";
 //Inifite load
 //do not reload in theme change
 
-
-
-function chunkArray(myArray : Array, numberOfChunks : number) {
+function chunkArray(myArray : Array<FeedContent>, numberOfChunks : number) : Array<Array<FeedContent>>{
     if (myArray.length === 0) return []
     const chunk_size = Math.floor(myArray.length / numberOfChunks)
     const difference = myArray.length - numberOfChunks * chunk_size
     let index = 0;
-    const tempArray = [];
+    const tempArray: Array<Array<FeedContent>> = [];
     for (index = 0; index + chunk_size <= myArray.length - difference; index += chunk_size) {
-        const a = myArray.slice(index, index + chunk_size)
+        const a:  Array<FeedContent> = myArray.slice(index, index + chunk_size)
         tempArray.push(a);
     }
     if (difference > 0) {
@@ -50,17 +48,17 @@ function feeds(feedContent: Array<FeedContent>) {
         borderRadius: '14px',
         minHeight: '162px'
     }
-    const aasd = {
+    const columnStyle = {
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'wrap',
         alignContent: 'flex-start'
-    }
+    } as CSSProperties
     const chunkedFeedContent = chunkArray(feedContent, 5) //This should change in column template too
-    return chunkedFeedContent.map((chunk, i) => {
+    return chunkedFeedContent.map((chunk, i: number) => {
         return (
-            <div key={`column-${i}`} style={aasd}>
-                {chunk.map((content, j) => (
+            <div key={`column-${i}`} style={columnStyle}>
+                {chunk.map((content, j: number) => (
                     <div key={`content-${i}-${j}`} >
                         <div style={contentStyle}>
                             <img src={content.url} style={Object.assign({backgroundColor: content.color},imageStyle)}/>
@@ -72,7 +70,7 @@ function feeds(feedContent: Array<FeedContent>) {
     })
 }
 
-const Page1 = () => {
+const InfiniteScrollExamplePage = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         loadFeed(dispatch)
@@ -84,7 +82,7 @@ const Page1 = () => {
         gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr'
     }
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', minHeight: '731px' }}>
             <div style={feedWall}>
                 {feeds(content)}
             </div>
@@ -92,4 +90,4 @@ const Page1 = () => {
     )
 }
 
-export default Page1
+export default InfiniteScrollExamplePage
