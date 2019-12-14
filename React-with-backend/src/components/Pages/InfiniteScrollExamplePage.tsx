@@ -4,11 +4,24 @@ import {loadFeed} from '../../actions/loadFreed'
 import {useDispatch, useSelector} from "react-redux";
 import {Store} from "../../store/store";
 import {FeedContent} from "../../model/FeedContent";
+import {fromEvent, timer} from "rxjs";
+import {debounce, share, filter} from "rxjs/operators";
+import useThemeContext from "../../hooks/useThemeContext";
+import {VisibilityProperty} from "csstype";
 
 //TODO
 //Send random text in some images
 //Inifite load
 //do not reload in theme change
+
+function setScrollToEndOfScreenListener(listenerCallback: Function) {
+    fromEvent(window, 'scroll').pipe(
+        debounce(() => timer(100)),
+        filter((event) => {
+            return window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
+        })
+    ).subscribe(() => listenerCallback())
+}
 
 function chunkArray(myArray : Array<FeedContent>, numberOfChunks : number) : Array<Array<FeedContent>>{
     if (myArray.length === 0) return []
@@ -70,22 +83,50 @@ function feeds(feedContent: Array<FeedContent>) {
     })
 }
 
+function spinnerStyle(isFeedLoading: VisibilityProperty): string {
+    return isFeedLoading
+            ? 'visible'
+            : 'hidden'
+}
+
 const InfiniteScrollExamplePage = () => {
     const dispatch = useDispatch()
+    const { theme } = useThemeContext()
     useEffect(() => {
         loadFeed(dispatch)
     }, [])
-    const { content } = useSelector((state: Store) => state.feed)
+    const { content, isFeedLoading } = useSelector((state: Store) => state.feed)
+    setScrollToEndOfScreenListener(() => loadFeed(dispatch))
     const feedWall = {
         paddingTop: '24px',
         display: 'grid',
         gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr'
     }
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', minHeight: '731px' }}>
-            <div style={feedWall}>
-                {feeds(content)}
+        <div style={{ display: 'flex', justifyContent: 'center', minHeight: '1731px' }}>
+            <div>
+                <div style={feedWall}>
+                    {feeds(content)}
+                </div>
+                <div  style={{width: '100%', display: 'flex', justifyContent: 'center', visibility: spinnerStyle(isFeedLoading)}}>
+                    <div className="lds-ellipsis">
+                        <div></div>
+                        <div style={{backgroundColor: theme.colors.primary}}></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+
             </div>
+
         </div>
     )
 }
