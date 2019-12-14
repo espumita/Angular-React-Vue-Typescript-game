@@ -1,18 +1,34 @@
 import { Action, Dispatch } from 'redux'
-import { LOAD_FEED } from "./actionTypes"
+import {FEED_LOADED, LOAD_FEED_REQUESTED} from "./actionTypes"
 import {getFeed} from '../clients/feedClient'
 import {FeedContent} from "../model/FeedContent"
+import {Observable, timer} from "rxjs";
+import {debounce} from "rxjs/operators";
 
-export interface LoadFeedAction extends Action {
-    type: typeof LOAD_FEED,
+export interface FeedLoadedRequested extends Action {
+    type: typeof LOAD_FEED_REQUESTED
+}
+
+export interface FeedLoaded extends Action {
+    type: typeof FEED_LOADED,
     feedContents: Array<FeedContent>
 }
 
-export const loadFeed = async (dispatch: Dispatch) => {
-    const feedContents = await getFeed()
-    const action : LoadFeedAction = {
-        type: LOAD_FEED,
-        feedContents: feedContents
+export const loadFeed = async (dispatch: Dispatch) => { //Todo check from where is call(too much calls)
+    const loadFeedRequested : FeedLoadedRequested = {
+        type: LOAD_FEED_REQUESTED
     }
-    dispatch(action)
+    dispatch(loadFeedRequested)
+    const feedContents = await getFeed()
+    console.log('Execute loadFeed Action')
+    new Observable(subscribe => subscribe.next(feedContents)).pipe(
+        debounce(() => timer(3000))
+    ).subscribe(contents => {
+        const feedLoaded : FeedLoaded = {
+            type: FEED_LOADED,
+            feedContents: feedContents
+        }
+        dispatch(feedLoaded)
+    })
+
 }
