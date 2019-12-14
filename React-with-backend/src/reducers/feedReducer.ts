@@ -23,6 +23,6 @@ function feedLoadedRequested(state: Feed, action: FeedLoadedRequested) {
 function feedLoaded(state: Feed, action: FeedLoaded) {
     return {
         isFeedLoading: false,
-        content: Object.assign(state.content, action.feedContents)
+        content: [...state.content, ...action.feedContents]
     }
 }
