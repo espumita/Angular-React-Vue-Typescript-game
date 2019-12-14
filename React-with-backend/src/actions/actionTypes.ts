@@ -1,1 +1,2 @@
-export const LOAD_FEED = 'LOAD_FEED'
+export const LOAD_FEED_REQUESTED = 'LOAD_FEED_REQUESTED'
+export const FEED_LOADED = 'FEED_LOADED'
