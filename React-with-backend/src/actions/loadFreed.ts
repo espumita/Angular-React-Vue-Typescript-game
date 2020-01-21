@@ -14,13 +14,13 @@ export interface FeedLoaded extends Action {
     feedContents: Array<FeedContent>
 }
 
-export const loadFeed = async (dispatch: Dispatch) => { //Todo check from where is call(too much calls)
+export const loadFeed = async (dispatch: Dispatch) => {
     const loadFeedRequested : FeedLoadedRequested = {
         type: LOAD_FEED_REQUESTED
     }
     dispatch(loadFeedRequested)
     const feedContents = await getFeed()
-    console.log('Execute loadFeed Action')
+    console.log('Execute loadFeed Action')// Multiple execution found
     new Observable(subscribe => subscribe.next(feedContents)).pipe(
         debounce(() => timer(3000))
     ).subscribe(contents => {
