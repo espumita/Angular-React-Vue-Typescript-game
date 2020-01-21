@@ -7,7 +7,7 @@ const Footer = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '150px',
+        minHeight: '350px',
         backgroundColor: theme.colors.footer
     }
     return (

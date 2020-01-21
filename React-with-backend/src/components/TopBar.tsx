@@ -41,9 +41,6 @@ const TopBar = () => {
                 <Link to="/infinitescroll" style={setBackgroundIfCurrentPathIs("/infinitescroll", pathname, theme)}>
                     <div style={{padding: '14px' }}>🐌</div>
                 </Link>
-                <Link to="/websockets" style={setBackgroundIfCurrentPathIs("/websockets", pathname, theme)}>
-                    <div style={{padding: '14px' }}>🍕</div>
-                </Link>
             </div>
             <div onClick={() => changeTheme()} style={changeThemeButtonStyle}>⚡</div>
         </div>
