@@ -4,22 +4,23 @@ import {loadFeed} from '../../actions/loadFreed'
 import {useDispatch, useSelector} from "react-redux";
 import {Store} from "../../store/store";
 import {FeedContent} from "../../model/FeedContent";
-import {fromEvent, timer} from "rxjs";
-import {debounce, share, filter} from "rxjs/operators";
+import {fromEvent} from "rxjs";
+import {map, filter, distinct,debounceTime } from "rxjs/operators";
 import useThemeContext from "../../hooks/useThemeContext";
 import {VisibilityProperty} from "csstype";
 
 //TODO
-//Send random text in some images
-//Inifite load
 //do not reload in theme change
+//Fix action call problem
 
 function setScrollToEndOfScreenListener(listenerCallback: Function) {
     fromEvent(window, 'scroll').pipe(
-        debounce(() => timer(100)),
-        filter((event) => {
-            return window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
-        })
+        map(event => window.innerHeight + document.documentElement.scrollTop),
+        filter((totalHeight) => {
+            return totalHeight >= document.documentElement.offsetHeight
+        }),
+        distinct(),
+        debounceTime(200),
     ).subscribe(() => listenerCallback())
 }
 
@@ -83,7 +84,7 @@ function feeds(feedContent: Array<FeedContent>) {
     })
 }
 
-function spinnerStyle(isFeedLoading: VisibilityProperty): string {
+function spinnerStyle(isFeedLoading: Boolean): VisibilityProperty {
     return isFeedLoading
             ? 'visible'
             : 'hidden'
@@ -92,11 +93,12 @@ function spinnerStyle(isFeedLoading: VisibilityProperty): string {
 const InfiniteScrollExamplePage = () => {
     const dispatch = useDispatch()
     const { theme } = useThemeContext()
+    const { content, isFeedLoading } = useSelector((state: Store) => state.feed)
     useEffect(() => {
         loadFeed(dispatch)
     }, [])
-    const { content, isFeedLoading } = useSelector((state: Store) => state.feed)
-    setScrollToEndOfScreenListener(() => loadFeed(dispatch))
+    setScrollToEndOfScreenListener(() => loadFeed(dispatch)
+    )
     const feedWall = {
         paddingTop: '24px',
         display: 'grid',
